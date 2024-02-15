@@ -157,5 +157,5 @@ yarn-error.log*
 *.sln
 
 # application emmits
-server/uploads/
-service_account_file.json
+server/testing-files/
+server/app/config/service_account_file.json

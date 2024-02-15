@@ -3,7 +3,8 @@ import os
 
 
 class config:
-    # Your other configurations here
+
+    SECRET_KEY = os.getenv("SECRET_KEY")
     
     # Google Cloud credentials
     GOOGLE = {
