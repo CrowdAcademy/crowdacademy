@@ -3,6 +3,7 @@ from functools import wraps
 import jwt
 from flask import current_app, jsonify, request, Blueprint
 from app.models.user import User
+from app.utils import generate_token
 
 # Define the blueprint
 bp = Blueprint('auth', __name__)
