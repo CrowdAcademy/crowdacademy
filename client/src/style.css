@@ -1,5 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
+/* fonts */
+
+.ubuntu-mono-regular {
+    font-family: "Ubuntu Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.ubuntu-mono-bold {
+    font-family: "Ubuntu Mono", monospace;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.ubuntu-mono-regular-italic {
+    font-family: "Ubuntu Mono", monospace;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.ubuntu-mono-bold-italic {
+    font-family: "Ubuntu Mono", monospace;
+    font-weight: 700;
+    font-style: italic;
+}
 
 * {
     margin: 0;
@@ -46,10 +71,7 @@ header {
 .header-top-container {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 100px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 15px;
+    margin: 1rem;
 }
 
 button {
@@ -73,14 +95,14 @@ button {
 }
 
 .get-started-button {
-    background-color: #0088ff;
+    background-color: #3321e9;
     color: white;
 }
 
 .get-started-button:hover {
     background-color: white;
-    color: #0088ff;
-    border: 2px solid #0088ff;
+    color: #3321e9;
+    border: 2px solid #3321e9;
 }
 
 h1 {
@@ -89,7 +111,7 @@ h1 {
 }
 
 span {
-    color: #0088ff;
+    color: #3321e9;
 }
 
 /* -------Header-large-input-container-styling------ */
@@ -102,26 +124,28 @@ span {
 }
 
 textarea {
-    padding: 10px;
+    padding: 15px;
     font-size: 16px;
     margin-left: -70px;
-    border-radius: .5rem;
-    border: 2px solid #0088ff;
+    height: 15rem;
+    border-radius: 10px;
+    border: 2px solid #3321e9;
 }
 
 .textarea-icons-container {
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
     align-items: center;
-    gap: 65px;
+    justify-content: flex-start;
 }
 
 a {
     cursor: pointer;
 }
 
-.question-submit-icon {
-    text-decoration: none;
+.question-submit-icon svg {
+    padding: 15px;
 }
 
 .fa-arrow-right {
@@ -133,7 +157,7 @@ a {
     align-items: center;
     border-radius: 100%;
     border: none;
-    background-color: #0088ff;
+    background-color: #3321e9;
     font-size: 30px;
 }
 
@@ -151,6 +175,13 @@ a {
     justify-content: center;
     gap: 10px;
     margin-top: 10px;
+}
+
+.textarea-input-icons svg {
+    margin: 0;
+    padding: 0;
+    height: 2rem;
+    color: #3028e8;
 }
 
 .hr-1 {
@@ -205,7 +236,7 @@ a {
 }
 
 .value-2 {
-    border-color: #0088ff;
+    border-color: #3321e9;
 }
 
 .value-3 {
@@ -219,7 +250,7 @@ a {
 
 .value-2 .fa-brands,
 .value-2 p {
-    color: #0088ff;
+    color: #3321e9;
 }
 
 .values .fa-solid,
@@ -229,7 +260,7 @@ a {
 }
 
 .hr-2 {
-    background-color: #0088ff;
+    background-color: #3321e9;
 }
 
 /* --------offers-------- */
@@ -299,14 +330,14 @@ main .fa-arrow-right {
 
 .offer-1 button,
 .offer-3 button {
-    background-color: #0088ff;
+    background-color: #3321e9;
 }
 
 .offer-1 button:hover,
 .offer-3 button:hover {
     background-color: white;
-    border: 2px solid #0088ff;
-    color: #0088ff;
+    border: 2px solid #3321e9;
+    color: #3321e9;
 }
 
 .offer-2 button {
@@ -320,7 +351,7 @@ main .fa-arrow-right {
 }
 
 .hr-4 {
-    background-color: #0088ff;
+    background-color: #3321e9;
 }
 
 /* ---------Join-Us-------- */
@@ -362,7 +393,7 @@ form {
 .SIGN-IN {
     padding: 12px 17px;
     margin-bottom: 10px;
-    background-color: #0088ff;
+    background-color: #3321e9;
     border-radius: .5rem;
     border: none;
     color: white;
@@ -453,6 +484,7 @@ footer {
     textarea {
         width: 300px;
     }
+
     h1 {
         font-size: 25px;
     }
@@ -463,25 +495,30 @@ footer {
         width: 300px;
         height: 300px;
     }
+
     .offer-right-container {
         justify-content: center;
         align-items: center;
     }
+
     .offer-insight-container {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
+
     .offer-right-container p {
         text-align: center;
     }
 }
 
 @media screen and (max-width: 410px) {
+
     .username-input,
     .pwd-input {
         width: 300px;
     }
+
     footer {
         font-size: 12px;
     }
@@ -499,9 +536,11 @@ footer {
     textarea {
         width: 250px;
     }
+
     h1 {
         font-size: 20px;
     }
+
     .logo-text {
         font-size: 12px;
     }
@@ -511,4 +550,21 @@ footer {
     textarea {
         width: 200px;
     }
+}
+
+/* Logo styles */
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    margin-right: .5rem;
+    width: 50px;
+    transform: rotateY(180deg);
+}
+
+section {
+    margin: 12rem 1rem;
 }
