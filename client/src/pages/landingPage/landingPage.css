@@ -123,6 +123,15 @@ span {
     margin-bottom: 30px;
 }
 
+.auth-link {
+    color: white;
+    text-decoration: none;
+}
+
+.auth-link:hover {
+    color: #3028e8;
+}
+
 textarea {
     padding: 15px;
     font-size: 16px;
@@ -356,7 +365,7 @@ main .fa-arrow-right {
 
 /* ---------Join-Us-------- */
 
-form {
+.log-in-form {
     display: flex;
     flex-direction: column;
     align-items: center;

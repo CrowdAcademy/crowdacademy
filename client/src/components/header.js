@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from 'react-router-dom';
 
 import CrowdAcademyLogo from '../assets/icon_tr.png'
 
@@ -13,7 +14,7 @@ export default function Header() {
                 </div>
                 <div>
                     <button className="instructor-button">Instructor</button>
-                    <button className="get-started-button">Get started</button>
+                    <Link to = "/auth" className = "auth-link"><button className="get-started-button">Get started</button></Link>
                 </div>
             </div>
         </header>
