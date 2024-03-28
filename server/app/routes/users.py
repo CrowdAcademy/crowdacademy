@@ -13,37 +13,60 @@ from bson import ObjectId  # Importing ObjectId from bson
 
 bp = Blueprint('users', __name__)
 
-# User registration route
+from flask import jsonify, request, Blueprint
+from app.models.user import User
+
+bp = Blueprint('users', __name__)
+
 @bp.route("/users/register", methods=["POST"])
 def register():
-    # Get registration data from request
-    data = request.get_json()
 
-    # Check if the required fields are present in the request data
-    if "username" not in data or "email" not in data or "password" not in data:
-        return jsonify({"message": "Missing required fields"}), 400
+    try:
+        # Get registration data from request
+        data = request.get_json()
 
-    # Check if the username or email already exists in the database
-    if User.objects(username=data["username"]).first() or User.objects(email=data["email"]).first():
-        return jsonify({"message": "Username or email already exists"}), 409
+        # Check if the required fields are present in the request data
+        required_fields = ["username", "email", "password"]
+        if not all(field in data for field in required_fields):
+            return jsonify({"error": "Missing required fields"}), 400
+        
+        # Check if username or email already exists in the database
+        existing_user = User.objects(username=data["username"]).first()
+        existing_email = User.objects(email=data["email"]).first()
 
-    # Create a new user object
-    user = User(
-        username=data["username"],
-        email=data["email"],
-        password=data["password"]
-    )
+        if existing_user:
+            return jsonify({"error": "Username already exists"}), 409
+        
+        if existing_email:
+            return jsonify({"error": "Email already exists"}), 409
 
-    # Save the user to the database
-    user.save()
+        # Create a new user object
+        user = User(
+            username=data["username"],
+            email=data["email"],
+            password=data["password"]
+        )
 
-    # Return a success message with the user's ID
-    return jsonify({"message": "User registered successfully", "user_id": str(user.id)}), 201
+        # Save the user to the database
+        user.save()
+
+        # Return success message with the user's ID
+        return jsonify({"message": "User registered successfully", "user_id": str(user.id)}), 201
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 # User retrieval route
-@bp.route("/users/<user_id>", methods=["GET"])
+@bp.route("/users/<string:user_id>", methods=["GET"])
 def get_user(user_id):
+    try:
+        # Attempt to convert user_id to ObjectId
+        user_id = ObjectId(user_id)
+    except Exception as e:
+        # Return an error response if user_id is not a valid ObjectId
+        return jsonify({"error": "Invalid user ID"}), 400
+
     # Retrieve the user from the database
     user = User.objects(id=user_id).first()
 

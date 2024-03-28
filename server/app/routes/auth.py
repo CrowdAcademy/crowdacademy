@@ -14,7 +14,7 @@ def login():
     try:
         data = request.get_json()
         user = User.objects(username=data.get("identifier")).first() or User.objects(email=data.get("identifier")).first()
-        print(user.username)
+        
         if user and user.check_password(data.get("password")):
             # Assuming you have a function to generate JWT tokens
             token = generate_token(user)
