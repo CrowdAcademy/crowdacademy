@@ -79,16 +79,22 @@ export default function AuthPage() {
         }
     
         try {
-            const formData = {
-                username,
-                email,
-                password,
-                confirmPassword,
-            };
-    
+            let formData = {};
             let url = '/login';
+    
             if (isSigningUp) {
+                formData = {
+                    username,
+                    email,
+                    password,
+                    confirmPassword,
+                };
                 url = '/users/register';
+            } else {
+                formData = {
+                    identifier,
+                    password
+                };
             }
     
             const response = await fetch(url, {
