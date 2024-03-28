@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://127.0.0.1:5000/",
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.16.5",
     "@fortawesome/free-brands-svg-icons": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
@@ -12,15 +13,9 @@
     "@testing-library/user-event": "^13.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-<<<<<<< HEAD
     "react-router-dom": "^6.22.3",
     "react-scripts": "^5.0.1",
-    "web-vitals": "^2.1.4",
-    "@babel/plugin-proposal-private-property-in-object": "^7.16.5"
-=======
-    "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4"
->>>>>>> 6fd99c18e3c35c8f2f50c57cba1d9fe9bf6a496f
   },
   "scripts": {
     "start": "react-scripts start",
