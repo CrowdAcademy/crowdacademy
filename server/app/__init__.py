@@ -28,7 +28,7 @@ from app.routes.auth import bp as login_bp
 from app.routes import register, get_user, get_users, \
     update_user, delete_user, create_challenge, get_challenge, \
     get_challenges, update_challenge, delete_challenge, create_lesson, \
-    get_lesson, get_lessons, update_lesson, delete_lesson
+    get_lesson, get_lessons, update_lesson, delete_lesson, get_user_account
 
 # Register index route
 app.register_blueprint(index_bp)
@@ -36,7 +36,8 @@ app.register_blueprint(index_bp)
 # Register user routes
 app.add_url_rule('/users/register', 'register', register, methods=['POST'])
 app.add_url_rule('/users', 'get_users', get_users, methods=['GET'])
-app.add_url_rule('/users/<user_id>', 'get_user', get_user, methods=['GET'])
+app.add_url_rule('/users/account', 'get_user_account', get_user_account, methods=['GET'])
+app.add_url_rule('/users/id/<user_id>', 'get_user', get_user, methods=['GET'])
 app.add_url_rule('/users/<user_id>', 'update_user', update_user, methods=['PUT'])
 app.add_url_rule('/users/<user_id>', 'delete_user', delete_user, methods=['DELETE'])
 

@@ -28,6 +28,7 @@ def login():
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
+        print("header")
         auth_header = request.headers.get('Authorization')
         if not auth_header or len(auth_header.split(" ")) != 2:
             return jsonify({"message": "Invalid authorization header"}), 401

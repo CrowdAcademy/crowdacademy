@@ -115,12 +115,26 @@ export default function AuthPage() {
             setPassword('');
             setConfirmPassword('');
             setError(null);
+    
+            // Handle successful login or registration
+            if (response.ok) {
+                if (!isSigningUp) {
+                    // If login is successful, store the JWT token in localStorage
+                    localStorage.setItem('token', data.token);
+    
+                    // Redirect to account page
+                    window.location.href = '/account';
+                }
+            } else {
+                // Handle error message for unsuccessful login or registration
+                setError(data.message);
+            }
         } catch (error) {
             console.error('Error:', error);
             setError('An error occurred while submitting the form.');
         }
     };
-    
+
     const toggleAuthMode = () => {
         setIsSigningUp(!isSigningUp);
     };

@@ -2,21 +2,20 @@ from bson import InvalidDocument, ObjectId  # Import ObjectId from bson module
 from flask import jsonify, request, Blueprint
 from wtforms import ValidationError
 from app.models.user import User
+from app.routes.auth import login_required
 
 bp = Blueprint('users', __name__)
 
-# User-related routes here
-# routes/users.py
-from flask import jsonify, request, Blueprint
-from app.models.user import User
-from bson import ObjectId  # Importing ObjectId from bson
 
-bp = Blueprint('users', __name__)
-
-from flask import jsonify, request, Blueprint
-from app.models.user import User
-
-bp = Blueprint('users', __name__)
+# Route to retrieve user account information
+@bp.route("/users/account", methods=["GET"])
+@login_required
+def get_user_account(user):
+    # Return user account information
+    return jsonify({
+        "username": user.username,
+        "email": user.email,
+    }), 200
 
 @bp.route("/users/register", methods=["POST"])
 def register():
@@ -58,7 +57,7 @@ def register():
 
 
 # User retrieval route
-@bp.route("/users/<string:user_id>", methods=["GET"])
+@bp.route("/users/id/<string:user_id>", methods=["GET"])
 def get_user(user_id):
     try:
         # Attempt to convert user_id to ObjectId
