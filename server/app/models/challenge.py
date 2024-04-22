@@ -1,16 +1,26 @@
 import datetime
+from mongoengine import EmbeddedDocument, StringField, ListField, DateTimeField, EmbeddedDocumentListField, DecimalField
 from app import db
+from app.models.resource import Resource
+from app.models.feedback import Feedback
 
-class Challenge(db.Document):
-    title = db.StringField(required=True)
-    description = db.StringField(required=True)
-    tags = db.ListField(db.StringField())
-    creator = db.ReferenceField('User')
-    created_at = db.DateTimeField(default=datetime.datetime.utcnow)
-    updated_at = db.DateTimeField(default=datetime.datetime.utcnow)
-
-    # Add more fields as needed
+class Challenge(EmbeddedDocument):
+    challenge_id = StringField()
+    title = StringField(required=True)
+    description = StringField(required=True)
+    status = StringField(default="active")  # e.g., active, completed, archived
+    author_id = StringField(required=True)  # Reference to User ID
+    created_at = DateTimeField(default=datetime.datetime.utcnow)
+    resources = EmbeddedDocumentListField(Resource)
+    feedback = EmbeddedDocumentListField(Feedback)
+    price = DecimalField(min_value=0, precision=2)
+    tags = ListField(StringField())
 
     meta = {
-        'collection': 'challenges'
+        'indexes': [
+            'challenge_id',  # Indexing for faster lookup by challenge_id
+            'author_id'
+        ]
     }
+
+# db.register(Challenge)
