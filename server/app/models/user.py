@@ -25,3 +25,6 @@ class User(db.Document):
     meta = {
         'collection': 'users'
     }
+
+    def check_password(self, provided_password: str):
+        return provided_password == self.password
