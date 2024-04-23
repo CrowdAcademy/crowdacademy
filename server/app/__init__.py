@@ -21,7 +21,7 @@ db = MongoEngine(app)
 
 # Import index and login blueprint
 from app.routes.index import bp as index_bp
-from app.routes.auth import bp as login_bp
+from app.routes.login import bp as login_bp
 
 
 # Import routers

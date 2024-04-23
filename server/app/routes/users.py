@@ -1,25 +1,21 @@
-from bson import InvalidDocument, ObjectId  # Import ObjectId from bson module
+from bson import InvalidDocument, ObjectId, errors
 from flask import jsonify, request, Blueprint
 from wtforms import ValidationError
 from app.models.user import User
-from app.routes.auth import login_required
+from app.modules.Access import Roles, permissions, login_required, authorize
 
 bp = Blueprint('users', __name__)
-
 
 # Route to retrieve user account information
 @bp.route("/users/account", methods=["GET"])
 @login_required
-def get_user_account(user):
+def get_user_account():
     # Return user account information
-    return jsonify({
-        "username": user.username,
-        "email": user.email,
-    }), 200
+    user = request.user
+    return jsonify(user), 200
 
 @bp.route("/users/register", methods=["POST"])
 def register():
-
     try:
         # Get registration data from request
         data = request.get_json()
@@ -55,31 +51,22 @@ def register():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
-# User retrieval route
-@bp.route("/users/id/<string:user_id>", methods=["GET"])
-def get_user(user_id):
+@bp.route("/users/id/<string:requested_user_id>", methods=["GET"])
+@login_required
+def get_user(requested_user_id):
     try:
-        # Attempt to convert user_id to ObjectId
-        user_id = ObjectId(user_id)
+        user = User.objects(id=requested_user_id).first()
+        if user:
+            user_data = {
+                "username": user.username,
+                "email": user.email,
+                "user_id": str(user.id)  # Convert ObjectId to string
+            }
+            return jsonify(user_data), 200
+        else:
+            return jsonify({"message": "User not found"}), 404
     except Exception as e:
-        # Return an error response if user_id is not a valid ObjectId
-        return jsonify({"error": "Invalid user ID"}), 400
-
-    # Retrieve the user from the database
-    user = User.objects(id=user_id).first()
-
-    # Check if the user exists
-    if user:
-        # Return the user data
-        return jsonify({
-            "username": user.username,
-            "email": user.email,
-            "user_id": str(user.id)  # Convert ObjectId to string for JSON serialization
-        }), 200
-    else:
-        # Return a message indicating the user was not found
-        return jsonify({"message": "User not found"}), 404
+        return jsonify({"error": str(e)}), 500
 
 @bp.route("/users", methods=["GET"])
 def get_users():
