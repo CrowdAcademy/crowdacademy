@@ -12,15 +12,15 @@ bp = Blueprint('login', __name__)
 def login_route():
     try:
         data = request.get_json()
-        username = data.get("username")
+        identifier = data.get("identifier")
         password = data.get("password")
         
         # Attempt login
-        token = login(username, password)
+        token = login(identifier, password)
         
         if token:
             return jsonify({"message": "Login successful", "token": token}), 200
         else:
-            return jsonify({"message": "Invalid username or password"}), 401
+            return jsonify({"message": "Invalid identifier or password"}), 401
     except Exception as e:
         return jsonify({"error": str(e), "message": "An error occurred"}), 500

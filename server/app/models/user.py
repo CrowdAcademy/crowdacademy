@@ -10,7 +10,7 @@ class User(db.Document):
     username = StringField(required=True, unique=True)
     email = EmailField(required=True, unique=True)
     password = StringField(required=True)
-    role = StringField(required=True, choices=("super_admin", "admin", "instructor", "student"))
+    roles = ListField(StringField(choices=("super_admin", "admin", "instructor", "student")), required=True)
     permissions = ListField(StringField())
     profile = EmbeddedDocumentField(Profile)
     lessons_created = ListField(ReferenceField(Lesson))

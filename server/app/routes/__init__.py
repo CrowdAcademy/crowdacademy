@@ -3,3 +3,4 @@ from app.routes.login import *
 from app.routes.users import *
 from app.routes.challenges import *
 from app.routes.lessons import *
+from app.routes.account import *

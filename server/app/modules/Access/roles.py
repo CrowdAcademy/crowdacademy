@@ -5,7 +5,8 @@ class Roles:
     STUDENT = {
         LessonPermissions.VIEW_LESSON,
         ProfilePermissions.VIEW_PROFILE,
-        FeedbackPermissions.VIEW_FEEDBACK
+        FeedbackPermissions.VIEW_FEEDBACK,
+        ResourcePermissions.VIEW_RESOURCE
     }
 
     INSTRUCTOR = {
