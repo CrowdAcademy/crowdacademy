@@ -1,30 +1,27 @@
 # Access/auth.py
+import pprint
 import jwt
 from functools import wraps
 from flask import current_app, jsonify, request
 from app.models.user import User
 from app.modules.Access.roles import Roles
+from app.models.token import Token
 from mongoengine.queryset.visitor import Q
-
-def login(identifier, password):
-    # Validate credentials against the database
-    user = User.objects(Q(username=identifier) | Q(email=identifier)).first()
-    if user and user.check_password(password):
-        # Generate authentication token (JWT)
-        token = generate_token(user)
-        return token
-    else:
-        return None
+from datetime import datetime, timedelta, timezone
 
 def generate_token(user):
     try:
         # Generate JWT token with user information
-        payload = {'user_id': str(user.id), 'roles': user.roles}
-        token = jwt.encode(payload, current_app.config['SECRET_KEY'], algorithm='HS256')
+        payload = {
+            'user_id': str(user.id),
+            'exp': datetime.now(timezone.utc) + timedelta(days=1)
+        }
+        secret_key = current_app.config['SECRET_KEY']
+        token = jwt.encode(payload, secret_key, algorithm='HS256')
         return token
     except Exception as e:
         return str(e)
-
+    
 def decode_token(token):
     try:
         payload = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])
@@ -35,6 +32,36 @@ def decode_token(token):
         return None
     except jwt.InvalidTokenError:
         return None
+    
+# Update the login function to set the user's current token
+def login(identifier, password):
+    from app.models.user import User  # Import User model here to avoid circular import
+    # Validate credentials against the database
+    user = User.objects(Q(username=identifier) | Q(email=identifier)).first()
+    if user and user.check_password(password):
+        # Generate authentication token (JWT)
+        token = generate_token(user)
+        # Set the current token in the user's document
+        user.token = Token(current_token=token)
+        user.save()
+        return token
+    else:
+        return None
+
+# Define the logout function to remove the user's current token
+def logout(user):
+    from app.models.user import User  # Import User model here to avoid circular import
+    try:
+        # Remove the current token from the user's document
+        user.token = None
+        user.save()
+
+        pprint.pprint(user.token.current_token)
+
+        return "Logout successful"
+
+    except Exception as e:
+        return str(e)
 
 def login_required(f):
     @wraps(f)
@@ -48,6 +75,14 @@ def login_required(f):
             user = decode_token(token)
             if not user:
                 return jsonify({"message": "Invalid token"}), 401
+
+            # Check if the user has a saved token
+            if not user.token.current_token:
+                return jsonify({"message": "Unauthorized. User does not have a saved token."}), 401
+            
+            # Check if the user has a saved token
+            if user.token.current_token != token:
+                return jsonify({"message": "Unauthorized. Unrecorgnized token."}), 401
 
             return f(user, *args, **kwargs)  # Pass 'user' and other parameters to the decorated function
         except jwt.ExpiredSignatureError:

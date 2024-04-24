@@ -56,8 +56,8 @@ def get_users(user):
 @bp.route("/users/<user_id>", methods=["GET"])
 @login_required
 @authorize([Permissions.VIEW_USER])
-def get_user_by_id(user_id):
-    user = User.objects(_id=user_id).first()
+def get_user_by_id(user, user_id):
+    user = User.objects(id=user_id).first()
     if user:
         return jsonify(user), 200
     else:
@@ -66,7 +66,7 @@ def get_user_by_id(user_id):
 @bp.route("/users/username/<username>", methods=["GET"])
 @login_required
 @authorize([Permissions.VIEW_USER])
-def get_user_by_username(username):
+def get_user_by_username(user, username):
     user = User.objects(username=username).first()
     if user:
         return jsonify(user), 200
@@ -76,19 +76,19 @@ def get_user_by_username(username):
 @bp.route("/users/email/<email>", methods=["GET"])
 @login_required
 @authorize([Permissions.VIEW_USER])
-def get_user_by_email(email,user):
+def get_user_by_email(user, email):
     requested_user = User.objects(email=email).first()
     if requested_user:
         return jsonify(requested_user), 200
     else:
-        return jsonify({"message": "User not found"}), 404
+        return jsonify({"message": f"User with email: {email} not found"}), 404
 
 @bp.route("/users/<user_id>", methods=["PUT"])
 @login_required
 @authorize([Permissions.EDIT_USER])
 def update_user_by_id(user_id):
     data = request.get_json()
-    user = User.objects(_id=user_id).first()
+    user = User.objects(id=user_id).first()
     if user:
         user.username = data.get('username', user.username)
         user.email = data.get('email', user.email)

@@ -5,6 +5,7 @@ from app.models.lesson import Lesson
 from app.models.challenge import Challenge
 from app.models.payment_method import PaymentMethod
 from app.models.payment import Payment
+from app.models.token import Token
 
 class User(db.Document):
     username = StringField(required=True, unique=True)
@@ -21,6 +22,7 @@ class User(db.Document):
     payments = ListField(EmbeddedDocumentField(Payment))
     created_at = DateTimeField()
     updated_at = DateTimeField()
+    token = EmbeddedDocumentField(Token, default=Token)
 
     meta = {
         'collection': 'users'
