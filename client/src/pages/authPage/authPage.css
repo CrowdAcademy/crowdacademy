@@ -44,7 +44,7 @@
 
 .auth-container .pwd-labels-container {
     display: flex;
-    justify-content: start;
+    justify-content: center;
     gap: 180px;
 }
 
@@ -93,8 +93,4 @@
     font-size: 14px;
     font-weight: lighter;
     cursor: pointer;
-}
-
-.error-message {
-    color: #B31312;
 }
