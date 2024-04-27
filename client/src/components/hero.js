@@ -12,7 +12,7 @@ export default function Hero() {
             <h1><span>Our aim</span>, help you as much as possible.</h1>
             <div className = "large-input-container">
                 <div>
-                    <textarea name = "" id = "" cols = "100" rows = "7" placeholder = "Ask your question right away"></textarea>
+                    <textarea name = "" id = "" cols = "110" rows = "7" placeholder = "Ask your question right away"></textarea>
                 </div>
                 <div className = "textarea-icons-container">
                     <div className = "textarea-input-icons">

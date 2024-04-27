@@ -135,7 +135,7 @@ span {
 textarea {
     padding: 15px;
     font-size: 16px;
-    margin-left: -70px;
+    /* margin-left: -70px; */
     height: 15rem;
     border-radius: 10px;
     border: 2px solid #3321e9;
