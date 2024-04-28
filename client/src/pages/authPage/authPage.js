@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './authPage.css';
 import CrowdAcademyLogo from '../../assets/icon_tr.png';
 
@@ -10,6 +10,18 @@ export default function AuthPage() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState(null);
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
+    useEffect(() => {
+        let timer;
+        if (showSuccessMessage) {
+            timer = setTimeout(() => {
+                setShowSuccessMessage(false);
+                toggleAuthMode();
+            }, 3000);
+        }
+        return () => clearTimeout(timer);
+    }, [showSuccessMessage]);
 
     const isValidEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -96,7 +108,7 @@ export default function AuthPage() {
                     password
                 };
             }
-
+    
             formData.roles = ["student"];
     
             const response = await fetch(url, {
@@ -110,6 +122,17 @@ export default function AuthPage() {
             const data = await response.json();
             console.log('Response:', data);
     
+            if (data.success && data.token) {
+                // Store the token in localStorage
+                localStorage.setItem('token', data.token);
+    
+                // Redirect to the account page
+                window.location.href = '/account';
+            } else {
+                // Handle unsuccessful login or signup
+                setError(data.message || 'Login failed.');
+            }
+    
             // Reset form fields and error state
             setIdentifier('');
             setUsername('');
@@ -117,6 +140,10 @@ export default function AuthPage() {
             setPassword('');
             setConfirmPassword('');
             setError(null);
+    
+            if (isSigningUp) {
+                setShowSuccessMessage(true);
+            }
         } catch (error) {
             console.error('Error:', error);
             setError('An error occurred while submitting the form.');
@@ -131,20 +158,19 @@ export default function AuthPage() {
         <div className="auth-container">
             <img className='logo' src={CrowdAcademyLogo} alt="logo-image" width="40px" />
             <h2>{isSigningUp ? 'Sign Up on our Platform' : 'Sign In on our Platform'}</h2>
+            {showSuccessMessage && <p className="success-message">Success! You have signed up successfully.</p>}
             <form onSubmit={handleSubmit}>
-                {
-                    !isSigningUp ? (
-                        <p className="Email-Label">
-                            <span>Username or Email</span>
-                            <input type="text" name='identifier' value={identifier} onChange={handleInputChange} />
-                        </p>
-                    ) : (
-                        <p className="Email-Label">
-                            <span>Username</span>
-                            <input type="text" name="username" value={username} onChange={handleInputChange} />
-                        </p>
-                    )
-                }
+                {!isSigningUp ? (
+                    <p className="Email-Label">
+                        <span>Username or Email</span>
+                        <input type="text" name='identifier' value={identifier} onChange={handleInputChange} />
+                    </p>
+                ) : (
+                    <p className="Email-Label">
+                        <span>Username</span>
+                        <input type="text" name="username" value={username} onChange={handleInputChange} />
+                    </p>
+                )}
                 {isSigningUp && (
                     <p className="Email-Label">
                         <span>Email</span>
