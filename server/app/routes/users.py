@@ -101,15 +101,17 @@ def get_user_by_email(current_user, email):
         return jsonify({"message": f"User with email: {email} not found"}), 404
 
 # update user
-@login_required
 @bp.route("/update/<user_id>", methods=["PUT"])
+@login_required
+@authorize([Permissions.EDIT_USER])
 def update_user_by_id(current_user, user_id):
 
     data = request.get_json()
     user = User.objects(id=user_id).first()
 
     if not current_user.id == user.id:
-        return jsonify({"message": "You can not modify your own account over this route, try; /account/update"}), 404
+        full_url = request.url_root + "/account/update"
+        return jsonify({"message": f"You can not modify your own account over this route, try; {full_url}"}), 404
 
     if not user:
         return jsonify({"message": "User not found"}), 404

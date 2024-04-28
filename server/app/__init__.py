@@ -42,8 +42,8 @@ app.add_url_rule('/users', 'get_users', get_users, methods=['GET'])
 app.add_url_rule('/users/id/<user_id>', 'get_user_by_id', get_user_by_id, methods=['GET'])
 app.add_url_rule('/users/username/<username>', 'get_user_by_username', get_user_by_username, methods=['GET'])
 app.add_url_rule('/users/email/<email>', 'get_user_by_email', get_user_by_email, methods=['GET'])
-app.add_url_rule('/users/<user_id>', 'update_user_by_id', update_user_by_id, methods=['PUT'])
-app.add_url_rule('/users/<user_id>', 'delete_user_by_id', delete_user_by_id, methods=['DELETE'])
+app.add_url_rule('/users/update/<user_id>', 'update_user_by_id', update_user_by_id, methods=['PUT'])
+app.add_url_rule('/users/delete/<user_id>', 'delete_user_by_id', delete_user_by_id, methods=['DELETE'])
 
 # Register challenge routes
 app.add_url_rule('/challenges', 'create_challenge', create_challenge, methods=['POST'])

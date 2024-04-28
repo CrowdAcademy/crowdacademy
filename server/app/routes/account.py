@@ -107,6 +107,10 @@ def update_user_account(user):
 @login_required
 def delete_user_account(user):
     try:
+
+        if USER_ROLES.SUPER_ADMIN in user.roles:
+            return jsonify({"error": "Super Admin account can not be deleted"}), 403
+
         user.delete()
         return jsonify({"message": "User deleted successfully"}), 200
     except Exception as e:
