@@ -37,7 +37,7 @@ app.add_url_rule('/account/update', 'update_user_account', update_user_account, 
 app.add_url_rule('/account/delete', 'delete_user_account', delete_user_account, methods=['DELETE'])
 
 # Register user routes
-app.add_url_rule('/users/register', 'register', register, methods=['POST'])
+app.add_url_rule('/users/add', 'register', register, methods=['POST'])
 app.add_url_rule('/users', 'get_users', get_users, methods=['GET'])
 app.add_url_rule('/users/id/<user_id>', 'get_user_by_id', get_user_by_id, methods=['GET'])
 app.add_url_rule('/users/username/<username>', 'get_user_by_username', get_user_by_username, methods=['GET'])

@@ -69,22 +69,30 @@ def update_user_account(user):
         try:
             for attribute, value in data.items():
 
-                if attribute == 'username':
+                if attribute == REQUIRED_FIELDS.USERNAME:
                     # Check if the new username is available
                     if User.objects(username=value).first() and value != user.username:
                         return jsonify({"message": "Username already exists"}), 409
                     
-                elif attribute == 'email':
-                    # Check if the new email is available
-                    if User.objects(email=value).first() and value != user.email:
+                elif attribute == REQUIRED_FIELDS.EMAIL:
+                    # Check if the new email is available  
+                    if value == user.email:
+                        continue
+                    elif User.objects(email=value).first():
                         return jsonify({"message": "Email already exists"}), 409
-                    
-                elif attribute == 'password':
+                  
+                elif attribute == REQUIRED_FIELDS.PASSWORD:
                     # Check if new password is different from old password
                     if value == user.password:
                         return jsonify({"message": "New password cannot be the same as the old one"}), 400
                     
                     # Hash the new password before setting it
+
+                elif attribute == REQUIRED_FIELDS.ROLES:
+                    return jsonify({"message": "You can not change your own roles"}), 403
+                
+                elif attribute == REQUIRED_FIELDS.PERMISSIONS:
+                    return jsonify({"message": "You can not change your own permissions"}), 403
 
                 setattr(user, attribute, value)
 

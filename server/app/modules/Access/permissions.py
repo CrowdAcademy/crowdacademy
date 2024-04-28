@@ -6,6 +6,7 @@ class UserPermissions:
     EDIT_USER = 'edit_user'  # Permission to edit user details.
     DELETE_USER = 'delete_user'  # Permission to delete user.
     CREATE_USER = 'create_user'  # Permission to create new user.
+    SUSPEND_USER = 'suspend_user' # Permission to suspend user.
 
 class ProfilePermissions:
     """
@@ -24,7 +25,7 @@ class LessonPermissions:
     EDIT_LESSON = 'edit_lesson'  # Permission to edit lesson details.
     DELETE_LESSON = 'delete_lesson'  # Permission to delete lesson.
     CREATE_LESSON = 'create_lesson'  # Permission to create new lesson.
-
+    VIEW_PREMIUM_LESSON = 'view_premium_lesson'  # Permission to view premium lesson details.
 
 class ChallengePermissions:
     """
@@ -73,6 +74,7 @@ class FeedbackPermissions:
     EDIT_FEEDBACK = 'edit_feedback'  # Permission to edit feedback details.
     DELETE_FEEDBACK = 'delete_feedback'  # Permission to delete feedback.
     CREATE_FEEDBACK = 'create_feedback'  # Permission to create new feedback.
+    HIDE_FEEDBACK = 'hide_feedback'  # Permission to hide feedback from post.
 
 class Permissions(
     UserPermissions,

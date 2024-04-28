@@ -1,5 +1,5 @@
 import datetime
-from mongoengine import EmbeddedDocument, StringField, ListField, DateTimeField, EmbeddedDocumentListField, DecimalField
+from mongoengine import EmbeddedDocument, StringField, ListField, DateTimeField, EmbeddedDocumentListField
 from app import db
 from app.models.resource import Resource
 from app.models.feedback import Feedback
@@ -13,7 +13,6 @@ class Challenge(EmbeddedDocument):
     created_at = DateTimeField(default=datetime.datetime.utcnow)
     resources = EmbeddedDocumentListField(Resource)
     feedback = EmbeddedDocumentListField(Feedback)
-    price = DecimalField(min_value=0, precision=2)
     tags = ListField(StringField())
 
     meta = {

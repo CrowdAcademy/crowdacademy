@@ -90,7 +90,7 @@ def login_required(f):
     return decorated_function
 
 
-def authorize(required_permissions):
+def authorize(required_permissions, model):
     """
     Decorator to authorize a user based on their roles and required permissions.
     
@@ -102,15 +102,23 @@ def authorize(required_permissions):
     """
     def decorator(f):
         @wraps(f)
-        def wrapper(user, *args, **kwargs):  # Ensure the 'user' argument is present
-            if not user or not user.roles:  # Adjust to use 'roles' attribute
+        def wrapper(user, *args, **kwargs):
+            if not user or not user.roles:
                 return jsonify({"message": "Unauthorized"}), 401
             
-            user_roles = user.roles  # Adjust to use 'roles' attribute
-            if any(role in user_roles for role in ['super_admin', 'admin']):
-                return f(user, *args, **kwargs)  # Pass 'user' to the decorated function
+            # Accumulate all permissions of user roles
+            user_permissions = set()
+            for role in user.roles:
+                if role.upper() in Roles.__dict__:
+                    user_permissions.update(Roles.__dict__[role.upper()])
+
+            # Check if all required permissions are in the accumulated permissions
+            if all(permission in user_permissions for permission in required_permissions):
+                return f(user, *args, **kwargs)
+            
             else:
                 return jsonify({"message": "Insufficient permissions"}), 403
+        
         return wrapper
     return decorator
 

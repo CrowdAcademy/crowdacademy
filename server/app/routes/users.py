@@ -1,6 +1,6 @@
 from flask import jsonify, request, Blueprint
 from app.models.user import User
-from app.modules.Access import Roles, Permissions, login_required, authorize
+from app.modules.Access import Roles, Permissions, Authority, login_required, authorize
 from app.utils.consts import USER_ROLES, REQUIRED_FIELDS
 
 bp = Blueprint('users', __name__)
@@ -12,8 +12,10 @@ from app.modules.Access.roles import Roles
 bp = Blueprint('users', __name__)
 
 
-@bp.route("/users/register", methods=["POST"])
-def register():
+@bp.route("/add", methods=["POST"])
+@login_required
+@authorize([Permissions.CREATE_USER])
+def register(current_user):
     try:
         data = request.get_json()
         required_fields = [REQUIRED_FIELDS.USERNAME, REQUIRED_FIELDS.EMAIL, REQUIRED_FIELDS.PASSWORD, REQUIRED_FIELDS.ROLES]
@@ -58,7 +60,7 @@ def register():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
-@bp.route("/users", methods=["GET"])
+@bp.route("/", methods=["GET"])
 @login_required
 @authorize([Permissions.VIEW_USER])
 def get_users(user):
@@ -68,7 +70,7 @@ def get_users(user):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
-@bp.route("/users/<user_id>", methods=["GET"])
+@bp.route("/<user_id>", methods=["GET"])
 @login_required
 @authorize([Permissions.VIEW_USER])
 def get_user_by_id(current_user, user_id):
@@ -78,7 +80,7 @@ def get_user_by_id(current_user, user_id):
     else:
         return jsonify({"message": "User not found"}), 404
 
-@bp.route("/users/username/<username>", methods=["GET"])
+@bp.route("/username/<username>", methods=["GET"])
 @login_required
 @authorize([Permissions.VIEW_USER])
 def get_user_by_username(current_user, username):
@@ -88,7 +90,7 @@ def get_user_by_username(current_user, username):
     else:
         return jsonify({"message": "User not found"}), 404
     
-@bp.route("/users/email/<email>", methods=["GET"])
+@bp.route("/email/<email>", methods=["GET"])
 @login_required
 @authorize([Permissions.VIEW_USER])
 def get_user_by_email(current_user, email):
@@ -98,25 +100,54 @@ def get_user_by_email(current_user, email):
     else:
         return jsonify({"message": f"User with email: {email} not found"}), 404
 
-@bp.route("/users/<user_id>", methods=["PUT"])
+# update user
 @login_required
-@authorize([Permissions.EDIT_USER])
+@bp.route("/update/<user_id>", methods=["PUT"])
 def update_user_by_id(current_user, user_id):
+
     data = request.get_json()
     user = User.objects(id=user_id).first()
-    if user:
-        user.username = data.get('username', user.username)
-        user.email = data.get('email', user.email)
-        user.password = data.get('password', user.password)
-        try:
-            user.save()
-            return jsonify({"message": "User updated successfully", "user": user}), 200
-        except Exception as e:
-            return jsonify({"message": str(e)}), 400
-    else:
+
+    if not current_user.id == user.id:
+        return jsonify({"message": "You can not modify your own account over this route, try; /account/update"}), 404
+
+    if not user:
         return jsonify({"message": "User not found"}), 404
 
-@bp.route("/users/<user_id>", methods=["DELETE"])
+    try:
+        for attribute, value in data.items():
+            if attribute == REQUIRED_FIELDS.USERNAME:
+                if User.objects(username=value).first() and value != user.username:
+                    return jsonify({"message": "Username already exists"}), 409
+
+            elif attribute == REQUIRED_FIELDS.EMAIL:
+                if User.objects(email=value).first() and value != user.email:
+                    return jsonify({"message": "Email already exists"}), 409
+
+            elif attribute == REQUIRED_FIELDS.PASSWORD:
+                if value == user.password:
+                    return jsonify({"message": "New password cannot be the same as the old one"}), 400
+                
+                # user.password = generate_password_hash(value)  # Hash new password
+                # continue
+                pass
+
+            elif attribute == REQUIRED_FIELDS.ROLES:
+                if not Authority.check_permission(current_user, user, attribute, value):
+                    return jsonify({"message": "Insufficient permissions to edit roles"}), 403
+                
+            elif attribute == REQUIRED_FIELDS.PERMISSIONS:
+                if not Authority.check_permission(current_user, user, attribute, value):
+                    return jsonify({"message": "Insufficient permissions to edit permissions"}), 403
+
+            setattr(user, attribute, value)
+
+        user.save()
+        return jsonify({"message": "User updated successfully", "user": user}), 200
+    except Exception as e:
+        return jsonify({"message": str(e)}), 400
+
+@bp.route("/<user_id>", methods=["DELETE"])
 @login_required
 @authorize([Permissions.DELETE_USER])
 def delete_user_by_id(current_user, user_id):
