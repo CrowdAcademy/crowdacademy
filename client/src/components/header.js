@@ -14,7 +14,6 @@ export default function Header() {
                 <div>
                     <button className="instructor-button">Instructor</button>
                     <Link to = "/auth" className = "auth-link"><button className="get-started-button">Get started</button></Link>
-                    <button className="get-started-button">Get started</button>
                 </div>
             </div>
         </header>

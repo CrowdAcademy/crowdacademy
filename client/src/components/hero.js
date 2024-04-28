@@ -19,7 +19,7 @@ export default function Hero() {
                         <a href = ""><FontAwesomeIcon icon = {faKeyboard} className = "icon-black-color"/></a>
                         <a href = ""><FontAwesomeIcon icon = {faImage} className = "icon-black-color"/></a>
                     </div>
-                    <a href = "" className = "question-submit-icon"><FontAwesomeIcon icon = {faArrowRight} className = "icon-black-color"/></a>
+                    <a href = "" className = "question-submit-icon"><FontAwesomeIcon icon = {faArrowRight} className = "hero-submit-icon"/></a>
                 </div>
             </div>
         </section>

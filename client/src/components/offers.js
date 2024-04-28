@@ -23,7 +23,7 @@ export default function Offers(props) {
                         {offerInsight}
                     </p>
                 </div>
-                <button>Explore <FontAwesomeIcon icon = {faArrowRight} className = "icon-black-color"/></button>
+                <button>Explore <FontAwesomeIcon icon = {faArrowRight} className = "explore-icon"/></button>
             </div>
         </div>
     )

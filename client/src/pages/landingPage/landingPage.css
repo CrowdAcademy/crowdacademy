@@ -85,24 +85,24 @@ button {
 
 .instructor-button {
     background-color: #0c0c9e;
+    border: 2px solid #0c0c9e;
     color: white;
 }
 
 .instructor-button:hover {
     background-color: white;
     color: #0c0c9e;
-    border: 2px solid #0c0c9e;
 }
 
 .get-started-button {
     background-color: #3321e9;
+    border: 2px solid #3321e9;
     color: white;
 }
 
 .get-started-button:hover {
     background-color: white;
     color: #3321e9;
-    border: 2px solid #3321e9;
 }
 
 h1 {
@@ -123,14 +123,14 @@ span {
     margin-bottom: 30px;
 }
 
-.auth-link {
+/* .auth-link {
     color: white;
     text-decoration: none;
 }
 
 .auth-link:hover {
     color: #3028e8;
-}
+} */
 
 textarea {
     padding: 15px;
@@ -157,7 +157,7 @@ a {
     padding: 15px;
 }
 
-.fa-arrow-right {
+.hero-submit-icon {
     width: 40px;
     height: 40px;
     border: 1px solid black;
@@ -170,7 +170,7 @@ a {
     font-size: 30px;
 }
 
-.fa-arrow-right:hover {
+.hero-submit-icon:hover {
     background-color: #0c0c9e;
     font: white;
 }
@@ -332,30 +332,36 @@ main button {
     color: white;
 }
 
-main .fa-arrow-right {
+main .hero-submit-icon {
     background: none;
     color: white;
+}
+
+.explore-icon  {
+    font-size: 30px;
 }
 
 .offer-1 button,
 .offer-3 button {
     background-color: #3321e9;
+    border: 2px solid #3321e9;
+    color: white;
 }
 
 .offer-1 button:hover,
 .offer-3 button:hover {
     background-color: white;
-    border: 2px solid #3321e9;
     color: #3321e9;
 }
 
 .offer-2 button {
     background-color: #0c0c9e;
+    border: 2px solid #0c0c9e;
+    color: white;
 }
 
 .offer-2 button:hover {
     background-color: white;
-    border: 2px solid #0c0c9e;
     color: #0c0c9e;
 }
 
@@ -391,6 +397,11 @@ main .fa-arrow-right {
 .pwd-input {
     border-right: none;
     border-left: none;
+    border-top-style: solid;
+}
+
+.log-in-form input:hover {
+    border-color: #0c0c9e;
 }
 
 .submit-btn-container {
