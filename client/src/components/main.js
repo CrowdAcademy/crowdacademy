@@ -47,7 +47,7 @@ export default function Main() {
                 </div>
             </div>
             <article className = "login-in">
-                <form action = "" class = "log-in-form">
+                <form action = "" className = "log-in-form">
                     <p>Username</p>
                     <input type = "text" className = "username-input" placeholder = "username" />
                     <p>Password</p>

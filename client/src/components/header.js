@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from 'react-router-dom';
-import CrowdAcademyLogo from '../assets/icon_tr.png'
+
+import CrowdAcademyLogo from '../assets/icon_tr.png' 
 
 
 export default function Header() {
@@ -8,7 +9,7 @@ export default function Header() {
         <header>
             <div className="header-top-container">
                 <div className="logo">
-                    <img src={CrowdAcademyLogo} alt="rafini" />
+                   <img src={CrowdAcademyLogo} alt="rafini" />  
                     <h3 className="logo-text">CrowdAcademy</h3>
                 </div>
                 <div>

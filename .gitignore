@@ -159,3 +159,6 @@ yarn-error.log*
 # application emmits
 server/testing-files/
 server/app/config/service_account_file.json
+
+
+vi/
