@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import CrowdAcademyLogo from '../../assets/icon_tr.png';
 import UserImage from '../../assets/samples/user-1.png';
 import Footer from '../../components/footer';  
-import './instructor.css'
+import './homePage.css'
 import { QuestionData } from './sampleQuestion';
 import Question from './question';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -40,7 +40,7 @@ function InstructorHomePage() {
                         {QuestionElement}
                     </div>
                 </section>
-                <Footer/>
+                <Footer className = "instructor-home-footer"/>
             </div>
 
             <div className = "home-aside-container">

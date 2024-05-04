@@ -1,5 +1,5 @@
+
 function Question(props) {
-    
     return(
         <div className = "question-card">
             <div className = "question-card-details">
@@ -8,7 +8,7 @@ function Question(props) {
                 <address className = "question-card-author">From {props.author}</address>
             </div>
             <img className = "question-author-image" src = {props.image}/>
-            <button className = "question-card-respond-btn">Respond</button>
+            <a className = "question-card-respond-btn" href = "/respond">Respond</a>
         </div>
     )
 }

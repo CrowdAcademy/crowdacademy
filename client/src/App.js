@@ -8,6 +8,7 @@ import StudentPage from './pages/student/student';
 import InstructorHomePage from './pages/instructor/homePage';
 import AccountPage from './pages/account'
 import ProtectedRoute from './components/ProtectedRoute'
+import QuestionResponsePage from './pages/instructor/QAPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/student" element={<StudentPage />} />
         <Route path="/instructor/home" element={<InstructorHomePage />} />
+        <Route path="/respond" element={<QuestionResponsePage />} />
         <Route path="/account" element={
           <ProtectedRoute>
             <AccountPage />

@@ -1,0 +1,142 @@
+.response-container {
+    width: 100%;
+    height: 100%;
+    background-color: #0090D6;
+    display: flex;
+}
+
+/* ---------topbar-------------- */
+
+.topbar {
+    height: 10%;
+    background-color: #0090D6;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+}
+
+.topbar .Logo-design {
+    padding: 0;
+}
+
+.add-res-resources-container {
+    margin-top: 20px;
+}
+
+.add-res-resources-container form textarea {
+    width: 100%;
+    height: 120px;
+    resize: none;
+}
+
+/* ---------response-main-container-------- */
+
+.response-main-container {
+    width: 60%;
+    height: 100%;
+    background-color: #d8d8d890;
+    display: flex;
+    flex-direction: column;
+}
+
+.response-main-inner-left-container {
+    width: 100%;
+    height: 85%;
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.response-main-preview-container {
+    width: 40%;
+    height: 100%;
+    background-color: #173251;
+    overflow-y: auto;
+}
+
+.response-main-container .question-card {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.response-main-container .question-card-details {
+    width: 70%;
+}
+
+.add-response-content-icon-item-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 40px;
+}
+
+.response-container .icons {
+    width: 40px;
+    height: 40px;
+    background-color: #173251;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.response-main-inner-left-container .question-card {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-right: 20px;
+}
+
+.note-to-responder {
+    width: 30%;
+}
+
+.add-res-resources-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.add-res-resources-container form {
+    width: 67%;
+}
+
+.add-format-btn {
+    margin-top: 10px;
+    padding: 10px 30px;
+    border-radius: .5rem;
+    background-color: #173251;
+    border-color: #173251;
+    border-style: solid;
+    color: white;
+    cursor: pointer;
+}
+
+.add-format-btn:hover {
+    background-color: #0090D6;
+    border-color: #0090D6;
+}
+
+.attach-file-input {
+    margin-left: 10px;
+}
+
+.link-input {
+    padding: 10px;
+    width: 300px;
+}
+
+.summary-track-container {
+    background-color: transparent;
+    width: 31%;
+    height: 292px;
+}
+
+.bottom-bar {
+    height: 5%;
+    width: 100%;
+    background-color: #0090D6;
+}

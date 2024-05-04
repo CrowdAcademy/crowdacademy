@@ -122,9 +122,17 @@ body,
 
 .question-card-respond-btn {
     background-color: #173251;
+    border-color: #173251;
     color: white;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: .5rem;
 }
 
+.question-card-respond-btn:hover {
+    border-color: #0090D6;
+    background-color: #0090D6;
+}
 
 /*--------HOME-ASIDE-CONTAINER------- */
 
