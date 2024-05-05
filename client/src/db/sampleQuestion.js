@@ -1,9 +1,10 @@
-import UserImage1 from '../../assets/samples/user-1.png';
-import UserImage2 from '../../assets/samples/user-2.png';
-import UserImage3 from '../../assets/samples/user-3.png';
-import UserImage4 from '../../assets/samples/user-4.png';
-import UserImage5 from '../../assets/samples/user-5.png';
-import UserImage6 from '../../assets/samples/user-6.png';
+import UserImage1 from '../assets//samples/user-1.png';
+import UserImage2 from '../assets//samples/user-2.png';
+import UserImage3 from '../assets//samples/user-3.png';
+import UserImage4 from '../assets//samples/user-4.png';
+import UserImage5 from '../assets//samples/user-5.png';
+import UserImage6 from '../assets//samples/user-6.png';
+
 
 const QuestionData = [
     {

@@ -3,7 +3,7 @@ import CrowdAcademyLogo from '../../assets/icon_tr.png';
 import UserImage from '../../assets/samples/user-1.png';
 import Footer from '../../components/footer';
 import './homePage.css';
-import { QuestionData } from './sampleQuestion';
+import { QuestionData } from '../../db/sampleQuestion';
 import Question from './question';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPowerOff } from '@fortawesome/free-solid-svg-icons';

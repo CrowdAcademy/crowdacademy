@@ -4,10 +4,10 @@ import CrowndAcademy from '../../assets/icon_tr.png';
 import './QAPage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAlignJustify, faImage, faVideo, faMicrophone, faLink } from '@fortawesome/free-solid-svg-icons';
-import { QuestionData } from './sampleQuestion'; // Importing the QuestionData array
+import { QuestionData } from '../../db/sampleQuestion';
 
 function QuestionResponsePage() {
-    
+
     const { slug } = useParams();
 
     const question = QuestionData.find(item => item.slug === slug);
