@@ -12,19 +12,6 @@ bp = Blueprint('index', __name__)
 def index():
     return jsonify({"message": "Success"})
 
-# Defining the protected route
-@bp.route("/protected", methods=["GET"])
-@login_required
-def protected_route(user):
-    return jsonify({"message": "Access granted. Hello, {}!".format(user.username)})
-
-@bp.route("/restricted", methods=["GET"])
-@login_required
-@authorize(required_permissions=[Permissions.VIEW_USER])
-def restricted_route(user):
-    # This route is only accessible to users with VIEW_USER and EDIT_USER permissions
-    return jsonify({"message": "This is a restricted route!"}), 200
-
 @bp.route("/create-super-admin", methods=["POST"])
 def create_super_admin():
     try:
@@ -64,3 +51,8 @@ def create_super_admin():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+# Catch-all route for handling any other path
+@bp.route("/<path:invalid_path>")
+def handle_invalid_path(invalid_path):
+    return jsonify({"error": "404 Not Found", "message": f"The path '{invalid_path}' does not exist"}), 404
