@@ -85,3 +85,44 @@
     align-self: end;  /* Align the footer to the end of the grid row */
     justify-self: stretch; /* Stretch the footer to fill the entire width of its grid area */
 }
+
+
+
+.dark-mode-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px;
+    cursor: pointer;
+    /* Additional styles for the dark mode toggle button */
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .left-side,
+    .right-side {
+      width: 100%;
+    }
+    .right-side {
+      padding: 20px;
+      text-align: center;
+    }
+  }
+  
+
+  .dark-mode {
+    background-color: #d1ed32;
+    color: #e77cc0;
+    /* Adjust other styles for dark mode as needed */
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s ease;
+    /* additional global styles as needed */
+  }
+
+  .left-side {
+    background-image: url('http://www.pixelstalk.net/wp-content/uploads/2016/07/HD-Computer-Science-Photos.jpg');
+    background-size: cover;
+    /* Add other background styles as needed */
+  }

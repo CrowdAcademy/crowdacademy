@@ -1,23 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react'; // Importing useState along with React
 import './studenthp.css';
 import CrowdAcademyLogo from '../../assets/icon_tr.png';
 import Hero from '../../components/hero';
 import Answer from './Answer';
-import Footer from '../../components/footer';  
+import Footer from '../../components/footer';
+import { faMarsDouble } from '@fortawesome/free-solid-svg-icons';
 
 
 function App() {
-    return (
-        <div className="app-container">
-            {/* Left side */}
+    const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+      setDarkMode(!darkMode);
+  };
+
+  return (
+    <div className={`app-container ${darkMode ? 'dark-mode' : ''}`}>
             <div className="left-side">
                 <div className="left-content">
                     <button>My Stats</button>
-                    <button>Study</button>
-                    <button>Subject</button>
-                    <button>Posts</button>
+                    <button>Blog</button>
+                    <button>Cursus</button>
+                    <button>Posts-News</button>
                     <button>Student Communities</button>
-                    <button className="logout-btn">LOGOUT</button>
+                    <button className="logout-btn">FILTER</button>
                     <Hero />
                     <div>
                         <Student />
@@ -36,16 +42,12 @@ function App() {
                     <button>Home</button>
                     <br />
                     <br />
-                    <button>Recent</button>
+                    <button>Forum</button>
                     <br />
                     <br />
-                    <button>Inbox</button>
+                    <button>Podcasts</button>
                     <br />
-                    <br />
-                    <button>Messages</button>
-                    <br />
-                    <br />
-                    <button>Settings</button>
+                    
                     <div className="avatar-section">
                         <img src=" " alt="Avatar" className="avatar" />
                         <p>Profile</p>
@@ -55,6 +57,9 @@ function App() {
 
             {/* Footer */}
             <Footer /> 
+            <button onClick={toggleDarkMode} className="dark-mode-toggle">
+        {darkMode ? 'Light Mode' : 'Dark Mode'}
+      </button>
         </div>
     );
 }
@@ -81,7 +86,15 @@ const Student = () => {
             <h1> Answers </h1>
             {/* Map over the rectangles array to render the Answer component */}
             {rectangles.map((rectangle, index) => (
-                <div key={index} style={{ backgroundColor: rectangle.backgroundColor, marginBottom: '20px' }}>
+                <div key={index} style={{
+                    backgroundColor: 'linear-gradient(to right, #ffcccb, #87cefa)', // Gradient background
+                    marginBottom: '20px',
+                    border: '20px double faMars', // Double border with Mars symbol
+                    borderRadius: '60px', // Rounded corners
+                    borderColor: 'red', // Border color (red)
+                    animation: 'pulse 2s infinite', // Add a pulsating animation
+                    /* Add other styles here if needed */
+                  }}>
                     <Answer 
                         content={rectangle.content} 
                         isPaid={false} 
