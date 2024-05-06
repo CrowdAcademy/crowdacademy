@@ -1,8 +1,10 @@
 .app-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;  /* Set the minimum height to 100% of the viewport height */
+    min-height: 100vh;
+    /* Set the minimum height to 100% of the viewport height */
 }
+
 .left-side {
     display: flex;
     flex: 1;
@@ -55,35 +57,48 @@
 .app-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;  /* Set the minimum height to 100% of the viewport height */
+    min-height: 100vh;
+    /* Set the minimum height to 100% of the viewport height */
 }
 
 
 
 .app-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;  /* Two equal columns */
-    grid-template-rows: auto 1fr auto auto;  /* Four rows: auto for header, 1fr for content, auto for footer */
-    min-height: 100vh;  /* Set the minimum height to 100% of the viewport height */
+    grid-template-columns: 1fr 1fr;
+    /* Two equal columns */
+    grid-template-rows: auto 1fr auto auto;
+    /* Four rows: auto for header, 1fr for content, auto for footer */
+    min-height: 100vh;
+    /* Set the minimum height to 100% of the viewport height */
 }
 
 
 .left-side {
-    grid-column: 1;  /* Align left side content to the first column */
-    grid-row: 2;  /* Align left side content to the second row */
+    grid-column: 1;
+    /* Align left side content to the first column */
+    grid-row: 2;
+    /* Align left side content to the second row */
 }
 
 .right-side {
-    grid-column: 2;  /* Align right side content to the second column */
-    grid-row: 2;  /* Align right side content to the second row */
+    grid-column: 2;
+    /* Align right side content to the second column */
+    grid-row: 2;
+    /* Align right side content to the second row */
 }
 
 .footer {
-    grid-column: 1 / -1;  /* Span the full width of both columns */
-    grid-row-start: auto;  /* Let the grid automatically determine the start row */
-    grid-row-end: span 1;  /* Span only 1 row for the footer */
-    align-self: end;  /* Align the footer to the end of the grid row */
-    justify-self: stretch; /* Stretch the footer to fill the entire width of its grid area */
+    grid-column: 1 / -1;
+    /* Span the full width of both columns */
+    grid-row-start: auto;
+    /* Let the grid automatically determine the start row */
+    grid-row-end: span 1;
+    /* Span only 1 row for the footer */
+    align-self: end;
+    /* Align the footer to the end of the grid row */
+    justify-self: stretch;
+    /* Stretch the footer to fill the entire width of its grid area */
 }
 
 
@@ -95,34 +110,36 @@
     padding: 10px;
     cursor: pointer;
     /* Additional styles for the dark mode toggle button */
-  }
-  
-  @media only screen and (max-width: 768px) {
+}
+
+@media only screen and (max-width: 768px) {
+
     .left-side,
     .right-side {
-      width: 100%;
+        width: 100%;
     }
-    .right-side {
-      padding: 20px;
-      text-align: center;
-    }
-  }
-  
 
-  .dark-mode {
+    .right-side {
+        padding: 20px;
+        text-align: center;
+    }
+}
+
+
+.dark-mode {
     background-color: #d1ed32;
     color: #e77cc0;
     /* Adjust other styles for dark mode as needed */
-  }
+}
 
-  body {
+body {
     font-family: Arial, sans-serif;
     transition: background-color 0.3s ease;
     /* additional global styles as needed */
-  }
+}
 
-  .left-side {
+.left-side {
     background-image: url('http://www.pixelstalk.net/wp-content/uploads/2016/07/HD-Computer-Science-Photos.jpg');
     background-size: cover;
     /* Add other background styles as needed */
-  }
+}

@@ -1,7 +1,7 @@
-// src/pages/Answer.js
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
-const Answer = ({ content, isPaid, profilePhoto, userId, rating, videoLink, bookLink, quizLink }) => {
+const Answer = ({ content, isPaid, profilePhoto, userId, rating, videoLink, bookLink, quizLink, detailedContent, slug }) => {
     return (
         <div style={{ 
             backgroundColor: '#ACDFF7', 
@@ -32,7 +32,13 @@ const Answer = ({ content, isPaid, profilePhoto, userId, rating, videoLink, book
             </div>
 
             <div>
-                <p>{content}</p>
+                {/* Wrap the content inside a Link component */}
+                <Link to={`/lesson/${slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <p>{content}</p>
+                </Link>
+                
+                {/* Display detailed content */}
+                <p>{detailedContent}</p>
                 {isPaid && <p><strong>This is a paid answer.</strong></p>}
                 
                 {videoLink && (
