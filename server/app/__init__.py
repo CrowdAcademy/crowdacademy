@@ -1,4 +1,3 @@
-# app.py
 from dotenv import load_dotenv
 from flask import Flask
 from flask_mongoengine import MongoEngine
@@ -30,6 +29,12 @@ from app.routes.account import create_user_account, get_user_account, update_use
 from app.routes.lessons import create_lesson, get_lesson, get_lessons, update_lesson, delete_lesson
 from app.routes.challenges import create_challenge, get_challenge, get_challenges, update_challenge, delete_challenge
 
+# Import resource routes
+from app.routes.resources import create_resource, update_resource, delete_resource
+
+# Import feedback routes
+from app.routes.challenge_feedback import create_feedback, update_feedback, delete_feedback
+
 # Register account routes
 app.add_url_rule('/account/', 'get_user_account', get_user_account, methods=['GET'])
 app.add_url_rule('/account/create', 'create_user_account', create_user_account, methods=['POST'])
@@ -46,11 +51,11 @@ app.add_url_rule('/users/update/<user_id>', 'update_user_by_id', update_user_by_
 app.add_url_rule('/users/delete/<user_id>', 'delete_user_by_id', delete_user_by_id, methods=['DELETE'])
 
 # Register challenge routes
-app.add_url_rule('/challenges', 'create_challenge', create_challenge, methods=['POST'])
+app.add_url_rule('/challenges/create', 'create_challenge', create_challenge, methods=['POST'])
 app.add_url_rule('/challenges', 'get_challenges', get_challenges, methods=['GET'])
 app.add_url_rule('/challenges/<challenge_id>', 'get_challenge', get_challenge, methods=['GET'])
-app.add_url_rule('/challenges/<challenge_id>', 'update_challenge', update_challenge, methods=['PUT'])
-app.add_url_rule('/challenges/<challenge_id>', 'delete_challenge', delete_challenge, methods=['DELETE'])
+app.add_url_rule('/challenges/update/<challenge_id>', 'update_challenge', update_challenge, methods=['PUT'])
+app.add_url_rule('/challenges/delete/<challenge_id>', 'delete_challenge', delete_challenge, methods=['DELETE'])
 
 # Register lesson routes
 app.add_url_rule('/lessons', 'create_lesson', create_lesson, methods=['POST'])
@@ -58,6 +63,16 @@ app.add_url_rule('/lessons', 'get_lessons', get_lessons, methods=['GET'])
 app.add_url_rule('/lessons/<lesson_id>', 'get_lesson', get_lesson, methods=['GET'])
 app.add_url_rule('/lessons/<lesson_id>', 'update_lesson', update_lesson, methods=['PUT'])
 app.add_url_rule('/lessons/<lesson_id>', 'delete_lesson', delete_lesson, methods=['DELETE'])
+
+# Register resource routes
+app.add_url_rule('/resources/create', 'create_resource', create_resource, methods=['POST'])
+app.add_url_rule('/resources/update/<resource_id>', 'update_resource', update_resource, methods=['PUT'])
+app.add_url_rule('/resources/delete/<resource_id>', 'delete_resource', delete_resource, methods=['DELETE'])
+
+# Register feedback routes
+app.add_url_rule('/challenges/<challenge_id>/feedback/create', 'create_feedback', create_feedback, methods=['POST'])
+app.add_url_rule('/challenges/feedback/update/<challenge_id>/<feedback_id>', 'update_feedback', update_feedback, methods=['PUT'])
+app.add_url_rule('/challenges/feedback/delete/<challenge_id>/<feedback_id>', 'delete_feedback', delete_feedback, methods=['DELETE'])
 
 # Authentication routes
 app.register_blueprint(login_bp)

@@ -5,12 +5,6 @@ from app.utils.consts import USER_ROLES, REQUIRED_FIELDS
 
 bp = Blueprint('users', __name__)
 
-from flask import jsonify, Blueprint, request
-from app.models.user import User
-from app.modules.Access.roles import Roles
-
-bp = Blueprint('users', __name__)
-
 
 @bp.route("/add", methods=["POST"])
 @login_required
