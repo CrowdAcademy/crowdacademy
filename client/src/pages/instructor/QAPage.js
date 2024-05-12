@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CrowndAcademy from '../../assets/icon_tr.png';
 import './QAPage.css';
@@ -20,6 +20,8 @@ function QuestionResponsePage() {
     const [linkInputValue, setLinkInputValue] = useState('');
 
     const [contents, setContents] = useState([]);
+    const [editState, setEditState] = useState(false);
+    const [editPos, setEditPos] = useState(-1);
 
     const handleIconListClick = (type) => {
         setFormType(type);
@@ -33,15 +35,15 @@ function QuestionResponsePage() {
         setVideoInputValue(event.target.value);
 
     };
-    
+
     const handleImageInputChange = (event) => {
         setImageInputValue(event.target.value);
     };
-    
+
     const handleAudioInputChange = (event) => {
         setAudioInputValue(event.target.value);
     };
-    
+
     const handleLinkInputChange = (event) => {
         setLinkInputValue(event.target.value);
     };
@@ -52,10 +54,11 @@ function QuestionResponsePage() {
         switch (type) {
             case 'notes':
                 value = inputValue;
+                setInputValue('');
                 break;
             case 'videos':
                 value = videoInputValue;
-                setVideoInputValue(''); 
+                setVideoInputValue('');
                 break;
             case 'images':
                 value = imageInputValue;
@@ -75,8 +78,33 @@ function QuestionResponsePage() {
         if (value.trim() !== '') {
             setContents([...contents, { type: type, value: value }]);
         }
-    }; 
+    };
+
+    const handleBlockClick = (type, position) => {
+        if (type === "notes") {
+            handleIconListClick(type);
+            setInputValue(contents[position].value);
+            setEditPos(position);
+            setEditState(true);
+        }
+    };
     
+    const editButtonClick = (event) => {
+        event.preventDefault();
+
+        if (inputValue.trim() !== '') {
+            const updatedContents = [...contents];
+            updatedContents[editPos].value = inputValue; // Use editPos here
+
+            setContents(updatedContents);
+            setInputValue('');
+
+            setEditState(false);
+            setEditPos(-1);
+        }
+    };
+    
+
     const renderContentForm = (type) => {
         switch (type) {
             case 'notes':
@@ -108,7 +136,7 @@ function QuestionResponsePage() {
                 return null;
         }
     };
-    
+
 
     return (
         <div className="response-container">
@@ -144,39 +172,45 @@ function QuestionResponsePage() {
                             <form className="add-note-form">
                                 <p>Use this option to craft a written explanation, clarification, or additional information regarding the question.Notes are ideal for providing detailed responses, insights, or context in written form.</p><br />
                                 <textarea value={inputValue} onChange={handleInputChange} /><br />
-                                <input className="add-format-btn" type="submit" value="add" onClick={(event) => addButtonClick(event, "notes")} />
+
+                                {editState ? (
+                                    <button className="add-format-btn" onClick={(event) => editButtonClick(event)}>Edit</button>
+                                ) : (
+                                    <button className="add-format-btn" onClick={(event) => addButtonClick(event, "notes")}>Add</button>
+                                )}
+
                             </form>
                         )}
                         {formType === 'videos' && (
                             <form className="add-video-form">
                                 <p>A video response can visually illustrate concepts and provide a more engaging explanation.Consider recording a video when visuals or demonstrations can enhance understanding.Videos are effective for tutorials, demonstrations, or sharing personal insights related to the question.</p><br />
                                 <label>Select a video file</label>
-                                <input className="attach-file-input" type="file" accept="video/*" onChange={handleVideoInputChange}/><br />
-                                <input className="add-format-btn" type="submit" value="add" onClick={(event) => addButtonClick(event, "videos")}/>
+                                <input className="attach-file-input" type="file" accept="video/*" onChange={handleVideoInputChange} /><br />
+                                <button className="add-format-btn" onClick={(event) => addButtonClick(event, "videos")}>Add</button>
                             </form>
                         )}
                         {formType === 'images' && (
                             <form className="add-image-form">
                                 <p>Images can quickly convey information and support your written response.Use images to show examples, diagrams, charts, or graphs relevant to the question.Incorporating images can enhance comprehension and provide visual context for your response.</p><br />
                                 <label>Select an image file</label>
-                                <input className="attach-file-input" type="file" accept="image/*" onChange={handleImageInputChange}/><br />
-                                <input className="add-format-btn" type="submit" value="add" onClick={(event) => addButtonClick(event, "images")}/>
+                                <input className="attach-file-input" type="file" accept="image/*" onChange={handleImageInputChange} /><br />
+                                <button className="add-format-btn" onClick={(event) => addButtonClick(event, "images")}>Add</button>
                             </form>
                         )}
                         {formType === 'audios' && (
                             <form className="add-audio-form">
                                 <p>An audio response offers a personal touch and can convey tone and emotion.Use audio recordings to provide verbal explanations, storytelling, or instructions.Audio responses are beneficial when verbal communication adds value or clarity to your response.</p><br />
                                 <label>Select a audio file</label>
-                                <input className="attach-file-input" type="file" accept="audio/*" onChange={handleAudioInputChange}/><br />
-                                <input className="add-format-btn" type="submit" value="add" onClick={(event) => addButtonClick(event, "audios")} />
+                                <input className="attach-file-input" type="file" accept="audio/*" onChange={handleAudioInputChange} /><br />
+                                <button className="add-format-btn" onClick={(event) => addButtonClick(event, "audios")}>Add</button>
                             </form>
                         )}
                         {formType === 'links' && (
                             <form className="add-link-form">
                                 <p>Include a link to relevant external resources that further elaborate on the question or your response.Share articles, studies, websites, or multimedia content that provide additional context or insights.Links can complement your response by directing users to more in-depth resources for further exploration.</p><br />
                                 <label>Enter a link</label>
-                                <input className="attach-file-input link-input" type="url" onChange={handleLinkInputChange}/><br />
-                                <input className="add-format-btn" type="submit" value="add" onClick={(event) => addButtonClick(event, "links")}/>
+                                <input className="attach-file-input link-input" type="url" onChange={handleLinkInputChange} /><br />
+                                <button className="add-format-btn" onClick={(event) => addButtonClick(event, "links")}>Add</button>
                             </form>
                         )}
                         <div className="summary-track-container"></div>
@@ -186,8 +220,8 @@ function QuestionResponsePage() {
             </div>
             <div className="response-main-preview-container">
                 {contents.map((content, index) => (
-                    <div key={index} className='added-content-container'>
-                        {console.log(contents)} 
+                    <div key={index} className='added-content-container' onClick={() => handleBlockClick(content.type, index)}>
+                        {console.log(contents)}
                         {renderContentForm(content.type)}
                         {/* Render content based on type */}
                         <p className="added-content-value">{content.value}</p>
