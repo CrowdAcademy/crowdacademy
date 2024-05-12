@@ -45,6 +45,7 @@
     height: 85%;
     padding-top: 20px;
     padding-left: 20px;
+    overflow-y: auto;
 }
 
 .response-main-preview-container {
@@ -56,11 +57,11 @@
 
 .response-main-container .question-card {
     width: 100%;
-    margin-top: 20px;
 }
 
 .response-main-container .question-card-details {
-    width: 70%;
+    width: 90%;
+    margin: 1rem 0;
 }
 
 .add-response-content-icon-item-container {
@@ -84,13 +85,14 @@
 
 .response-main-inner-left-container .question-card {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: flex-start;
     padding-right: 20px;
 }
 
 .note-to-responder {
-    width: 30%;
+    width: 90%;
+    margin: 1rem;
 }
 
 .add-res-resources-container {
@@ -139,4 +141,11 @@
     height: 5%;
     width: 100%;
     background-color: #0090D6;
+}
+.added-content-value {
+    border: 2px solid white;
+    margin: 20px;
+    padding: 20px;
+    color: white;
+    cursor: pointer;
 }

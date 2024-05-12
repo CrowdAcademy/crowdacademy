@@ -6,6 +6,7 @@ import StudentPage from './pages/student/student';
 import AccountPage from './pages/account'
 import ProtectedRoute from './components/ProtectedRoute'
 import InstructorHomePage from './pages/instructor/homePage';
+import InstructorInboxPage from './pages/instructor/inBoxPage';
 import QuestionResponsePage from './pages/instructor/QAPage';
 import LessonPage from './pages/lesson/lesson';
 import MyStatsPage from './pages/student/my-stats';
@@ -20,6 +21,7 @@ function App() {
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/student" element={<StudentPage />} />
         <Route path="/instructor/home" element={<InstructorHomePage />} />
+        <Route path="/instructor/inbox" element={<InstructorInboxPage />} />
         <Route path="/respond/:slug" element={<QuestionResponsePage />} />
         <Route path="/lesson/:slug" element={<LessonPage />} />
         <Route path="/student/" element={<StudentPage/>} />
