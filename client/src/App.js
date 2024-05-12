@@ -8,7 +8,9 @@ import ProtectedRoute from './components/ProtectedRoute'
 import InstructorHomePage from './pages/instructor/homePage';
 import QuestionResponsePage from './pages/instructor/QAPage';
 import LessonPage from './pages/lesson/lesson';
-
+import MyStatsPage from './pages/student/my-stats';
+import MyBlogPage from './pages/student/blog';
+import PostsNews from './pages/student/PostsNews';
 
 function App() {
   return (
@@ -20,6 +22,10 @@ function App() {
         <Route path="/instructor/home" element={<InstructorHomePage />} />
         <Route path="/respond/:slug" element={<QuestionResponsePage />} />
         <Route path="/lesson/:slug" element={<LessonPage />} />
+        <Route path="/student/" element={<StudentPage/>} />
+        <Route path="/student/my-stat/" element={<MyStatsPage/>} />
+        <Route path="/student/blog/" element={<MyBlogPage/>} />
+        <Route path="/student/posts-news/" element={<PostsNews/>} />
         <Route path="/account" element={
           <ProtectedRoute>
             <AccountPage />

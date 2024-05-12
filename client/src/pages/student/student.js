@@ -5,6 +5,7 @@ import Hero from '../../components/hero';
 import Answer from './Answer'; // Import the Answer component
 import Footer from '../../components/footer';
 import { AnswerData } from '../../db/sampleAnswers';
+import { Link } from 'react-router-dom';
 
 function App() {
     const [darkMode, setDarkMode] = useState(false);
@@ -13,17 +14,36 @@ function App() {
         setDarkMode(!darkMode);
     };
 
+    // Define an array of buttons with their labels and routes
+    const buttons = [
+        { label: 'My Stats', route: './my-stat/' },
+        { label: 'Blog', route: './blog' },
+        { label: 'Cursus', route: './cursus' },
+        { label: 'Posts-News', route: './posts-news' },
+        { label: 'Student Communities', route: './student-communities' },
+        { label: 'Search', route: './Search' }
+    ];
+
+    const Site_buttons = [
+        { label: 'Forum', route: './Forum' },
+        { label: 'Podcasts', route: './Podcasts' },
+        { label: 'Recent', route: './Recent' },
+        { label: 'Inbox', route: './Inbox' },
+        { label: 'Messages', route: './Messages' },
+        { label: 'Settings', route: './Settings' }
+    ];
+
     return (
+        <>
         <div className={`app-container ${darkMode ? 'dark-mode' : ''}`}>
             {/* Left side */}
             <div className="left-side">
                 <div className="left-content">
-                    <button>My Stats</button>
-                    <button>Blog</button>
-                    <button>Cursus</button>
-                    <button>Posts-News</button>
-                    <button>Student Communities</button>
-                    <button className="logout-btn">FILTER</button>
+                    {buttons.map((button, index) => (
+                        <Link key={index} to={button.route}>
+                            <button>{button.label}</button>
+                        </Link>
+                    ))}
                     <Hero />
                     <div>
                         <Student />
@@ -39,37 +59,28 @@ function App() {
                     </div>
                     <h2>Crowd Academy</h2>
                     <br />
-                    <button>Home</button>
-                    <br />
-                    <br />
-                    <button>Forum</button>
-                    <br />
-                    <br />
-                    <button>Podcasts</button>
-                    <br />
-                    <button>Recent</button>
-                    <br />
-                    <br />
-                    <button>Inbox</button>
-                    <br />
-                    <br />
-                    <button>Messages</button>
-                    <br />
-                    <br />
-                    <button>Settings</button>
+                    {Site_buttons.map((button, index) => (
+                    <React.Fragment key={index}>
+                        <Link to={button.route}>
+                            <button>{button.label}</button>
+                        </Link>
+                        {index !== Site_buttons.length - 1 && <span>&nbsp;</span>}
+                    </React.Fragment>
+                ))}
                     <div className="avatar-section">
-                        <img src=" " alt="Avatar" className="avatar" />
-                        <p>Profile</p>
+                        <img src=" https://d2oe9fogqkc3hl.cloudfront.net/static/illustrations/category-pages/computer-science.png" alt="Avatar" className="avatar" />
+                        <p></p>
                     </div>
                 </div>
             </div>
 
             {/* Footer */}
-            <Footer />
             <button onClick={toggleDarkMode} className="dark-mode-toggle">
                 {darkMode ? 'Light Mode' : 'Dark Mode'}
             </button>
         </div>
+        <Footer />
+        </>
     );
 }
 
