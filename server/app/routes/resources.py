@@ -1,81 +1,154 @@
-import pytz
-import datetime
+import os
+from mongoengine import DoesNotExist
+from app.models.resource import Resource
+from app.modules.Media import MediaManager
 from flask import jsonify, request, Blueprint
 from app.modules.Access import login_required, authorize, Permissions
-from app.modules.Media import upload_file
-from app.models.resource import Resource
+from werkzeug.utils import secure_filename
+
+
+
+# Function to check if the file extension is allowed
+def allowed_file(filename):
+    ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'mp4', 'avi', 'mkv', 'mov'}
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 bp = Blueprint('resources', __name__)
+media_manager = MediaManager()
+
+# Get the current directory's base path
+base_path = os.getcwd()
+
+# Combine with 'uploads' folder
+UPLOAD_FOLDER = os.path.join(base_path, 'uploads')
+
+print(f"UPLOAD_FOLDER: {UPLOAD_FOLDER}")
+
+
+# Route to retrieve all resources
+@bp.route("/resources", methods=["GET"])
+def get_all_resources():
+    try:
+        resources = Resource.objects.all()
+        return jsonify({"resources": resources}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+
+# Route to retrieve resource details
+@bp.route("/resources/<resource_id>", methods=["GET"])
+@login_required
+@authorize([Permissions.VIEW_RESOURCE])
+def get_resource_details(resource_id):
+    try:
+        resource = Resource.objects.get(id=resource_id)
+        return jsonify({"resource": resource}), 200
+    except DoesNotExist:
+        return jsonify({"error": "Resource not found"}), 404
+
 
 # Route to create a new resource
 @bp.route("/resources/create", methods=["POST"])
 @login_required
+@authorize([Permissions.CREATE_RESOURCE])
 def create_resource(current_user):
     try:
-        data = request.get_json()
-        
-        # Check if 'file' is present in request.files
+        # Check if the request contains a file
         if 'file' not in request.files:
             return jsonify({"error": "No file part"}), 400
         
         file = request.files['file']
-        
-        # Upload file using Media module
-        media_url = upload_file(file)
-        
-        # Create Resource object
+
+        # Check if the file is empty
+        if file.filename == '':
+            return jsonify({"error": "No selected file"}), 400
+
+        # Save the file to the uploads folder
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file_path = os.path.join(UPLOAD_FOLDER, filename)
+            file.save(file_path)
+        else:
+            return jsonify({"error": "Invalid file type"}), 400
+
+        # Use MediaManager to upload media and get URL
+        media_manager = MediaManager()
+        media_data = open(file_path, 'rb').read()
+
+        if file.content_type.startswith('image'):
+            url, access_id = media_manager.upload_image(media_data)
+        elif file.content_type.startswith('audio') or file.content_type.startswith('video'):
+            url, access_id = media_manager.upload_audio_video(media_data)
+        else:
+            os.remove(file_path)  # Remove the file from the temporary folder
+            return jsonify({"error": "Unsupported media type"}), 400
+
+        # Remove the file from the temporary folder
+        os.remove(file_path)
+
+        # Create new Resource object
         new_resource = Resource(
-            resource_type=data.get('resource_type'),
-            link=media_url,
-            description=data.get('description'),
-            user_ids=[current_user.id]  # Assuming user ID is needed
+            resource_type=file.content_type,
+            link=url,
+            access_id=access_id,
+            description=request.form.get('description', ''),
+            user_ids=[current_user.id]
         )
-        
+
         # Save the new resource
         new_resource.save()
-
         return jsonify({"message": "Resource created successfully", "resource": new_resource}), 201
+    
+    except FileNotFoundError:
+        return jsonify({"error": "File not found"}), 500
+    
     except Exception as e:
-        return jsonify({"error": str(e)}), 400
+        return jsonify({"error": str(e)}), 500
 
 
-# Route to update a resource by ID
+# Route to update a resource
 @bp.route("/resources/update/<resource_id>", methods=["PUT"])
 @login_required
+@authorize([Permissions.EDIT_RESOURCE])
 def update_resource(current_user, resource_id):
+    data = request.get_json()
     try:
-        data = request.get_json()
-        
-        # Fetch resource by ID
         resource = Resource.objects.get(id=resource_id)
-        
-        # Update resource fields
-        for key, value in data.items():
-            setattr(resource, key, value)
-        
-        # Save the updated resource
-        resource.save()
-
-        return jsonify({"message": "Resource updated successfully", "resource": resource}), 200
     except Resource.DoesNotExist:
         return jsonify({"error": "Resource not found"}), 404
+
+    if current_user.id not in resource.user_ids:
+        return jsonify({"error": "You don't have permission to update this resource"}), 403
+
+    # Update resource fields
+    resource.description = data.get('description', resource.description)
+    # Add more fields to update as needed
+
+    try:
+        # Save the updated resource
+        resource.save()
+        return jsonify({"message": "Resource updated successfully", "resource": resource}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
 
-# Route to delete a resource by ID
+# Route to delete a resource
 @bp.route("/resources/delete/<resource_id>", methods=["DELETE"])
 @login_required
+@authorize([Permissions.DELETE_RESOURCE])
 def delete_resource(current_user, resource_id):
     try:
-        # Fetch resource by ID
         resource = Resource.objects.get(id=resource_id)
-        
-        # Delete the resource
-        resource.delete()
-
-        return jsonify({"message": "Resource deleted successfully"}), 200
     except Resource.DoesNotExist:
         return jsonify({"error": "Resource not found"}), 404
+
+    if current_user.id not in resource.user_ids:
+        return jsonify({"error": "You don't have permission to delete this resource"}), 403
+
+    try:
+        # Delete the resource
+        resource.delete()
+        return jsonify({"message": "Resource deleted successfully"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
