@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useParams } from 'react-router-dom';
 import CrowndAcademy from '../../assets/icon_tr.png';
 import './QAPage.css';
@@ -13,10 +13,102 @@ function QuestionResponsePage() {
     const question = QuestionData.find(item => item.slug === slug);
 
     const [formType, setFormType] = React.useState('notes');
+    const [inputValue, setInputValue] = useState('');
+    const [videoInputValue, setVideoInputValue] = useState('');
+    const [imageInputValue, setImageInputValue] = useState('');
+    const [audioInputValue, setAudioInputValue] = useState('');
+    const [linkInputValue, setLinkInputValue] = useState('');
+
+    const [contents, setContents] = useState([]);
 
     const handleIconListClick = (type) => {
         setFormType(type);
-    }
+    };
+
+    const handleInputChange = (event) => {
+        setInputValue(event.target.value);
+    };
+
+    const handleVideoInputChange = (event) => {
+        setVideoInputValue(event.target.value);
+
+    };
+    
+    const handleImageInputChange = (event) => {
+        setImageInputValue(event.target.value);
+    };
+    
+    const handleAudioInputChange = (event) => {
+        setAudioInputValue(event.target.value);
+    };
+    
+    const handleLinkInputChange = (event) => {
+        setLinkInputValue(event.target.value);
+    };
+
+    const addButtonClick = (event, type) => {
+        event.preventDefault();
+        let value = '';
+        switch (type) {
+            case 'notes':
+                value = inputValue;
+                break;
+            case 'videos':
+                value = videoInputValue;
+                setVideoInputValue(''); 
+                break;
+            case 'images':
+                value = imageInputValue;
+                setImageInputValue('');
+                break;
+            case 'audios':
+                value = audioInputValue;
+                setAudioInputValue('');
+                break;
+            case 'links':
+                value = linkInputValue;
+                setLinkInputValue('');
+                break;
+            default:
+                break;
+        }
+        if (value.trim() !== '') {
+            setContents([...contents, { type: type, value: value }]);
+        }
+    }; 
+    
+    const renderContentForm = (type) => {
+        switch (type) {
+            case 'notes':
+                return (
+                    <div className="add-note-container">
+                    </div>
+                );
+            case 'videos':
+                return (
+                    <form className="add-video-form">
+                    </form>
+                );
+            case 'images':
+                return (
+                    <form className="add-image-form">
+                    </form>
+                );
+            case 'audios':
+                return (
+                    <form className="add-audio-form">
+                    </form>
+                );
+            case 'links':
+                return (
+                    <form className="add-link-form">
+                    </form>
+                );
+            default:
+                return null;
+        }
+    };
+    
 
     return (
         <div className="response-container">
@@ -51,40 +143,40 @@ function QuestionResponsePage() {
                         {formType === 'notes' && (
                             <form className="add-note-form">
                                 <p>Use this option to craft a written explanation, clarification, or additional information regarding the question.Notes are ideal for providing detailed responses, insights, or context in written form.</p><br />
-                                <textarea /><br />
-                                <input className="add-format-btn" type="submit" value="add" />
+                                <textarea value={inputValue} onChange={handleInputChange} /><br />
+                                <input className="add-format-btn" type="submit" value="add" onClick={(event) => addButtonClick(event, "notes")} />
                             </form>
                         )}
                         {formType === 'videos' && (
                             <form className="add-video-form">
                                 <p>A video response can visually illustrate concepts and provide a more engaging explanation.Consider recording a video when visuals or demonstrations can enhance understanding.Videos are effective for tutorials, demonstrations, or sharing personal insights related to the question.</p><br />
                                 <label>Select a video file</label>
-                                <input className="attach-file-input" type="file" accept="video/*" /><br />
-                                <input className="add-format-btn" type="submit" value="add" />
+                                <input className="attach-file-input" type="file" accept="video/*" onChange={handleVideoInputChange}/><br />
+                                <input className="add-format-btn" type="submit" value="add" onClick={(event) => addButtonClick(event, "videos")}/>
                             </form>
                         )}
                         {formType === 'images' && (
                             <form className="add-image-form">
                                 <p>Images can quickly convey information and support your written response.Use images to show examples, diagrams, charts, or graphs relevant to the question.Incorporating images can enhance comprehension and provide visual context for your response.</p><br />
                                 <label>Select an image file</label>
-                                <input className="attach-file-input" type="file" accept="image/*" /><br />
-                                <input className="add-format-btn" type="submit" value="add" />
+                                <input className="attach-file-input" type="file" accept="image/*" onChange={handleImageInputChange}/><br />
+                                <input className="add-format-btn" type="submit" value="add" onClick={(event) => addButtonClick(event, "images")}/>
                             </form>
                         )}
                         {formType === 'audios' && (
                             <form className="add-audio-form">
                                 <p>An audio response offers a personal touch and can convey tone and emotion.Use audio recordings to provide verbal explanations, storytelling, or instructions.Audio responses are beneficial when verbal communication adds value or clarity to your response.</p><br />
                                 <label>Select a audio file</label>
-                                <input className="attach-file-input" type="file" accept="audio/*" /><br />
-                                <input className="add-format-btn" type="submit" value="add" />
+                                <input className="attach-file-input" type="file" accept="audio/*" onChange={handleAudioInputChange}/><br />
+                                <input className="add-format-btn" type="submit" value="add" onClick={(event) => addButtonClick(event, "audios")} />
                             </form>
                         )}
                         {formType === 'links' && (
                             <form className="add-link-form">
                                 <p>Include a link to relevant external resources that further elaborate on the question or your response.Share articles, studies, websites, or multimedia content that provide additional context or insights.Links can complement your response by directing users to more in-depth resources for further exploration.</p><br />
                                 <label>Enter a link</label>
-                                <input className="attach-file-input link-input" type="url" /><br />
-                                <input className="add-format-btn" type="submit" value="add" />
+                                <input className="attach-file-input link-input" type="url" onChange={handleLinkInputChange}/><br />
+                                <input className="add-format-btn" type="submit" value="add" onClick={(event) => addButtonClick(event, "links")}/>
                             </form>
                         )}
                         <div className="summary-track-container"></div>
@@ -92,7 +184,16 @@ function QuestionResponsePage() {
                 </div>
                 <div className="bottom-bar"></div>
             </div>
-            <div className="response-main-preview-container"></div>
+            <div className="response-main-preview-container">
+                {contents.map((content, index) => (
+                    <div key={index} className='added-content-container'>
+                        {console.log(contents)} 
+                        {renderContentForm(content.type)}
+                        {/* Render content based on type */}
+                        <p className="added-content-value">{content.value}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }
