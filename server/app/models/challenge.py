@@ -1,6 +1,7 @@
 import datetime
 import pytz
 from mongoengine import Document, StringField, ListField, DateTimeField, ReferenceField, EnumField, EmbeddedDocumentListField
+from mongoengine import EmbeddedDocument, StringField, ListField, DateTimeField, EmbeddedDocumentListField
 from app import db
 from app.models.resource import Resource
 from app.models.feedback import Feedback

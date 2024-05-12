@@ -1,6 +1,4 @@
 import React from 'react';
-
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LandingPage from './pages/landingPage/landingPage';
 import AuthPage from './pages/authPage/authPage';
@@ -9,6 +7,10 @@ import InstructorHomePage from './pages/instructor/homePage';
 import AccountPage from './pages/account'
 import ProtectedRoute from './components/ProtectedRoute'
 import QuestionResponsePage from './pages/instructor/QAPage';
+import AccountPage from './pages/account'
+import ProtectedRoute from './components/ProtectedRoute'
+
+
 
 function App() {
   return (
