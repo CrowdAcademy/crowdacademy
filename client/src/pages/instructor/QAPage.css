@@ -90,12 +90,9 @@
     padding-right: 20px;
 }
 
-.note-to-responder-container {
-    margin: 2rem 0;
-}
-
 .note-to-responder {
     width: 90%;
+    margin: 1rem;
 }
 
 .add-res-resources-container {
@@ -145,11 +142,6 @@
     width: 100%;
     background-color: #0090D6;
 }
-
-.added-note-container {
-    
-}
-
 .added-content-value {
     border: 2px solid white;
     margin: 20px;
