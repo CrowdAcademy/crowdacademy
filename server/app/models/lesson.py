@@ -1,5 +1,5 @@
 import datetime
-from mongoengine import Document, DecimalField, StringField, DateTimeField, IntField, EmbeddedDocumentListField, ReferenceField
+from mongoengine import Document, DecimalField, StringField, DateTimeField, IntField, EmbeddedDocumentListField, ReferenceField, ListField
 from app import db
 from app.models.resource import Resource
 from app.models.feedback import Feedback
@@ -18,7 +18,7 @@ class Lesson(Document):
     status = StringField()  # e.g., planned, ongoing, completed
     instructor_id = StringField()  # Reference to User ID if using DBRefs or just a string
     scheduled_time = DateTimeField()
-    resources = EmbeddedDocumentListField(Resource)
+    resource_ids = ListField(ReferenceField(Resource))
     feedback = EmbeddedDocumentListField(Feedback)
     level = StringField()  # e.g., Beginner, Intermediate, Advanced
 

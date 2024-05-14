@@ -15,7 +15,6 @@ def allowed_file(filename):
 
 
 bp = Blueprint('resources', __name__)
-media_manager = MediaManager()
 
 # Get the current directory's base path
 base_path = os.getcwd()
@@ -23,7 +22,6 @@ base_path = os.getcwd()
 # Combine with 'uploads' folder
 UPLOAD_FOLDER = os.path.join(base_path, 'uploads')
 
-print(f"UPLOAD_FOLDER: {UPLOAD_FOLDER}")
 
 
 # Route to retrieve all resources
@@ -74,12 +72,11 @@ def create_resource(current_user):
 
         # Use MediaManager to upload media and get URL
         media_manager = MediaManager()
-        media_data = open(file_path, 'rb').read()
 
         if file.content_type.startswith('image'):
-            url, access_id = media_manager.upload_image(media_data)
+            result = media_manager.upload_media(file_path, filename, 'image')
         elif file.content_type.startswith('audio') or file.content_type.startswith('video'):
-            url, access_id = media_manager.upload_audio_video(media_data)
+            result = media_manager.upload_media(file_path, filename, 'audio')
         else:
             os.remove(file_path)  # Remove the file from the temporary folder
             return jsonify({"error": "Unsupported media type"}), 400
@@ -87,18 +84,21 @@ def create_resource(current_user):
         # Remove the file from the temporary folder
         os.remove(file_path)
 
-        # Create new Resource object
-        new_resource = Resource(
-            resource_type=file.content_type,
-            link=url,
-            access_id=access_id,
-            description=request.form.get('description', ''),
-            user_ids=[current_user.id]
-        )
+        if result.get("url"):
+            # Create new Resource object
+            new_resource = Resource(
+                resource_type=file.content_type,
+                link=result["url"],
+                access_id=result["id"],
+                description=request.form.get('description', ''),
+                user_ids=[]
+            )
 
-        # Save the new resource
-        new_resource.save()
-        return jsonify({"message": "Resource created successfully", "resource": new_resource}), 201
+            # Save the new resource
+            new_resource.save()
+            return jsonify({"message": "Resource created successfully", "resource": new_resource}), 201
+        else:
+            return jsonify({"error": "Failed to upload media"}), 500
     
     except FileNotFoundError:
         return jsonify({"error": "File not found"}), 500
