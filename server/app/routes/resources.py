@@ -5,12 +5,12 @@ from app.modules.Media import MediaManager
 from flask import jsonify, request, Blueprint
 from app.modules.Access import login_required, authorize, Permissions
 from werkzeug.utils import secure_filename
-
+from app.models.resource import ResourceType
 
 
 # Function to check if the file extension is allowed
 def allowed_file(filename):
-    ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'mp4', 'avi', 'mkv', 'mov'}
+    ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'mp4', 'avi', 'mkv', 'mov', 'mp3', 'wav', 'flac'}
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
@@ -55,7 +55,7 @@ def create_resource(current_user):
         # Check if the request contains a file
         if 'file' not in request.files:
             return jsonify({"error": "No file part"}), 400
-        
+
         file = request.files['file']
 
         # Check if the file is empty
@@ -73,25 +73,25 @@ def create_resource(current_user):
         # Use MediaManager to upload media and get URL
         media_manager = MediaManager()
 
-        if file.content_type.startswith('image'):
-            result = media_manager.upload_media(file_path, filename, 'image')
-        elif file.content_type.startswith('audio') or file.content_type.startswith('video'):
-            result = media_manager.upload_media(file_path, filename, 'audio')
-        else:
+        resource_type = request.form.get('resource_type')
+
+        if resource_type not in [ResourceType.IMAGE.value, ResourceType.AUDIO.value, ResourceType.VIDEO.value]:
             os.remove(file_path)  # Remove the file from the temporary folder
-            return jsonify({"error": "Unsupported media type"}), 400
+            return jsonify({"error": "Invalid resource type"}), 400
+
+        result = media_manager.upload_media(file_path, filename, resource_type)
 
         # Remove the file from the temporary folder
         os.remove(file_path)
 
-        if result.get("url"):
+        if result and result.get("url"):
             # Create new Resource object
             new_resource = Resource(
-                resource_type=file.content_type,
+                resource_type=resource_type,
                 link=result["url"],
                 access_id=result["id"],
                 description=request.form.get('description', ''),
-                user_ids=[]
+                user_ids=[current_user.id]
             )
 
             # Save the new resource
@@ -99,10 +99,10 @@ def create_resource(current_user):
             return jsonify({"message": "Resource created successfully", "resource": new_resource}), 201
         else:
             return jsonify({"error": "Failed to upload media"}), 500
-    
+
     except FileNotFoundError:
         return jsonify({"error": "File not found"}), 500
-    
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

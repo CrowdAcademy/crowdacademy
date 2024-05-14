@@ -16,10 +16,13 @@ class CloudinaryStore:
 
     def upload_file(self, file_path):
         try:
-            result = cloudinary.uploader.upload(file_path)
+            result = cloudinary.uploader.upload(file_path, resource_type="video")
             return result['secure_url'], result['public_id']
-        except Exception as e:
-            print(f"Upload failed with error: {e}")
+        except cloudinary.exceptions.Error as e:
+            error_message = f"Upload failed with error: {str(e)}"
+            if 'Invalid image file' in str(e):
+                error_message = "Invalid image file. Please upload a valid image."
+            print(error_message)
             return None, None
 
     def delete_file(self, public_id):
