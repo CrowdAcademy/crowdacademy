@@ -1,4 +1,6 @@
-from mongoengine import EmbeddedDocument, StringField
+import datetime
+import pytz
+from mongoengine import EmbeddedDocument, StringField, DateTimeField
 
 class Profile(EmbeddedDocument):
     avatar = StringField()
@@ -6,3 +8,4 @@ class Profile(EmbeddedDocument):
     full_name = StringField()
     location = StringField()
     contact_number = StringField()
+    updated_at = DateTimeField(default=datetime.datetime.now(pytz.utc))

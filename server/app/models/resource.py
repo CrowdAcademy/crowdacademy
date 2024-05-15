@@ -1,7 +1,18 @@
-from mongoengine import EmbeddedDocument, StringField, LineStringField
+import pytz
+import datetime
+from mongoengine import Document, StringField, DateTimeField, ObjectIdField, ListField
+from enum import Enum
+from mongoengine.fields import EnumField
 
-class Resource(EmbeddedDocument):
-    resource_type = StringField()  # e.g., video, book, article, image, ...
+class ResourceType(Enum):
+    IMAGE = "image"
+    AUDIO = "audio"
+    VIDEO = "video"
+
+class Resource(Document):
+    resource_type = EnumField(ResourceType, required=True)  # Use EnumField for resource_type
     link = StringField()
+    access_id = StringField()
     description = StringField()
-    users = LineStringField()
+    created_at = DateTimeField(default=datetime.datetime.now(pytz.utc))
+    user_ids = ListField(ObjectIdField())
