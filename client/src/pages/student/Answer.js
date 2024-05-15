@@ -39,7 +39,7 @@ const Answer = ({ content, isPaid, profilePhoto, userId, rating, videoLink, book
                 
                 {/* Display detailed content */}
                 <p>{detailedContent}</p>
-                {isPaid && <p><strong>This is a paid answer.</strong></p>}
+                {isPaid && <p className='premium-banner'><strong>Premium lesson</strong></p>}
                 
                 {videoLink && (
                     <div>

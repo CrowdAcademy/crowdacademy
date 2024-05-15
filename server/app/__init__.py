@@ -1,6 +1,8 @@
 from dotenv import load_dotenv
 from flask import Flask
 from flask_mongoengine import MongoEngine
+from flask_cors import CORS
+
 from app.config import config
 
 # Load environment variables from .env file
@@ -17,6 +19,9 @@ app.config['MONGODB_SETTINGS'] = {
 
 # Initialize the MongoEngine
 db = MongoEngine(app)
+
+# Add CORS middleware
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Import blueprints
 from app.routes.index import bp as index_bp

@@ -1,3 +1,4 @@
+@import url('../../assets/palette.css');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 /* fonts */
@@ -84,25 +85,25 @@ button {
 }
 
 .instructor-button {
-    background-color: #0c0c9e;
-    border: 2px solid #0c0c9e;
-    color: white;
+    background-color: var(--primary-dark);
+    border: 2px solid var(--primary-dark);
+    color: var(--background-primary);
 }
 
 .instructor-button:hover {
-    background-color: white;
-    color: #0c0c9e;
+    background-color: var(--background-primary);
+    color: var(--primary-dark);
 }
 
 .get-started-button {
-    background-color: #3321e9;
-    border: 2px solid #3321e9;
-    color: white;
+    background-color: var(--primary);
+    border: 2px solid var(--primary);
+    color: var(--background-primary);
 }
 
 .get-started-button:hover {
-    background-color: white;
-    color: #3321e9;
+    background-color: var(--background-primary);
+    color: var(--primary-dark);
 }
 
 h1 {
@@ -111,34 +112,30 @@ h1 {
 }
 
 span {
-    color: #3321e9;
+    color: var(--primary-dark);
 }
 
 /* -------Header-large-input-container-styling------ */
 
 .large-input-container {
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    gap: 1rem;
     margin-bottom: 30px;
+    flex-direction: column;
+    align-items: center;
 }
-
-/* .auth-link {
-    color: white;
-    text-decoration: none;
-}
-
-.auth-link:hover {
-    color: #3028e8;
-} */
 
 textarea {
     padding: 15px;
     font-size: 16px;
-    /* margin-left: -70px; */
     height: 15rem;
     border-radius: 10px;
-    border: 2px solid #3321e9;
+    border: 2px solid var(--primary-dark);
+    width: 100%;
+}
+
+textarea:hover {
+    border-color: var(--primary);
 }
 
 .textarea-icons-container {
@@ -146,7 +143,62 @@ textarea {
     flex-direction: column;
     gap: 1.5rem;
     align-items: center;
+    width: 70%;
     justify-content: flex-start;
+}
+
+.input-container-form-field {
+    display: flex;
+    width: 65%;
+}
+
+.input-container-form-field input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--primary-dark);
+    border-radius: 10px;
+}
+
+.input-container-form-field input:hover {
+    border-color: var(--primary);
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.message-div {
+    width: 65%;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 10px;
+    color: var(--secondary-light);
+    opacity: 1;
+    /* transition: opacity 3s ease; */
+    animation: fadeOut 3s ease; /* Fade out over 3 seconds */
+
+}
+
+/* .message-div.fade-out {
+    opacity: 0;
+} */
+
+.success {
+    background: var(--success);
+}
+
+.warning {
+    background: var(--warning);
+}
+
+.error {
+    background: var(--error);
 }
 
 a {
@@ -172,7 +224,7 @@ a {
 
 .hero-submit-icon:hover {
     background-color: #0c0c9e;
-    font: white;
+    font: var(--background-primary);
 }
 
 .icon-black-color {
@@ -190,11 +242,11 @@ a {
     margin: 0;
     padding: 0;
     height: 2rem;
-    color: #3028e8;
+    color: var(--primary);
 }
 
 .hr-1 {
-    background-color: #0c0c9e;
+    background-color: var(--secondary);
 }
 
 /* MAIN STYLING */
@@ -329,15 +381,15 @@ main button {
     align-items: center;
     width: 200px;
     font-size: 20px;
-    color: white;
+    color: var(--background-primary);
 }
 
 main .hero-submit-icon {
     background: none;
-    color: white;
+    color: var(--background-primary);
 }
 
-.explore-icon  {
+.explore-icon {
     font-size: 30px;
 }
 
@@ -345,23 +397,23 @@ main .hero-submit-icon {
 .offer-3 button {
     background-color: #3321e9;
     border: 2px solid #3321e9;
-    color: white;
+    color: var(--background-primary);
 }
 
 .offer-1 button:hover,
 .offer-3 button:hover {
-    background-color: white;
+    background-color: var(--background-primary);
     color: #3321e9;
 }
 
 .offer-2 button {
     background-color: #0c0c9e;
     border: 2px solid #0c0c9e;
-    color: white;
+    color: var(--background-primary);
 }
 
 .offer-2 button:hover {
-    background-color: white;
+    background-color: var(--background-primary);
     color: #0c0c9e;
 }
 
@@ -416,7 +468,7 @@ main .hero-submit-icon {
     background-color: #3321e9;
     border-radius: .5rem;
     border: none;
-    color: white;
+    color: var(--background-primary);
     cursor: pointer;
 }
 

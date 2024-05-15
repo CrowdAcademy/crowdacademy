@@ -10,7 +10,7 @@ bp = Blueprint('challenges', __name__)
 
 
 # Route to create a new challenge
-@bp.route("/create", methods=["POST"])
+@bp.route("/challenges/create", methods=["POST"])
 @login_required
 @authorize([Permissions.CREATE_CHALLENGE])
 def create_challenge(current_user):
@@ -22,31 +22,25 @@ def create_challenge(current_user):
     # Extract other data from JSON object
     title = data.get('title')
     description = data.get('description')
-    status = data.get('status', StatusField.ACTIVE.value)  # Default status to ACTIVE if not provided
-    resources = data.get('resources', [])
-    feedback = data.get('feedback', [])
     tags = data.get('tags', [])
 
     if "feedback" in data:
-        url = request.url_root + f"challenges/feedback/update/{challenge_id}/<feedback_id>"
+        url = request.url_root + f"challenges/feedback/update/<challenge_id>/<feedback_id>"
         return jsonify({"error": f"To update feedback, use: {url}"}), 400
 
     try:
-        # Validate status
-        if not any(status == item.value for item in StatusField):
-            raise ValueError(f"Invalid status: {status}")
 
         # Create new Challenge object
         new_challenge = Challenge(
             title=title,
             description=description,
-            status=status,
+            status=StatusField.ACTIVE.value,
             author_id=author_id,
-            resources=[Resource(**res) for res in resources],
-            feedback=[Feedback(**fb) for fb in feedback],
-            tags=tags
+            resource_ids=[],
+            feedback=[],
+            tags=tags,
         )
-
+    
         # Save the new challenge
         new_challenge.save()
 
@@ -58,7 +52,7 @@ def create_challenge(current_user):
 
 
 # Route to get all challenges
-@bp.route("/", methods=["GET"])
+@bp.route("/challenges/", methods=["GET"])
 @login_required
 @authorize([Permissions.VIEW_CHALLENGE, Permissions.VIEW_FEEDBACK, Permissions.VIEW_RESOURCE])
 def get_challenges(current_user):
@@ -68,7 +62,7 @@ def get_challenges(current_user):
 
 
 # Route to get a specific challenge by ID
-@bp.route("/<challenge_id>", methods=["GET"])
+@bp.route("/challenges/<challenge_id>", methods=["GET"])
 @login_required
 @authorize([Permissions.VIEW_CHALLENGE, Permissions.VIEW_FEEDBACK, Permissions.VIEW_RESOURCE])
 def get_challenge(current_user, challenge_id):
@@ -89,7 +83,7 @@ def get_challenge(current_user, challenge_id):
     
 
 # Route to update a challenge by ID
-@bp.route("/update/<challenge_id>", methods=["PUT"])
+@bp.route("/challenges/update/<challenge_id>", methods=["PUT"])
 @login_required
 @authorize([Permissions.EDIT_CHALLENGE])
 def update_challenge(current_user, challenge_id):
@@ -122,7 +116,7 @@ def update_challenge(current_user, challenge_id):
 
 
 # Route to delete a challenge by ID
-@bp.route("/delete/<challenge_id>", methods=["DELETE"])
+@bp.route("/challenges/delete/<challenge_id>", methods=["DELETE"])
 @login_required
 @authorize([Permissions.DELETE_CHALLENGE])
 def delete_challenge(current_user, challenge_id):

@@ -1,6 +1,9 @@
 import React from "react";
 import LeftMainContainer from "../../components/shared/leftmaincontainer";
 import SideBar from "../../components/shared/sidebar";
+import "./studenthp.css";
+
+
 
 function Test() {
     return(

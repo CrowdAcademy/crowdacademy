@@ -9,7 +9,7 @@ bp = Blueprint('feedback', __name__)
 
 
 # Route to create feedback for a challenge
-@bp.route("/challenges/<challenge_id>/feedback/create", methods=["POST"])
+@bp.route("/feedback/challenges/<challenge_id>/feedback/create", methods=["POST"])
 @login_required
 @authorize([Permissions.CREATE_FEEDBACK])
 def create_feedback(current_user, challenge_id):
@@ -37,7 +37,7 @@ def create_feedback(current_user, challenge_id):
 
 
 # Route to update feedback for a challenge
-@bp.route("/challenges/feedback/update/<challenge_id>/<feedback_id>", methods=["PUT"])
+@bp.route("/feedback/challenges/update/<challenge_id>/<feedback_id>", methods=["PUT"])
 @login_required
 @authorize([Permissions.EDIT_FEEDBACK])
 def update_feedback(current_user, challenge_id, feedback_id):
@@ -69,7 +69,7 @@ def update_feedback(current_user, challenge_id, feedback_id):
 
 
 # Route to delete feedback for a challenge
-@bp.route("/challenges/feedback/delete/<challenge_id>/<feedback_id>", methods=["DELETE"])
+@bp.route("/feedback/challenges/delete/<challenge_id>/<feedback_id>", methods=["DELETE"])
 @login_required
 @authorize([Permissions.DELETE_FEEDBACK])
 def delete_feedback(current_user, challenge_id, feedback_id):

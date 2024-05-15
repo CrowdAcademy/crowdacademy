@@ -8,13 +8,13 @@ bp = Blueprint('account', __name__)
 
 
 # Route to retrieve user account information
-@bp.route("/", methods=["GET"])
+@bp.route("/account/", methods=["GET"])
 @login_required
 def get_user_account(user):
     # Return user account information
     return jsonify(user), 200
 
-@bp.route("/create", methods=["POST"])
+@bp.route("/account/create", methods=["POST"])
 def create_user_account():
     try:
         data = request.get_json()
@@ -60,7 +60,7 @@ def create_user_account():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@bp.route("/update", methods=["PUT"])
+@bp.route("/account/update", methods=["PUT"])
 @login_required
 def update_user_account(user):
     data = request.get_json()
@@ -103,7 +103,7 @@ def update_user_account(user):
     else:
         return jsonify({"message": "User not found"}), 404
 
-@bp.route("/delete", methods=["DELETE"])
+@bp.route("/account/delete", methods=["DELETE"])
 @login_required
 def delete_user_account(user):
     try:

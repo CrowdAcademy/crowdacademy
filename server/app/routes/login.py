@@ -17,7 +17,7 @@ def login_route():
         token = login(identifier, password)
         
         if token:
-            return jsonify({"message": "Login successful", "token": token}), 200
+            return jsonify({"success": True, "message": "Login successful", "token": token}), 200
         else:
             return jsonify({"message": "Invalid identifier or password"}), 401
     except Exception as e:
