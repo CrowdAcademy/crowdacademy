@@ -1,6 +1,6 @@
 import React from "react";
-import LeftMainContainer from "../../components/shared/leftmaincontainer";
-import SideBar from "../../components/shared/sidebar";
+import LeftMainContainer from "./leftmaincontainer";
+import SideBar from "./sidebar";
 
 function Test2() {
     return(

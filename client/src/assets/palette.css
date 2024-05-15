@@ -1,0 +1,33 @@
+:root {
+    /* Primary Colors */
+    --primary: #03a9f8ff; /* Picton Blue */
+    --primary-dark: #0569f1ff; /* Brandeis Blue */
+    --primary-light: #03cefaff; /* Vivid Sky Blue */
+  
+    /* Secondary Colors */
+    --secondary: #001e66ff; /* Royal Blue Traditional */
+    --secondary-dark: #001e66ff; /* Same as secondary color */
+    --secondary-light: #effdfeff; /* Azure Web */
+  
+    /* Accent Colors */
+    --accent: #03a9f8ff; /* Picton Blue */
+    --accent-dark: #0569f1ff; /* Brandeis Blue */
+    --accent-light: #03cefaff; /* Vivid Sky Blue */
+  
+    /* Text Colors */
+    --text-primary: #333; /* Default dark text color */
+    --text-secondary: #6c757d; /* Secondary text color */
+  
+    /* Background Colors */
+    --background-primary: #fff; /* White */
+    --background-secondary: #f8f9fa; /* Light gray */
+  
+    /* Borders */
+    --border-color: #ced4da; /* Gray */
+  
+    /* Success, Warning, Error Colors */
+    --success: #28a745; /* Success color */
+    --warning: #ffc107; /* Warning color */
+    --error: #dc3545; /* Error color */
+  }
+  

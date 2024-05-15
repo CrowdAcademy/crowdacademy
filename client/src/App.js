@@ -10,6 +10,9 @@ import InstructorInboxPage from './pages/instructor/inBoxPage';
 import QuestionResponsePage from './pages/instructor/QAPage';
 import LessonPage from './pages/lesson/lesson';
 
+import Test from './components/shared/test';
+import Test2 from './components/shared/test2';
+
 
 
 function App() {
@@ -23,6 +26,8 @@ function App() {
         <Route path="/instructor/inbox" element={<InstructorInboxPage />} />
         <Route path="/respond/:slug" element={<QuestionResponsePage />} />
         <Route path="/lesson/:slug" element={<LessonPage />} />
+        {/* <Route path="/test" element={<Test />} />
+        <Route path="/test2" element={<Test2 />} /> */}
         <Route path="/account" element={
           <ProtectedRoute>
             <AccountPage />
