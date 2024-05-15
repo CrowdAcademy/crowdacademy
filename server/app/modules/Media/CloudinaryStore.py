@@ -26,11 +26,18 @@ class CloudinaryStore:
             return None, None
 
     def delete_file(self, public_id):
+
         try:
-            result = cloudinary.uploader.destroy(public_id)
-            if result['result'] == 'ok':
-                print("File deleted successfully.")
+
+            result = cloudinary.uploader.destroy(public_id, resource_type="video")
+            if result.get('result') == 'ok':
+                return True
+            
             else:
-                print("Deletion failed.")
+                logging.error("Deletion failed.")
+                return False
+            
         except Exception as e:
-            print(f"Deletion failed with error: {e}")
+            logging.error(f"Exception during deletion: {e}")
+
+            return False

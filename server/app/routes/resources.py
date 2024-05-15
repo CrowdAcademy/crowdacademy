@@ -6,6 +6,8 @@ from flask import jsonify, request, Blueprint
 from app.modules.Access import login_required, authorize, Permissions
 from werkzeug.utils import secure_filename
 from app.models.resource import ResourceType
+from app.utils.custom_exceptions import UnsupportedMediaTypeError
+
 
 
 # Function to check if the file extension is allowed
@@ -26,7 +28,9 @@ UPLOAD_FOLDER = os.path.join(base_path, 'uploads')
 
 # Route to retrieve all resources
 @bp.route("/resources", methods=["GET"])
-def get_all_resources():
+@login_required
+@authorize([Permissions.VIEW_RESOURCE])
+def get_all_resources(current_user):
     try:
         resources = Resource.objects.all()
         return jsonify({"resources": resources}), 200
@@ -38,7 +42,7 @@ def get_all_resources():
 @bp.route("/resources/<resource_id>", methods=["GET"])
 @login_required
 @authorize([Permissions.VIEW_RESOURCE])
-def get_resource_details(resource_id):
+def get_resource_by_id(current_user, resource_id):
     try:
         resource = Resource.objects.get(id=resource_id)
         return jsonify({"resource": resource}), 200
@@ -91,7 +95,7 @@ def create_resource(current_user):
                 link=result["url"],
                 access_id=result["id"],
                 description=request.form.get('description', ''),
-                user_ids=[current_user.id]
+                user_ids=[]
             )
 
             # Save the new resource
@@ -113,24 +117,37 @@ def create_resource(current_user):
 @authorize([Permissions.EDIT_RESOURCE])
 def update_resource(current_user, resource_id):
     data = request.get_json()
+
     try:
         resource = Resource.objects.get(id=resource_id)
+
     except Resource.DoesNotExist:
         return jsonify({"error": "Resource not found"}), 404
 
-    if current_user.id not in resource.user_ids:
-        return jsonify({"error": "You don't have permission to update this resource"}), 403
-
     # Update resource fields
-    resource.description = data.get('description', resource.description)
-    # Add more fields to update as needed
+    for attr, value in data.items():
+        
+        if attr == "link":
+            return jsonify({"error": "Resource link can not be modified"}), 400
+        
+        if attr == "access_id":
+            return jsonify({"error": "Resource access_id can not be modified"}), 400   
+             
+        if attr == "resource_type":
+            return jsonify({"error": "Resource resource_type can not be modified"}), 400
+
+
+        if hasattr(resource, attr):
+            setattr(resource, attr, value)
 
     try:
         # Save the updated resource
         resource.save()
         return jsonify({"message": "Resource updated successfully", "resource": resource}), 200
+    
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
 
 
 # Route to delete a resource
@@ -143,12 +160,19 @@ def delete_resource(current_user, resource_id):
     except Resource.DoesNotExist:
         return jsonify({"error": "Resource not found"}), 404
 
-    if current_user.id not in resource.user_ids:
-        return jsonify({"error": "You don't have permission to delete this resource"}), 403
+    media_manager = MediaManager()
 
     try:
-        # Delete the resource
+        # Attempt to delete the media from the storage
+        media_manager.delete_media(resource.access_id, resource.resource_type.value)
+    except UnsupportedMediaTypeError as e:
+        return jsonify({"error": str(e)}), 400
+    except Exception as e:
+        return jsonify({"error": f"Failed to delete media: {str(e)}"}), 500
+
+    try:
+        # Delete the resource from the database
         resource.delete()
         return jsonify({"message": "Resource deleted successfully"}), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 400
+        return jsonify({"error": f"Failed to delete resource from database: {str(e)}"}), 500
