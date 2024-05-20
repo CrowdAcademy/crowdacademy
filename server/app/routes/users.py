@@ -3,16 +3,12 @@ from app.models.user import User
 from app.modules.Access import Roles, Permissions, Authority, login_required, authorize
 from app.utils.consts import USER_ROLES, REQUIRED_FIELDS
 
-bp = Blueprint('users', __name__)
 
-from flask import jsonify, Blueprint, request
-from app.models.user import User
-from app.modules.Access.roles import Roles
 
 bp = Blueprint('users', __name__)
 
 
-@bp.route("/add", methods=["POST"])
+@bp.route("/users/add", methods=["POST"])
 @login_required
 @authorize([Permissions.CREATE_USER])
 def register(current_user):
@@ -60,17 +56,17 @@ def register(current_user):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
-@bp.route("/", methods=["GET"])
+@bp.route("/users/", methods=["GET"])
 @login_required
 @authorize([Permissions.VIEW_USER])
-def get_users(user):
+def get_users(current_user):
     try:
         users = User.objects().all()
         return jsonify(users), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
-@bp.route("/<user_id>", methods=["GET"])
+@bp.route("/users/<user_id>", methods=["GET"])
 @login_required
 @authorize([Permissions.VIEW_USER])
 def get_user_by_id(current_user, user_id):
@@ -80,7 +76,7 @@ def get_user_by_id(current_user, user_id):
     else:
         return jsonify({"message": "User not found"}), 404
 
-@bp.route("/username/<username>", methods=["GET"])
+@bp.route("/users/username/<username>", methods=["GET"])
 @login_required
 @authorize([Permissions.VIEW_USER])
 def get_user_by_username(current_user, username):
@@ -90,7 +86,7 @@ def get_user_by_username(current_user, username):
     else:
         return jsonify({"message": "User not found"}), 404
     
-@bp.route("/email/<email>", methods=["GET"])
+@bp.route("/users/email/<email>", methods=["GET"])
 @login_required
 @authorize([Permissions.VIEW_USER])
 def get_user_by_email(current_user, email):
@@ -101,7 +97,7 @@ def get_user_by_email(current_user, email):
         return jsonify({"message": f"User with email: {email} not found"}), 404
 
 # update user
-@bp.route("/update/<user_id>", methods=["PUT"])
+@bp.route("/users/update/<user_id>", methods=["PUT"])
 @login_required
 @authorize([Permissions.EDIT_USER])
 def update_user_by_id(current_user, user_id):
@@ -110,7 +106,7 @@ def update_user_by_id(current_user, user_id):
     user = User.objects(id=user_id).first()
 
     if not current_user.id == user.id:
-        full_url = request.url_root + "/account/update"
+        full_url = request.url_root + "/users/account/update"
         return jsonify({"message": f"You can not modify your own account over this route, try; {full_url}"}), 404
 
     if not user:
@@ -149,7 +145,7 @@ def update_user_by_id(current_user, user_id):
     except Exception as e:
         return jsonify({"message": str(e)}), 400
 
-@bp.route("/<user_id>", methods=["DELETE"])
+@bp.route("/users/<user_id>", methods=["DELETE"])
 @login_required
 @authorize([Permissions.DELETE_USER])
 def delete_user_by_id(current_user, user_id):

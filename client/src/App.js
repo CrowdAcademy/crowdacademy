@@ -12,6 +12,10 @@ import LessonPage from './pages/lesson/lesson';
 import MyStatsPage from './pages/student/my-stats';
 import MyBlogPage from './pages/student/blog';
 import PostsNews from './pages/student/PostsNews';
+import Test from './components/shared/test';
+import Test2 from './components/shared/test2';
+
+
 
 function App() {
   return (
@@ -24,10 +28,11 @@ function App() {
         <Route path="/instructor/inbox" element={<InstructorInboxPage />} />
         <Route path="/respond/:slug" element={<QuestionResponsePage />} />
         <Route path="/lesson/:slug" element={<LessonPage />} />
-        <Route path="/student/" element={<StudentPage/>} />
         <Route path="/student/my-stat/" element={<MyStatsPage/>} />
         <Route path="/student/blog/" element={<MyBlogPage/>} />
         <Route path="/student/posts-news/" element={<PostsNews/>} />
+        {/* <Route path="/test" element={<Test />} />
+        <Route path="/test2" element={<Test2 />} /> */}
         <Route path="/account" element={
           <ProtectedRoute>
             <AccountPage />

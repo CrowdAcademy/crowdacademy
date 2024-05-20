@@ -104,6 +104,8 @@ celerybeat.pid
 # Environments
 .venv
 ENV/
+.env
+service_account_file.json
 
 # Spyder project settings
 .spyderproject

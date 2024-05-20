@@ -123,8 +123,11 @@ export default function AuthPage() {
             console.log('Response:', data);
     
             if (data.success && data.token) {
+
                 // Store the token in localStorage
                 localStorage.setItem('token', data.token);
+
+                console.log(`Saved token to localStorage ${data.token}`);
     
                 // Redirect to the account page
                 window.location.href = '/account';

@@ -1,14 +1,17 @@
 # Import necessary modules
-from flask import jsonify, request, Blueprint
 from app.models.lesson import Lesson
+from app.modules.Access import login_required, authorize, Permissions
+from flask import jsonify, request, Blueprint
 
 # Create a Blueprint instance
 bp = Blueprint('lessons', __name__)
 
 
-# Lesson-related routes here
+
 # Route to create a new lesson
 @bp.route("/lessons", methods=["POST"])
+@login_required
+@authorize([Permissions.CREATE_LESSON])
 def create_lesson():
     data = request.get_json()
     new_lesson = Lesson(title=data.get('title'), content=data.get('content'))

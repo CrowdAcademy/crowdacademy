@@ -1,113 +1,52 @@
-import os
-import cloudinary
-from cloudinary.uploader import upload
-from cloudinary.utils import cloudinary_url
-from cloudinary.uploader import destroy
-import lzma
+import logging
+from app.modules.Media.GoogleStore import GoogleStore
+from app.modules.Media.CloudinaryStore import CloudinaryStore
+from app.models.resource import ResourceType
+from app.utils.custom_exceptions import UnsupportedMediaTypeError
 
 
 class MediaManager:
+
     def __init__(self):
-        # Set Cloudinary configuration
-        cloudinary.config(
-            cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
-            api_key=os.environ.get("CLOUDINARY_API_KEY"),
-            api_secret=os.environ.get("CLOUDINARY_API_SECRET")
-        )
+        self.google_store = GoogleStore()
+        self.cloudinary_store = CloudinaryStore()
 
-    @staticmethod
-    def upload_image(file_path: str) -> str:
-        """Uploads an image file to Cloudinary.
+    def upload_media(self, file_path, filename, resource_type):
 
-        Args:
-            file_path (str): Path to the image file to upload.
+        if resource_type == ResourceType.IMAGE.value:
+            url, access_id = self.google_store.upload_file(file_path, filename)
 
-        Returns:
-            str: The public ID of the uploaded image.
-        """
-        try:
-            response = upload(file_path)
-            return response['public_id']
-        except Exception as e:
-            raise Exception(f"Failed to upload image: {str(e)}")
+            return {"url": url, "id": access_id}
+        
+        elif resource_type in [ResourceType.AUDIO.value, ResourceType.VIDEO.value]:
+            url, access_id = self.cloudinary_store.upload_file(file_path)
+            
+            return {"url": url, "id": access_id}
+        
+        else:
+            raise UnsupportedMediaTypeError(f"Unsupported media type: {resource_type}")
+      
+    def delete_media(self, file_id_or_public_id, resource_type):
 
-    @staticmethod
-    def upload_compressed_video(file_path: str) -> str:
-        """Compresses and uploads a video file to Cloudinary.
+        if resource_type == ResourceType.IMAGE.value:
+            success = self.google_store.delete_file(file_id_or_public_id)
 
-        Args:
-            file_path (str): Path to the video file to upload.
+        elif resource_type in [ResourceType.AUDIO.value, ResourceType.VIDEO.value]:
+            success = self.cloudinary_store.delete_file(file_id_or_public_id)
 
-        Returns:
-            str: The public ID of the uploaded video.
-        """
-        try:
-            compressed_file_path = f"file_path"
-            VideoUtil.compress_video(file_path, compressed_file_path)
-            response = upload(compressed_file_path, resource_type="video")
-            os.remove(compressed_file_path)  # Remove compressed file after upload
-            return response['public_id']
-        except Exception as e:
-            raise Exception(f"Failed to upload video: {str(e)}")
+        else:
+            raise UnsupportedMediaTypeError(f"Unsupported media type: {resource_type}")
 
-    @staticmethod
-    def download_media(public_id: str, output_file: str) -> None:
-        """Downloads a media file from Cloudinary.
+        if not success:
+            raise Exception(f"Failed to delete media with ID: {file_id_or_public_id}")
+                      
+    def update_media_metadata(self, file_id, new_metadata, resource_type):
 
-        Args:
-            public_id (str): The public ID of the media file on Cloudinary.
-            output_file (str): Path to save the downloaded media file.
-        """
-        try:
-            url, options = cloudinary_url(public_id)
-            # Download the media file using the generated URL
-            # Code for downloading the file from the generated URL
-        except Exception as e:
-            raise Exception(f"Failed to download media: {str(e)}")
-
-    @staticmethod
-    def delete_file(public_id: str) -> None:
-        """Deletes a file from Cloudinary.
-
-        Args:
-            public_id (str): The public ID of the file on Cloudinary.
-        """
-        try:
-            response = destroy(public_id)
-            print("File deleted successfully.")
-        except Exception as e:
-            raise Exception(f"Failed to delete file: {str(e)}")
-
-
-class VideoUtil:
-    @staticmethod
-    def compress_video(input_file: str, output_file: str) -> None:
-        """Compresses a video file using LZMA compression.
-
-        Args:
-            input_file (str): Path to the input video file.
-            output_file (str): Path to save the compressed video file.
-        """
-        try:
-            with open(input_file, 'rb') as f:
-                data = f.read()
-                with lzma.open(output_file, 'wb') as f_out:
-                    f_out.write(data)
-        except Exception as e:
-            raise Exception(f"Failed to compress video: {str(e)}")
-
-    @staticmethod
-    def decompress_video(input_file: str, output_file: str) -> None:
-        """Decompresses a video file compressed with LZMA compression.
-
-        Args:
-            input_file (str): Path to the input compressed video file.
-            output_file (str): Path to save the decompressed video file.
-        """
-        try:
-            with lzma.open(input_file, 'rb') as f:
-                data = f.read()
-                with open(output_file, 'wb') as f_out:
-                    f_out.write(data)
-        except Exception as e:
-            raise Exception(f"Failed to decompress video: {str(e)}")
+        if resource_type == ResourceType.IMAGE.value:
+            return self.google_store.update_metadata(file_id, new_metadata)
+        
+        elif resource_type in [ResourceType.AUDIO.value, ResourceType.VIDEO.value]:
+            raise UnsupportedMediaTypeError(f"Updating metadata not supported for media type: {resource_type}")
+        
+        else:
+            raise UnsupportedMediaTypeError(f"Unsupported media type: {resource_type}")

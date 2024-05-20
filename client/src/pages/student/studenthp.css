@@ -1,4 +1,4 @@
-@import url("../../assets/palette.css")
+@import url("../../assets/palette.css");
 
 
 .app-container {
@@ -146,4 +146,9 @@ body {
     background-size: cover;
     /* background-color: #68D2E8; */
     /* Add other background styles as needed */
+}
+
+.premium-banner {
+    color: var(--primary);
+    margin: 1rem 0;
 }

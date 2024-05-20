@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 const Answer = ({ content, isPaid, profilePhoto, userId, rating, videoLink, bookLink, quizLink, detailedContent, slug }) => {
     return (
         <div style={{ 
-            backgroundColor: '#ACDFF7', 
+            backgroundColor: 'white', 
             border: '1px solid #ccc', 
             padding: '20px', 
-            margin: '20px 0',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             width: '90%',  // Adjusted width
-            minHeight: '240px',  // Adjusted minimum height
+            minHeight: '240px',  // Adjusted minimum height,
+            borderRadius: "1rem",
         }}>
             <div style={{ 
                 display: 'flex', 
@@ -39,7 +39,7 @@ const Answer = ({ content, isPaid, profilePhoto, userId, rating, videoLink, book
                 
                 {/* Display detailed content */}
                 <p>{detailedContent}</p>
-                {isPaid && <p><strong>This is a paid answer.</strong></p>}
+                {isPaid && <p className='premium-banner'><strong>Premium lesson</strong></p>}
                 
                 {videoLink && (
                     <div>
