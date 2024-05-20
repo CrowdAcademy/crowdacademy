@@ -1,3 +1,6 @@
+@import url("../../assets/palette.css")
+
+
 .app-container {
     display: flex;
     flex-direction: column;
@@ -8,8 +11,8 @@
 .left-side {
     display: flex;
     flex: 1;
-    background-color: #0090D6;
-    color: white;
+    background-color: var(--primary);
+    color: var(--error);
 }
 
 .left-content {
@@ -19,7 +22,7 @@
 .right-side {
     display: flex;
     flex: 1;
-    background-color: #173251;
+    background-color: var(--secondary-dark);
     color: rgb(192, 171, 65);
     height: 100 px;
 }
@@ -41,7 +44,7 @@
 .logout-btn {
     margin-top: 20px;
     background-color: red;
-    color: white;
+    color: rgb(22, 229, 32);
 }
 
 .avatar {
@@ -141,6 +144,6 @@ body {
 .left-side {
     /* background-image: url('http://www.pixelstalk.net/wp-content/uploads/2016/07/HD-Computer-Science-Photos.jpg'); */
     background-size: cover;
-    background-color: #68D2E8;
+    /* background-color: #68D2E8; */
     /* Add other background styles as needed */
 }

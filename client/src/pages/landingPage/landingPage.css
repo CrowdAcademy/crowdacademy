@@ -48,7 +48,7 @@ body {
 
 hr {
     height: 40px;
-    background-color: blue;
+    background-color:  var(--primary);
 }
 
 h2 {
@@ -84,8 +84,8 @@ button {
 }
 
 .instructor-button {
-    background-color: #0c0c9e;
-    border: 2px solid #0c0c9e;
+    background-color:  var(--primary);
+    border: 2px solid #ced4da;
     color: white;
 }
 
@@ -95,8 +95,8 @@ button {
 }
 
 .get-started-button {
-    background-color: #3321e9;
-    border: 2px solid #3321e9;
+    background-color:  var(--secondary); 
+    border: 2px solid #ced4da;
     color: white;
 }
 
@@ -138,7 +138,7 @@ textarea {
     /* margin-left: -70px; */
     height: 15rem;
     border-radius: 10px;
-    border: 2px solid #3321e9;
+    border: 2px solid blue;
 }
 
 .textarea-icons-container {
@@ -166,12 +166,12 @@ a {
     align-items: center;
     border-radius: 100%;
     border: none;
-    background-color: #3321e9;
+    background-color: var(--background-primary);
     font-size: 30px;
 }
 
 .hero-submit-icon:hover {
-    background-color: #0c0c9e;
+    background-color:  var(--secondary-light);
     font: white;
 }
 
@@ -194,7 +194,7 @@ a {
 }
 
 .hr-1 {
-    background-color: #0c0c9e;
+    background-color: var(--primary-dark);
 }
 
 /* MAIN STYLING */
@@ -241,15 +241,15 @@ a {
 }
 
 .value-1 {
-    border-color: #0c0c9e;
+    border-color: var(--success);
 }
 
 .value-2 {
-    border-color: #3321e9;
+    border-color:var(--warning);
 }
 
 .value-3 {
-    border-color: #0c0c9e;
+    border-color: var(--error);
 }
 
 .values .fa-solid,
@@ -269,13 +269,13 @@ a {
 }
 
 .hr-2 {
-    background-color: #3321e9;
+    background-color: var(--primary-light);
 }
 
 /* --------offers-------- */
 
 .hr-3 {
-    background-color: #0c0c9e;
+    background-color: var(--accent);
 }
 
 .offer-insight-container {
@@ -343,7 +343,7 @@ main .hero-submit-icon {
 
 .offer-1 button,
 .offer-3 button {
-    background-color: #3321e9;
+    background-color: var(--secondary-dark);
     border: 2px solid #3321e9;
     color: white;
 }
@@ -366,7 +366,7 @@ main .hero-submit-icon {
 }
 
 .hr-4 {
-    background-color: #3321e9;
+    background-color: var(--accent-light);
 }
 
 /* ---------Join-Us-------- */
@@ -401,27 +401,26 @@ main .hero-submit-icon {
 }
 
 .log-in-form input:hover {
-    border-color: #0c0c9e;
-}
-
+    border-color: #ced4da;
 .submit-btn-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+}
 
 .SIGN-IN {
     padding: 12px 17px;
     margin-bottom: 10px;
-    background-color: #3321e9;
+    background-color: var(--warning);
     border-radius: .5rem;
     border: none;
-    color: white;
+    color: rgb(13, 8, 70);
     cursor: pointer;
 }
 
 .SIGN-IN:hover {
-    background-color: #0c0c9e;
+    background-color: var(--secondary-light);
 }
 
 /* FOOTER */
@@ -440,11 +439,11 @@ footer {
 .footer-contact-icons .fa-brands,
 .footer-contact-icons .fa-solid {
     font-size: 25px;
-    color: black;
+    color: var(--primary);
 }
 
 .hr-5 {
-    background-color: #0c0c9e;
+    background-color: var(--secondary-dark);
 }
 
 /* MEDIA QUERIES */

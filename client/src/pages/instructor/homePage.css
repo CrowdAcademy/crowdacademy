@@ -1,3 +1,6 @@
+@import url("../../assets/palette.css");
+
+
 * {
     padding: 0;
     margin: 0;
@@ -23,7 +26,7 @@ body,
 .home-main-container {
     width: 80%;
     height: 100%;
-    background-color: #0090D6;
+    background-color: var(--primary);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -32,7 +35,7 @@ body,
 .home-aside-container {
     width: 20%;
     height: 100%;
-    background-color: #173251;
+    background-color: var(--primary-light);
 }
 
 /* ------HOME-MAIN-CONTAINER------(left container) */
@@ -44,23 +47,23 @@ body,
     align-items: center;
     gap: 10px;
     margin: 0 2%;
-    color: white;
+    color: yellow;
 }
 
 .home-main-container .navbar-link-item {
-    background-color: #0090D6;
+    background-color: var(--primary-dark);
     border-radius: .5rem;
     border: 1px solid #0090D6;
     padding: 15px 20px;
 }
 
 .home-main-container .navbar-link-item:hover {
-    background-color: #173251;
+    background-color: var(--secondary-light);
     border-color: #173251;
 }
 
 .hr {
-    border: 1px solid #173251;
+    border: 1px solid #d9e0e8;
     width: 100%;
     margin: 10px 0 20px 0;
 }
@@ -120,7 +123,7 @@ body,
 }
 
 .question-card-respond-btn {
-    background-color: #173251;
+    background-color: var(--primary-dark);
     border-color: #173251;
     color: white;
     padding: 10px;
@@ -130,7 +133,7 @@ body,
 
 .question-card-respond-btn:hover {
     border-color: #0090D6;
-    background-color: #0090D6;
+    background-color: var(--primary);
 }
 
 /*--------HOME-ASIDE-CONTAINER------- */
@@ -164,16 +167,16 @@ body,
 
 .home-aside-container .navbar-link-item {
     width: 100%;
-    background-color: #173251;
+    background-color:  var(--primary-dark);
     border-radius: .5rem;
-    border: 1px solid #173251;
+    border: 1px solid #cdea3d;
     padding: 15px 20px;
     text-align: end;
 }
 
 .home-aside-container .navbar-link-item:hover {
-    background-color: #0090D6;
-    border-color: #0090D6;
+    background-color: var(--secondary);
+    border-color: #aae63b;
 }
 
 .Log-in-user-image {
