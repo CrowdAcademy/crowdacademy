@@ -1,0 +1,63 @@
+body {
+    background-color: #f0f0f0; /* Set background color for the entire page */
+    /*background-image: url('https://www.uominnovationfactory.com/wp-content/uploads/2020/10/Computer-Science-Page-Header-2048x1197.jpg'); */ /* Set background image */
+    background-size: cover; /* Cover the entire background */
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff; /* Set background color for the blog container */
+    border-radius: 10px; /* Add rounded corners to the container */
+  }
+  
+  .title {
+    color: #11bee6;
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .description {
+    color: #cb4545;
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+  
+  .search-bar,
+  .category-filter {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .blog-posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+  }
+  
+  .blog-post {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 20px;
+  }
+  
+  .post-title {
+    color: #3e16dc;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .post-category {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .post-content {
+    color: #444;
+    font-size: 16px;
+  }
+  

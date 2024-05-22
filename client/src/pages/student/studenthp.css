@@ -65,7 +65,6 @@
 }
 
 
-
 .app-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -142,8 +141,9 @@ body {
 }
 
 .left-side {
-    background-image: url('http://www.pixelstalk.net/wp-content/uploads/2016/07/HD-Computer-Science-Photos.jpg');
+    /* background-image: url('http://www.pixelstalk.net/wp-content/uploads/2016/07/HD-Computer-Science-Photos.jpg'); */
     background-size: cover;
+    /* background-color: #68D2E8; */
     /* Add other background styles as needed */
 }
 

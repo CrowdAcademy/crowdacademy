@@ -56,7 +56,6 @@
     background-color: var(--secondary);
     overflow-y: auto;
 }
-
 .response-main-container .question-card {
     width: 100%;
 }

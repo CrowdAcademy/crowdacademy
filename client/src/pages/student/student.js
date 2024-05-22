@@ -4,8 +4,7 @@ import SideBar from "../../components/shared/sidebar";
 import "./studenthp.css";
 
 
-
-function Test() {
+function StudentPage() {
     return(
         <div className="home-container">
             <LeftMainContainer section = "student"/>
@@ -14,4 +13,4 @@ function Test() {
     )
 }
 
-export default Test;
+export default StudentPage;

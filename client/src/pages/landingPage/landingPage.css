@@ -97,7 +97,6 @@ button {
     cursor: pointer;
     margin-left: 10px;
 }
-
 .instructor-button {
     background-color: var(--primary-dark);
     border: 2px solid var(--primary-dark);
@@ -144,6 +143,7 @@ textarea {
     font-size: 16px;
     height: 15rem;
     border-radius: 10px;
+    border: 2px solid blue;
     border: 2px solid var(--primary-dark);
     width: 100%;
 }
@@ -222,6 +222,7 @@ a {
 }
 
 .hr-1 {
+    background-color: var(--primary-dark);
     background-color: var(--secondary);
 }
 

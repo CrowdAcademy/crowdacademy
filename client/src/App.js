@@ -16,8 +16,7 @@ import LogoutPage from './pages/logout/LogoutPage';
 
 
 
-function App() {
-  return (
+function App() {return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/auth" element={<AuthPage />} />

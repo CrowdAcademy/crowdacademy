@@ -1,5 +1,6 @@
 @import url("../../assets/palette.css");
 
+
 * {
     padding: 0;
     margin: 0;
@@ -34,7 +35,6 @@ body,
 .home-aside-container {
     width: 20%;
     height: 100%;
-    background-color: var(--secondary);
 }
 
 /* ------HOME-MAIN-CONTAINER------(left container) */
