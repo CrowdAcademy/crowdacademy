@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import './authPage.css';
 import CrowdAcademyLogo from '../../assets/icon_tr.png';
 
@@ -11,6 +12,14 @@ export default function AuthPage() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState(null);
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+    const location = useLocation();
+    const referrerRef = useRef();
+
+    useEffect(() => {
+        referrerRef.current = document.referrer;
+    }, []);
+
+    const FROM = referrerRef.current || location.state?.from?.pathname || '/account';
 
     useEffect(() => {
         let timer;
@@ -64,7 +73,7 @@ export default function AuthPage() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-    
+
         if (isSigningUp) {
             if (!username) {
                 setError('Please provide a username.');
@@ -79,21 +88,21 @@ export default function AuthPage() {
                 return;
             }
         }
-    
+
         if (!username && !email && !identifier) {
             setError('Please provide username or email.');
             return;
         }
-    
+
         if (!password) {
             setError('Please provide password.');
             return;
         }
-    
+
         try {
             let formData = {};
             let url = '/login';
-    
+
             if (isSigningUp) {
                 formData = {
                     username,
@@ -108,9 +117,9 @@ export default function AuthPage() {
                     password
                 };
             }
-    
+
             formData.roles = ["student"];
-    
+
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -118,24 +127,21 @@ export default function AuthPage() {
                 },
                 body: JSON.stringify(formData)
             });
-    
+
             const data = await response.json();
             console.log('Response:', data);
-    
-            if (data.success && data.token) {
 
+            if (data.success && data.token) {
                 // Store the token in localStorage
                 localStorage.setItem('token', data.token);
-
                 console.log(`Saved token to localStorage ${data.token}`);
-    
-                // Redirect to the account page
-                window.location.href = '/account';
+                // Redirect to the original page
+                window.location.href = FROM;
             } else {
                 // Handle unsuccessful login or signup
                 setError(data.message || 'Login failed.');
             }
-    
+
             // Reset form fields and error state
             setIdentifier('');
             setUsername('');
@@ -143,7 +149,7 @@ export default function AuthPage() {
             setPassword('');
             setConfirmPassword('');
             setError(null);
-    
+
             if (isSigningUp) {
                 setShowSuccessMessage(true);
             }
@@ -152,7 +158,7 @@ export default function AuthPage() {
             setError('An error occurred while submitting the form.');
         }
     };
-    
+
     const toggleAuthMode = () => {
         setIsSigningUp(!isSigningUp);
     };

@@ -7,7 +7,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    background-color: white;
+    background-color: var(--background-primary);
     overflow-y: auto;
 }
 
@@ -49,8 +49,8 @@
 .message-container-header .icons {
     width: 40px;
     height: 40px;
-    background-color: #173251;
-    color: white;
+    background-color: var(--secondary);
+    color: var(--background-primary);
     display: flex;
     justify-content: center;
     align-items: center;

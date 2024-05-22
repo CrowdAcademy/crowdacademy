@@ -48,13 +48,18 @@ body {
 }
 
 hr {
-    height: 40px;
-    background-color: blue;
+    height: .8rem;
+    margin: 8rem 0;
+    background-color: var(--primary-dark);
 }
 
 h2 {
-    padding: 30px 0;
+    padding: 15px 0;
     text-align: center;
+}
+
+.footer-hr {
+    margin: 0 !important;
 }
 
 /* BODY STYLING */
@@ -68,6 +73,15 @@ header {
 }
 
 /* -------Header-top-container-styling------ */
+
+.hero-section {
+    /* Set the background video */
+    /* background: url('../../assets/videos/rafini-1.mp4') no-repeat center fixed; */
+    /* Adjust the background size and other properties */
+    /* background-size: cover; */
+    /* Add other styles as needed */
+}
+
 
 .header-top-container {
     display: flex;
@@ -163,44 +177,6 @@ textarea:hover {
     border-color: var(--primary);
 }
 
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
-
-.message-div {
-    width: 65%;
-    display: flex;
-    justify-content: center;
-    padding: 1rem;
-    border-radius: 10px;
-    color: var(--secondary-light);
-    opacity: 1;
-    /* transition: opacity 3s ease; */
-    animation: fadeOut 3s ease; /* Fade out over 3 seconds */
-
-}
-
-/* .message-div.fade-out {
-    opacity: 0;
-} */
-
-.success {
-    background: var(--success);
-}
-
-.warning {
-    background: var(--warning);
-}
-
-.error {
-    background: var(--error);
-}
-
 a {
     cursor: pointer;
 }
@@ -212,23 +188,23 @@ a {
 .hero-submit-icon {
     width: 40px;
     height: 40px;
-    border: 1px solid black;
+    border: 1px solid var(--border-color-dark);
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 100%;
     border: none;
-    background-color: #3321e9;
+    background-color: var(--primary-dark);
     font-size: 30px;
 }
 
 .hero-submit-icon:hover {
-    background-color: #0c0c9e;
+    background-color: var(--primary-dark);
     font: var(--background-primary);
 }
 
 .icon-black-color {
-    color: black;
+    color: var(--secondary-dark);
 }
 
 .textarea-input-icons {
@@ -256,13 +232,15 @@ a {
     justify-content: center;
     align-items: center;
     margin-top: 40px;
+    margin-bottom: 8rem;
 }
 
 .main-h2-headers div {
-    padding: 0px 40px;
-    border: 3px solid black;
+    padding: .5rem;
+    border: 3px solid var(--border-color-dark);
     border-right: none;
     border-left: none;
+    width: 20rem;
 }
 
 /* ----------values--------- */
@@ -293,15 +271,15 @@ a {
 }
 
 .value-1 {
-    border-color: #0c0c9e;
+    border-color: var(--primary-dark);
 }
 
 .value-2 {
-    border-color: #3321e9;
+    border-color: var(--primary-dark);
 }
 
 .value-3 {
-    border-color: #0c0c9e;
+    border-color: var(--primary-dark);
 }
 
 .values .fa-solid,
@@ -311,23 +289,23 @@ a {
 
 .value-2 .fa-brands,
 .value-2 p {
-    color: #3321e9;
+    color: var(--primary-dark);
 }
 
 .values .fa-solid,
 .value-1 p,
 .value-3 p {
-    color: #0c0c9e;
+    color: var(--primary-dark);
 }
 
 .hr-2 {
-    background-color: #3321e9;
+    background-color: var(--primary-dark);
 }
 
 /* --------offers-------- */
 
 .hr-3 {
-    background-color: #0c0c9e;
+    background-color: var(--primary-dark);
 }
 
 .offer-insight-container {
@@ -344,7 +322,7 @@ a {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 2rem;
+    border-radius: 1rem;
 }
 
 .offers {
@@ -395,30 +373,30 @@ main .hero-submit-icon {
 
 .offer-1 button,
 .offer-3 button {
-    background-color: #3321e9;
-    border: 2px solid #3321e9;
+    background-color: var(--primary-dark);
+    border: 2px solid var(--primary-dark);
     color: var(--background-primary);
 }
 
 .offer-1 button:hover,
 .offer-3 button:hover {
     background-color: var(--background-primary);
-    color: #3321e9;
+    color: var(--primary-dark);
 }
 
 .offer-2 button {
-    background-color: #0c0c9e;
-    border: 2px solid #0c0c9e;
+    background-color: var(--primary-dark);
+    border: 2px solid var(--primary-dark);
     color: var(--background-primary);
 }
 
 .offer-2 button:hover {
     background-color: var(--background-primary);
-    color: #0c0c9e;
+    color: var(--primary-dark);
 }
 
 .hr-4 {
-    background-color: #3321e9;
+    background-color: var(--primary-dark);
 }
 
 /* ---------Join-Us-------- */
@@ -427,7 +405,7 @@ main .hero-submit-icon {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 40px 0;
+    margin: 40px 0 5rem;
 }
 
 .log-in-form p {
@@ -453,7 +431,7 @@ main .hero-submit-icon {
 }
 
 .log-in-form input:hover {
-    border-color: #0c0c9e;
+    border-color: var(--primary-dark);
 }
 
 .submit-btn-container {
@@ -465,7 +443,7 @@ main .hero-submit-icon {
 .SIGN-IN {
     padding: 12px 17px;
     margin-bottom: 10px;
-    background-color: #3321e9;
+    background-color: var(--primary-dark);
     border-radius: .5rem;
     border: none;
     color: var(--background-primary);
@@ -473,7 +451,7 @@ main .hero-submit-icon {
 }
 
 .SIGN-IN:hover {
-    background-color: #0c0c9e;
+    background-color: var(--primary-dark);
 }
 
 /* FOOTER */
@@ -492,11 +470,11 @@ footer {
 .footer-contact-icons .fa-brands,
 .footer-contact-icons .fa-solid {
     font-size: 25px;
-    color: black;
+    color: var(--secondary-dark);
 }
 
 .hr-5 {
-    background-color: #0c0c9e;
+    background-color: var(--primary-dark);
 }
 
 /* MEDIA QUERIES */

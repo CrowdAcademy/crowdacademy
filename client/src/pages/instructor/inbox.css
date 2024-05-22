@@ -1,14 +1,18 @@
+@import url("../../assets/palette.css");
+
+
+
 .message-item-container {
     padding: 7px 20px;
     display: flex;
     justify-content: flex-start;
     gap: 30px;
-    border-bottom: 1px solid #173251;
+    border-bottom: 1px solid var(--secondary);
     cursor: pointer;
     width: 100%;
-    background-color: white;
+    background-color: var(--background-primary);
 }
 
 .message-item-container:hover {
-    background-color: #0090D6;
+    background-color: var(--primary);
 }

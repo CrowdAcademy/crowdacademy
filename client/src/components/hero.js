@@ -9,7 +9,7 @@ import CoreHero from "./corehero"
 
 export default function Hero() {
 	return(
-		<section>
+		<section className="hero-section">
             <h1><span>Our aim</span>, help you as much as possible.</h1>
             <CoreHero />
         </section>

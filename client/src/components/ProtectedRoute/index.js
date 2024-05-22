@@ -1,21 +1,20 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { UserProvider } from '../../context/UserContext';
+import { useUser } from '../../context/UserContext';
 
-
-export default function ProtectedRoute({ children }) {
+const ProtectedRoute = ({ children }) => {
+    const { user, loading } = useUser();
     const location = useLocation();
-    const token = localStorage.getItem('token');
 
-    if (!token) {
-        // Redirect them to the /login page, but save the current location they were trying to go to
-        return <Navigate to="/login" state={{ from: location }} replace />;
+    if (loading) {
+        return <div>Loading...</div>;
     }
 
-    // Wrap children in the UserProvider to provide user data context
-    return (
-        <UserProvider>
-            {children}
-        </UserProvider>
-    );
-}
+    if (!user) {
+        return <Navigate to="/auth" state={{ from: location }} />;
+    }
+
+    return children;
+};
+
+export default ProtectedRoute;

@@ -2,7 +2,11 @@ import React from 'react';
 import { useUser } from '../../context/UserContext';
 
 export default function AccountDetails() {
-    const user = useUser();
+    const { user, loading } = useUser();
+
+    if (loading) {
+        return <p>Loading user data...</p>;
+    }
 
     return user ? (
         <div>
@@ -10,6 +14,6 @@ export default function AccountDetails() {
             <p>Email: {user.email}</p>
         </div>
     ) : (
-        <p>Loading user data...</p>
+        <p>No user data available.</p>
     );
 }

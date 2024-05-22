@@ -11,8 +11,8 @@
 .left-side {
     display: flex;
     flex: 1;
-    background-color: #0090D6;
-    color: white;
+    background-color: var(--primary);
+    color: var(--secondary-light);
 }
 
 .left-content {
@@ -22,8 +22,8 @@
 .right-side {
     display: flex;
     flex: 1;
-    background-color: #173251;
-    color: rgb(192, 171, 65);
+    background-color: var(--secondary-dark);
+    color: var(--text-light);
     height: 100 px;
 }
 
@@ -43,8 +43,8 @@
 
 .logout-btn {
     margin-top: 20px;
-    background-color: red;
-    color: white;
+    background-color: var(--secondary-dark);
+    color: var(--secondary-light);
 }
 
 .avatar {
@@ -130,8 +130,8 @@
 
 
 .dark-mode {
-    background-color: #d1ed32;
-    color: #e77cc0;
+    background-color: var(--secondary-dark);
+    color: var(--text-light);
     /* Adjust other styles for dark mode as needed */
 }
 

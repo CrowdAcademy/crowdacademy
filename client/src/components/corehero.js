@@ -24,6 +24,12 @@ export default function CoreHero() {
         setTags(tagsArray);
     };
 
+    const clearFields = () => {
+        setTitle("");
+        setDescription("");
+        setTags([]);
+    }
+
     const formatTags = tags.map((t, i) => {
         return (i !== tags.length - 1) ? `${t.trim()}, ` : t.trim();
     }).join('').trim();
@@ -69,6 +75,8 @@ export default function CoreHero() {
                     throw new Error('Failed to create challenge.');
                 }
                 setMessage({ type: 'success', content: 'Challenge created successfully!' });
+                clearFields();
+
                 setTimeout(() => {
                     setMessage({});
                 }, 3000);

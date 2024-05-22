@@ -17,7 +17,8 @@ def create_challenge(current_user):
     data = request.get_json()
 
     # Extract author_id from the current_user object
-    author_id = str(current_user.id)  # Ensure author_id is a string
+    author_id = str(current_user.id)
+    author_username = str(current_user.username)
     
     # Extract other data from JSON object
     title = data.get('title')
@@ -36,6 +37,7 @@ def create_challenge(current_user):
             description=description,
             status=StatusField.ACTIVE.value,
             author_id=author_id,
+            author_username=author_username,
             resource_ids=[],
             feedback=[],
             tags=tags,
@@ -53,9 +55,9 @@ def create_challenge(current_user):
 
 # Route to get all challenges
 @bp.route("/challenges/", methods=["GET"])
-@login_required
-@authorize([Permissions.VIEW_CHALLENGE, Permissions.VIEW_FEEDBACK, Permissions.VIEW_RESOURCE])
-def get_challenges(current_user):
+# @login_required
+# @authorize([Permissions.VIEW_CHALLENGE, Permissions.VIEW_FEEDBACK, Permissions.VIEW_RESOURCE])
+def get_challenges():
     challenges = Challenge.objects().all()
     return jsonify(challenges), 200
 
@@ -63,9 +65,9 @@ def get_challenges(current_user):
 
 # Route to get a specific challenge by ID
 @bp.route("/challenges/<challenge_id>", methods=["GET"])
-@login_required
-@authorize([Permissions.VIEW_CHALLENGE, Permissions.VIEW_FEEDBACK, Permissions.VIEW_RESOURCE])
-def get_challenge(current_user, challenge_id):
+# @login_required
+# @authorize([Permissions.VIEW_CHALLENGE, Permissions.VIEW_FEEDBACK, Permissions.VIEW_RESOURCE])
+def get_challenge(challenge_id):
     try:
         if not ObjectId.is_valid(challenge_id):
             return jsonify({"error": "Invalid challenge ID format"}), 400

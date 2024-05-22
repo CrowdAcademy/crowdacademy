@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Header from '../../components/header';
 import Hero from '../../components/hero';
 import Main from '../../components/main';
@@ -15,9 +14,9 @@ export default function LandingPage() {
 			<Hero />
 			<hr className = "hr-1"></hr>
             <Main />
-			<hr className = "hr-4"></hr>
+			<hr className = "hr-4 footer-hr"></hr>
             <Footer />
-			<hr className = "hr-5"></hr>
+			<hr className = "hr-5 footer-hr"></hr>
 		</div>
 	)
 }

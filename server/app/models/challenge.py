@@ -17,6 +17,7 @@ class Challenge(Document):
     description = StringField(required=True)
     status = EnumField(StatusField, default=StatusField.ACTIVE.value)  # EnumField for status
     author_id = StringField(required=True)
+    author_username = StringField(required=True)
     created_at = DateTimeField(default=datetime.datetime.now(pytz.utc))
     updated_at = DateTimeField(default=datetime.datetime.now(pytz.utc))
     resource_ids = ListField(ReferenceField(Resource))

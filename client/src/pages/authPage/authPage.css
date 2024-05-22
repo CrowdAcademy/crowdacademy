@@ -27,7 +27,7 @@
     border: none;
     border-radius: 1rem;
     width: 450px;
-    background-color: #45b4e7;
+    background-color: var(--primary);
 }
 
 .auth-container form p {
@@ -39,7 +39,7 @@
     width: 100%;
     padding: 10px;
     border-radius: .5rem;
-    border: 1px solid #022f67;
+    border: 1px solid var(--secondary-dark);
 }
 
 .auth-container .pwd-labels-container {
@@ -50,15 +50,15 @@
 
 .auth-container .submitButton {
     margin-top: 10px;
-    background-color: #022f67;
-    color: white;
+    background-color: var(--secondary-dark);
+    color: var(--secondary-light);
     border: none;
     padding: 11px;
     font-weight: bold;
 }
 
 .auth-container .submitButton:hover {
-    background-color: #022f6783;
+    background-color: var(--secondary-dark);
 }
 
 .auth-container .new-create-account {
@@ -68,13 +68,13 @@
 
 .auth-container a {
     font-weight: bold;
-    color: black;
+    color: var(--text-dark);
     text-decoration: none;
     cursor: pointer;
 }
 
 .auth-container a:hover {
-    color: #00000089;
+    color: var(--text-dark);
 }
 
 /* footer */
@@ -101,5 +101,5 @@
 }
 
 span {
-    color: #000000;
+    color: var(--secondary-dark);
 }
