@@ -1,5 +1,7 @@
 import React from 'react';
-import UserImage from '../assets/samples/user-6.png'
+import avatarDefault from "../assets/avatar-default.svg"
+
+
 
 function Question({ id, title, description, author, createdAt, showNote=false, showImage=true }) {
     return (
@@ -10,7 +12,7 @@ function Question({ id, title, description, author, createdAt, showNote=false, s
                 <p className="question-card-author">From {author}</p>
                 <p className="question-card-date">{createdAt}</p>
             </div>
-            {showImage && <img className="question-author-image" src={UserImage} alt="User" />}
+            {showImage && <img className="question-author-image" src={avatarDefault} alt="User" />}
             {
                 showNote ?
                     <p className="note-to-responder">

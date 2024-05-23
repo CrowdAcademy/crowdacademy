@@ -162,13 +162,14 @@ function QuestionResponsePage() {
                         <h3>Formulate a response to:</h3>
 
                         <Question
+                            key={question._id.$oid}
+                            id={question._id.$oid}
                             title={question.title}
                             description={question.description}
+                            createdAt={question.created_at.$date}
                             author={question.author_username}
-                            createdAt={question.createdAt}
-                            id={question.id}
                             showNote={true}
-                            showImage={false}
+                            showImage={false} 
                         />
 
                         <div className="add-response-content-icon-item-container">

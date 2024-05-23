@@ -1,3 +1,5 @@
+/* palette.css */
+
 :root {
   /* Primary Colors */
   --primary: #03a9f8ff;
@@ -20,7 +22,7 @@
   /* Picton Blue */
   --accent-dark: #0569f1ff;
   /* Brandeis Blue */
-  --accent-light: #03cefaff;
+  --accent-light: #67C6E3;
   /* Vivid Sky Blue */
 
   /* Text Colors */
@@ -34,6 +36,7 @@
   /* White */
   --background-secondary: #f8f9fa;
   /* Light gray */
+  
 
   /* Borders */
   --border-color: #ced4da;

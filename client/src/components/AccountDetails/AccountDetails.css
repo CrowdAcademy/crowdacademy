@@ -1,0 +1,181 @@
+/* AccountDetails.css */
+@import url("../../assets/palette.css");
+
+.account-details-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    visibility: hidden;
+    /* Hide the container itself */
+}
+
+.info-card {
+    background-color: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    border-radius: 10px;
+    visibility: visible;
+    /* Ensure cards are visible */
+    font-family: 'Arial', sans-serif;
+}
+
+.info-card p {
+    padding: .3rem 0;
+}
+
+.info-card h1,
+.info-card h2 {
+    color: var(--text-primary);
+    padding: .8rem;
+}
+
+.info-card .email {
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+.info-card ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.info-card ul li {
+    background-color: var(--background-secondary);
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.loading,
+.no-data {
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.avatar-container {
+    position: relative;
+    text-align: right;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.upload-avatar {
+    margin: 0 0 0 5rem;
+}
+
+.create-bio-btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.create-bio-btn:hover {
+    background-color: var(--primary-dark);
+}
+
+.edit-profile-btn,
+.save-btn,
+.add-payment-btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 2rem 0;
+}
+
+.edit-profile-btn:hover,
+.save-btn:hover,
+.add-payment-btn:hover {
+    background-color: var(--primary-dark);
+}
+
+.edit-profile-form label,
+.add-payment-form label {
+    display: block;
+    margin: 1.2rem 0;
+}
+
+.edit-profile-form input[type="text"],
+.edit-profile-form textarea,
+.add-payment-form input[type="text"],
+.add-payment-form input[type="email"],
+.add-payment-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    background-color: var(--background-secondary);
+}
+
+.edit-profile-form textarea {
+    resize: vertical;
+}
+
+.edit-profile-form input[type="text"]:focus,
+.edit-profile-form textarea:focus,
+.add-payment-form input[type="text"]:focus,
+.add-payment-form input[type="email"]:focus,
+.add-payment-form select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.profile-details p {
+    display: flex;
+    padding: .3rem 0;
+}
+
+.profile-details p strong {
+    flex: 0.3;
+}
+
+.profile-details p span {
+    flex: 0.7;
+    color: var(--text-primary);
+}
+
+.activity-details p {
+    display: flex;
+    padding: .3rem 0;
+}
+
+.activity-details p strong {
+    flex: 0.3;
+}
+
+.activity-details p span {
+    flex: 0.7;
+    color: var(--text-primary);
+}
+
+.permissions-card.collapsible h2 {
+    cursor: pointer;
+}
+
+.permissions-card.collapsible ul {
+    display: none;
+}
+
+.permissions-card.collapsible.open ul {
+    display: block;
+}
+
+.token {
+    word-break: break-all;
+    color: var(--accent-light);
+}

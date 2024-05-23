@@ -1,7 +1,6 @@
 import "./base.css";
 import React from 'react';
 import { Link } from 'react-router-dom';
-import UserImage from '../../assets/samples/user-1.png';
 import CrowdAcademyLogo from '../../assets/icon_tr.png';
 import { useUser } from '../../context/UserContext';
 
@@ -32,7 +31,7 @@ function SideBar() {
                                     <p>{user.username}</p>
                                     <p>{user.email}</p>
                                 </div>
-                                <img className="Log-in-user-image" src={UserImage} alt="User" />
+                                <img className="Log-in-user-image" src={user.profile.avatar} alt="User" />
                             </div>
                         </Link>
                         <Link to="/logout" className="navbar-link-item">Logout</Link>

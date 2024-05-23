@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg 
+    version="1.1" 
+    xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink" 
+    width="600" 
+    height="600"
+    fill="white">
+
+  <style>
+    :root {
+        --background-secondary: #f8f9fa; /* Grey background color */
+        --primary-color: #3498db; /* Example color, replace with actual value from palette.css */
+        --secondary-color: #001e66; /* Example color, replace with actual value from palette.css */
+    }
+    .background { fill: var(--background-secondary); }
+    .primary { fill: var(--primary-color); }
+    .secondary { fill: var(--secondary-color); }
+  </style>
+
+  <defs>
+    <clipPath id="circular-border">
+      <circle cx="300" cy="300" r="280" />
+    </clipPath>
+    <clipPath id="avoid-antialiasing-bugs">
+      <rect width="100%" height="498" />
+    </clipPath>
+  </defs>
+  
+  <circle cx="300" cy="300" r="280" class="background" clip-path="url(#avoid-antialiasing-bugs)" />
+  <circle cx="300" cy="230" r="115" class="primary" />
+  <circle cx="300" cy="550" r="205" class="secondary" clip-path="url(#circular-border)" />
+</svg>

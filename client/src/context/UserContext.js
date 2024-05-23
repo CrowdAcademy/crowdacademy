@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import avatarDefault from '../assets/avatar-default.svg';
 
 const UserContext = createContext({ user: null, loading: true });
 
@@ -23,6 +24,13 @@ export const UserProvider = ({ children }) => {
                     });
                     const data = await response.json();
                     if (response.ok) {
+                        // Set default avatar if user does not have a bio or avatar
+                        if (!data.profile) {
+                            data.profile = { avatar: avatarDefault };
+                        } else if (!data.profile.avatar) {
+                            data.profile.avatar = avatarDefault;
+                        }
+
                         setUser(data);
                     } else {
                         console.error('Failed to fetch user:', data);

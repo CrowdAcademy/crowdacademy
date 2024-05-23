@@ -1,8 +1,6 @@
 import UserImage1 from '../assets//samples/user-1.png';
 import UserImage2 from '../assets//samples/user-2.png';
 import UserImage3 from '../assets//samples/user-3.png';
-import UserImage4 from '../assets//samples/user-4.png';
-import UserImage5 from '../assets//samples/user-5.png';
 import UserImage6 from '../assets//samples/user-6.png';
 
 const AnswerData = [
@@ -42,7 +40,7 @@ const AnswerData = [
         "detailedContent": "Team collaboration is vital for achieving productivity goals and driving business success. In today's interconnected world, where teams often consist of remote or distributed members, effective collaboration becomes even more critical. To enhance team collaboration and productivity, organizations can implement various strategies and practices. These include fostering a collaborative culture, promoting open communication and transparency, establishing clear goals and expectations, providing the right tools and technology for collaboration, encouraging knowledge sharing and cross-functional teamwork, and recognizing and rewarding collaborative efforts. By prioritizing team collaboration and implementing these strategies, organizations can create high-performing teams that achieve exceptional results and drive innovation.",
         "date": "10-03-2024",
         "author": "Ousmane Dembele",
-        "image": UserImage4,
+        "image": UserImage1,
         "slug": "team-collaboration-productivity",
         "isPaid": false
     },
@@ -52,7 +50,7 @@ const AnswerData = [
         "detailedContent": "Empathy plays a crucial role in effective leadership and significantly influences organizational culture. Leaders who demonstrate empathy understand and acknowledge the emotions, perspectives, and experiences of their team members. By showing empathy, leaders can build trust, foster collaboration, and create a supportive work environment where individuals feel valued and appreciated. Moreover, empathetic leaders are better equipped to address conflicts, resolve issues, and motivate their teams to achieve common goals. Additionally, empathy contributes to a positive organizational culture characterized by inclusivity, diversity, and mutual respect. Therefore, organizations should prioritize empathy in leadership development programs and cultivate a culture of empathy throughout the organization.",
         "date": "20-03-2024",
         "author": "Kone Abdoulaye",
-        "image": UserImage5,
+        "image": UserImage2,
         "slug": "empathy-leadership-organizational-culture",
         "isPaid": false
     },

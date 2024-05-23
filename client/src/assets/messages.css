@@ -1,37 +1,6 @@
 @import url("./palette.css");
 
 
-
-/* .message-div {
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    text-align: center;
-    animation: fadeOut 3s forwards;
-}
-
-.message-div.success {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.message-div.error {
-    background-color: #f8d7da;
-    color: #721c24;
-}
-
-.message-div.warning {
-    background-color: #fff3cd;
-    color: #856404;
-}
-
-@keyframes fadeOut {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
-} */
-
-
-
 .message-div {
     width: 100%;
     display: flex;
@@ -41,6 +10,7 @@
     color: var(--secondary-light);
     opacity: 1;
     animation: fadeOut 3s ease;
+    margin: 1rem 0 1.5rem 0;
 }
 
 .success {

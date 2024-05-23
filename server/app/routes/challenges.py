@@ -20,6 +20,12 @@ def create_challenge(current_user):
     author_id = str(current_user.id)
     author_username = str(current_user.username)
     
+    # Check if the current user has a profile with an avatar
+    if hasattr(current_user, 'profile') and current_user.profile.avatar:
+        author_avatar = current_user.profile.avatar
+    else:
+        author_avatar = None
+    
     # Extract other data from JSON object
     title = data.get('title')
     description = data.get('description')
@@ -38,6 +44,7 @@ def create_challenge(current_user):
             status=StatusField.ACTIVE.value,
             author_id=author_id,
             author_username=author_username,
+            author_avatar=author_avatar,
             resource_ids=[],
             feedback=[],
             tags=tags,

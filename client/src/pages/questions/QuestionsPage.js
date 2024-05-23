@@ -61,9 +61,10 @@ const InstructorHomePage = () => {
             description={question.description}
             createdAt={question.created_at.$date}
             author={question.author_username}
-            image="" /* pass the image URL if available in the JSON data */
+            image={question.author_avatar || ""}
         />
     ));
+    
 
     return (
         <LeftMainContainer>
