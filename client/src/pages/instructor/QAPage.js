@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAlignJustify, faImage, faVideo, faMicrophone, faLink } from '@fortawesome/free-solid-svg-icons';
 import Question from '../../components/question';
 
+
+
 function QuestionResponsePage() {
     const { slug } = useParams();
     const [question, setQuestion] = useState(null);
@@ -23,7 +25,7 @@ function QuestionResponsePage() {
     const [editPos, setEditPos] = useState(-1);
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:5000/challenges/${slug}`)
+        fetch(`/challenges/${slug}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Question not found');
@@ -236,7 +238,6 @@ function QuestionResponsePage() {
                         <div key={index} className='added-content-container' onClick={() => handleBlockClick(content.type, index)}>
                             {console.log(contents)}
                             {renderContentForm(content.type)}
-                            {/* Render content based on type */}
                             <p className="added-content-value">{content.value}</p>
                         </div>
                     ))}

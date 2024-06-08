@@ -619,3 +619,7 @@ footer {
 section {
     margin: 12rem 1rem;
 }
+
+.link {
+    text-decoration: none;
+}

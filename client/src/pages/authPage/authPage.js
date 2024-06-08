@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
 import './authPage.css';
+import React, { useState, useEffect, useRef } from 'react';
 import CrowdAcademyLogo from '../../assets/icon_tr.png';
+
+
 
 export default function AuthPage() {
     const [isSigningUp, setIsSigningUp] = useState(false);
@@ -12,14 +13,11 @@ export default function AuthPage() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState(null);
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-    const location = useLocation();
     const referrerRef = useRef();
 
     useEffect(() => {
         referrerRef.current = document.referrer;
     }, []);
-
-    const FROM = referrerRef.current || location.state?.from?.pathname || '/account';
 
     useEffect(() => {
         let timer;
@@ -136,7 +134,7 @@ export default function AuthPage() {
                 localStorage.setItem('token', data.token);
                 console.log(`Saved token to localStorage ${data.token}`);
                 // Redirect to the original page
-                window.location.href = FROM;
+                window.location.href = "/account";
             } else {
                 // Handle unsuccessful login or signup
                 setError(data.message || 'Login failed.');

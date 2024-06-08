@@ -1,18 +1,19 @@
+import './AccountDetails.css';
 import React, { useState } from 'react';
 import { useUser } from '../../context/UserContext';
-import './AccountDetails.css';
+import { FaChevronDown, FaChevronUp, FaCopy } from 'react-icons/fa'; 
+import { formatString } from "../../utils/string";
 
-// Helper function to capitalize and replace underscores with spaces
-const formatString = (str) => {
-    return str.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
-};
+
 
 export default function AccountDetails() {
     const { user, loading } = useUser();
     const [isEditing, setIsEditing] = useState(false);
     const [isPermissionsOpen, setIsPermissionsOpen] = useState(false);
+    const [isTokenShowing, setIsTokenShowing] = useState(false);
     const [isAddingPayment, setIsAddingPayment] = useState(false);
     const [paymentType, setPaymentType] = useState('credit card');
+    const [isCopied, setIsCopied] = useState(false); // State to track if token is copied
 
     const toggleEdit = () => {
         setIsEditing(!isEditing);
@@ -22,12 +23,22 @@ export default function AccountDetails() {
         setIsPermissionsOpen(!isPermissionsOpen);
     };
 
+    const toggleToken = () => {
+        setIsTokenShowing(!isTokenShowing);
+    };
+
     const toggleAddPayment = () => {
         setIsAddingPayment(!isAddingPayment);
     };
 
     const handlePaymentTypeChange = (event) => {
         setPaymentType(event.target.value);
+    };
+
+    const copyTokenToClipboard = () => {
+        navigator.clipboard.writeText(user.token.current_token);
+        setIsCopied(true); // Set copied state to true
+        setTimeout(() => setIsCopied(false), 2000); // Reset copied state after 2 seconds
     };
 
     if (loading) {
@@ -41,10 +52,12 @@ export default function AccountDetails() {
             </div>
 
             <div className="info-card">
+                <h2>Profile</h2>
                 <div className="avatar-container">
                     {user.profile?.avatar && <img src={user.profile.avatar} alt="Avatar" className="avatar" onClick={toggleEdit} />}
+                    <p>{user.username}</p>
                 </div>
-                <h2>Profile</h2>
+                <hr />
                 {isEditing ? (
                     <div className="edit-profile-form">
                         <label>
@@ -81,10 +94,12 @@ export default function AccountDetails() {
             </div>
 
             <div className={`info-card permissions-card collapsible ${isPermissionsOpen ? 'open' : ''}`}>
-                <h2 onClick={togglePermissions}>Permissions</h2>
+                <h2 onClick={togglePermissions}>
+                    Permissions {isPermissionsOpen ? <FaChevronUp /> : <FaChevronDown />}
+                </h2>
                 <ul>
                     {user.permissions.map((permission, index) => (
-                        <li key={index}>{formatString(permission)}</li>
+                        <li className='permission' key={index}>Can {formatString(permission)}</li>
                     ))}
                 </ul>
             </div>
@@ -144,10 +159,18 @@ export default function AccountDetails() {
                 <p>{user.payments.length ? user.payments.join(', ') : 'No payments available'}</p>
             </div>
 
-            <div className="info-card">
-                <h2>Token</h2>
-                <p className="token">{user.token.current_token}</p>
+            <div className={`info-card collapsible ${isTokenShowing ? 'open' : ''}`}>
+                <h2 onClick={toggleToken}>
+                    Token {isTokenShowing ? <FaChevronUp /> : <FaChevronDown />}
+                </h2>
+                <p>
+                    <span className="token">{user.token.current_token}</span>
+                    <button onClick={copyTokenToClipboard} className='copy-btn'>
+                        {isCopied ? 'Copied!' : <FaCopy />}
+                    </button>
+                </p>
             </div>
+
         </div>
     ) : (
         <p className="no-data">No user data available.</p>

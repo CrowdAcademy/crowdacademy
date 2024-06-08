@@ -5,6 +5,7 @@ from mongoengine import EmbeddedDocument, StringField, ListField, DateTimeField,
 from app import db
 from app.models.resource import Resource
 from app.models.feedback import Feedback
+from app.models.block import Block
 from enum import Enum
 
 class StatusField(Enum):
@@ -18,10 +19,12 @@ class Challenge(Document):
     status = EnumField(StatusField, default=StatusField.ACTIVE.value)  # EnumField for status
     author_id = StringField(required=True)
     author_username = StringField(required=True)
+    author_avatar = StringField()
     created_at = DateTimeField(default=datetime.datetime.now(pytz.utc))
     updated_at = DateTimeField(default=datetime.datetime.now(pytz.utc))
     resource_ids = ListField(ReferenceField(Resource))
     feedback = EmbeddedDocumentListField(Feedback)
+    blocks = EmbeddedDocumentListField(Block)
     tags = ListField(StringField())
 
     meta = {

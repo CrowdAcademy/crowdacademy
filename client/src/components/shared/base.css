@@ -1,4 +1,4 @@
-@import url("../../assets//palette.css");
+@import url("../../assets/palette.css");
 
 * {
     padding: 0;
@@ -37,9 +37,14 @@ body,
 }
 
 .home-aside-container {
-    width: 20%;
+    width: 22%;
     height: 100%;
     background-color: var(--secondary-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    overflow-y: auto;
 }
 
 /* ------HOME-MAIN-CONTAINER------(left container) */
@@ -142,13 +147,6 @@ body,
 
 /*--------HOME-ASIDE-CONTAINER------- */
 
-.home-aside-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
 .Logo-design {
     width: 60px;
     padding-top: 20px;
@@ -177,38 +175,13 @@ body,
     color: var(--text-light);
     text-align: end;
     text-decoration: none;
-}
-
-.home-aside-container .navbar-link-item:hover {
-    background-color: var(--primary);
-    border-color: var(--primary);
-}
-
-.home-aside-container .navbar {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-    color: var(--background-primary);
-    padding: 0 20px;
-}
-
-.home-aside-container .navbar-link-item {
-    width: 100%;
-    background-color: var(--secondary);
-    background-color: var(--secondary);
-    border-radius: .5rem;
-    border: 1px solid var(--secondary);
     padding: 15px 20px;
-    text-align: end;
 }
 
 .home-aside-container .navbar-link-item:hover {
     background-color: var(--primary);
     border-color: var(--primary);
 }
-
 
 .Log-in-user-image {
     width: 70px;
@@ -226,7 +199,6 @@ body,
     font-size: 30px;
     margin-top: 60px;
     padding: 5px;
-    /* background-color: var(--primary); */
     border-radius: 50%;
     cursor: pointer;
 }
@@ -238,16 +210,30 @@ body,
 
 .account-data {
     display: flex;
-    flex-direction: column-reverse;
     justify-content: space-between;
-    align-items: center;
-    gap: 1.5rem;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-direction: column;
 }
 
-.account-data.info {
-    margin: 1rem;
+.account-data .info {
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    text-align: right;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
 }
 
 .account-data .info p {
     margin: .5rem;
+    word-wrap: break-word;
+}
+
+.account-data .info .email {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
