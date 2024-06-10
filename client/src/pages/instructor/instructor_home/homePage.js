@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import LeftMainContainer from '../../components/shared/leftmaincontainer';
-import Question from "../../components/question";
-import CountHeader from '../../components/shared/CountHeader';
+import LeftMainContainer from '../../../components/shared/leftmaincontainer';
+import Question from "../../../components/question";
+import CountHeader from '../../../components/shared/CountHeader';
 
 function InstructorHomePage() {
     const [questions, setQuestions] = useState([]);

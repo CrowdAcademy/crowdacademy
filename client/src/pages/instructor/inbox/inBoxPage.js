@@ -1,10 +1,10 @@
 import React from 'react';
-import './homePage.css';
+import '../instructor_home/homePage.css';
 import './inbox.css';
-import { MessageData } from '../../db/sampleInboxData';
+import { MessageData } from "../../../db/sampleInboxData";
 import Message from './message';
-import LeftMainContainer from '../../components/shared/leftmaincontainer';
-import CountHeader from '../../components/shared/CountHeader';
+import LeftMainContainer from '../../../components/shared/leftmaincontainer';
+import CountHeader from '../../../components/shared/CountHeader';
 
 
 

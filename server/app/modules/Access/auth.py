@@ -35,9 +35,10 @@ def decode_token(token):
     
 # Update the login function to set the user's current token
 def login(identifier, password):
-    from app.models.user import User  # Import User model here to avoid circular import
+    lowercase_identifier = identifier.lower()
+
     # Validate credentials against the database
-    user = User.objects(Q(username=identifier) | Q(email=identifier)).first()
+    user = User.objects(Q(username__iexact=lowercase_identifier) | Q(email__iexact=lowercase_identifier)).first()
     if user and user.check_password(password):
         # Generate authentication token (JWT)
         token = generate_token(user)

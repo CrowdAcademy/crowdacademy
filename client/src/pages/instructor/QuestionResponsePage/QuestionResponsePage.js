@@ -1,12 +1,12 @@
-import './QAPage.css';
+import './QuestionResponsePage.css';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAlignJustify, faImage, faVideo, faMicrophone, faLink } from '@fortawesome/free-solid-svg-icons';
-import Question from '../../components/question';
-
-
+import Question from '../../../components/question';
+import Topbar from '../../../components/shared/topbar';
+import { capitalize } from '../../../utils/string';
 
 function QuestionResponsePage() {
     const { slug } = useParams();
@@ -19,6 +19,7 @@ function QuestionResponsePage() {
     const [imageInputValue, setImageInputValue] = useState('');
     const [audioInputValue, setAudioInputValue] = useState('');
     const [linkInputValue, setLinkInputValue] = useState('');
+    const [lessonTitle, setlessonTitle] = useState('');
 
     const [contents, setContents] = useState([]);
     const [editState, setEditState] = useState(false);
@@ -157,9 +158,7 @@ function QuestionResponsePage() {
         question ? (
             <div className="response-container">
                 <div className="response-main-container">
-                    <div className="topbar">
-                        <h4 className="Logo-text">CrowdAcademy</h4>
-                    </div>
+                    <Topbar />
                     <div className="response-main-inner-left-container">
                         <h3>Formulate a response to:</h3>
 
@@ -171,8 +170,15 @@ function QuestionResponsePage() {
                             createdAt={question.created_at.$date}
                             author={question.author_username}
                             showNote={true}
-                            showImage={false} 
+                            showImage={false}
                         />
+
+                        <div className="title-form-container">
+                            <form className='title-form'>
+                                <label>Lesson Response Title</label>
+                                <input type='text' placeholder='Enter Lesson Title' value={lessonTitle} onChange={(e) => setlessonTitle(e.target.value)} />
+                            </form>
+                        </div>
 
                         <div className="add-response-content-icon-item-container">
                             <a className="icons" onClick={() => handleIconListClick('notes')}><FontAwesomeIcon icon={faAlignJustify} /></a>
@@ -181,6 +187,7 @@ function QuestionResponsePage() {
                             <a className="icons" onClick={() => handleIconListClick('audios')}><FontAwesomeIcon icon={faMicrophone} /></a>
                             <a className="icons" onClick={() => handleIconListClick('links')}><FontAwesomeIcon icon={faLink} /></a>
                         </div>
+
                         <div className="add-res-resources-container">
                             {formType === 'notes' && (
                                 <form className="add-note-form">
@@ -215,7 +222,7 @@ function QuestionResponsePage() {
                             {formType === 'audios' && (
                                 <form className="add-audio-form">
                                     <p>An audio response offers a personal touch and can convey tone and emotion.Use audio recordings to provide verbal explanations, storytelling, or instructions.Audio responses are beneficial when verbal communication adds value or clarity to your response.</p><br />
-                                    <label>Select a audio file</label>
+                                    <label>Select an audio file</label>
                                     <input className="attach-file-input" type="file" accept="audio/*" onChange={handleAudioInputChange} /><br />
                                     <button className="add-format-btn" onClick={(event) => addButtonClick(event, "audios")}>Add</button>
                                 </form>
@@ -234,6 +241,7 @@ function QuestionResponsePage() {
                     <div className="bottom-bar"></div>
                 </div>
                 <div className="response-main-preview-container">
+                    {lessonTitle && <h2 className='lesson-title'>{capitalize(lessonTitle)}</h2>}
                     {contents.map((content, index) => (
                         <div key={index} className='added-content-container' onClick={() => handleBlockClick(content.type, index)}>
                             {console.log(contents)}
@@ -266,9 +274,6 @@ function QuestionResponsePage() {
             </div>
         )
     );
-
 }
-
-
 
 export default QuestionResponsePage;

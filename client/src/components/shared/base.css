@@ -237,3 +237,15 @@ body,
     text-overflow: ellipsis;
     max-width: 100%;
 }
+
+.topbar-link {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 1rem;
+    text-decoration: none;
+}
+
+.topbar-link img {
+    width: 3rem;
+}

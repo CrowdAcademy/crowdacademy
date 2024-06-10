@@ -1,13 +1,13 @@
+import "./messagePage.css"
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { MessageData } from '../../db/sampleInboxData';
+import { MessageData } from '../../../db/sampleInboxData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faTrashCan, faPowerOff } from '@fortawesome/free-solid-svg-icons';
-import Footer from '../../components/footer';
+import Footer from '../../../components/footer';
 import UserImage from '../../assets/samples/user-1.png';
 import CrowdAcademyLogo from '../../assets/icon_tr.png';
 
-import "./messagePage.css"
 
 
 function MessagePage() {

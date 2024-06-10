@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import CrowdAcademyLogo from '../../assets/icon_tr.png';
 import { useUser } from '../../context/UserContext';
-import { formatString } from '../../utils/string';
+import { formatString, truncateString } from '../../utils/string';
 
 function SideBar() {
     const { user, loading } = useUser();
@@ -31,7 +31,7 @@ function SideBar() {
                                 <img className="Log-in-user-image" src={user.profile.avatar} alt="User Avatar" />
                                 <div className="info">
                                     <p>{formatString(user.username)}</p>
-                                    <p className="email">{user.email}</p>
+                                    <p>{truncateString(user.email, 20)}</p> {/* Truncate email here */}
                                 </div>
                             </div>
                         </Link>

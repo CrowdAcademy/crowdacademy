@@ -2,8 +2,6 @@ import './authPage.css';
 import React, { useState, useEffect, useRef } from 'react';
 import CrowdAcademyLogo from '../../assets/icon_tr.png';
 
-
-
 export default function AuthPage() {
     const [isSigningUp, setIsSigningUp] = useState(false);
     const [username, setUsername] = useState('');
@@ -126,30 +124,36 @@ export default function AuthPage() {
                 body: JSON.stringify(formData)
             });
 
-            const data = await response.json();
-            console.log('Response:', data);
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Response:', data);
 
-            if (data.success && data.token) {
-                // Store the token in localStorage
-                localStorage.setItem('token', data.token);
-                console.log(`Saved token to localStorage ${data.token}`);
-                // Redirect to the original page
-                window.location.href = "/account";
+                if (data.success && data.token) {
+                    // Store the token in localStorage
+                    localStorage.setItem('token', data.token);
+                    console.log(`Saved token to localStorage ${data.token}`);
+                    // Redirect to the original page
+                    window.location.href = "/account";
+                } else {
+                    // Handle unsuccessful login or signup
+                    setError(data.message || 'Login failed.');
+                }
+
+                // Reset form fields and error state
+                setIdentifier('');
+                setUsername('');
+                setEmail('');
+                setPassword('');
+                setConfirmPassword('');
+                setError(null);
+
+                if (isSigningUp) {
+                    setShowSuccessMessage(true);
+                }
             } else {
-                // Handle unsuccessful login or signup
-                setError(data.message || 'Login failed.');
-            }
-
-            // Reset form fields and error state
-            setIdentifier('');
-            setUsername('');
-            setEmail('');
-            setPassword('');
-            setConfirmPassword('');
-            setError(null);
-
-            if (isSigningUp) {
-                setShowSuccessMessage(true);
+                // Handle server error
+                const errorData = await response.json();
+                setError(errorData.error || 'An error occurred while submitting the form.');
             }
         } catch (error) {
             console.error('Error:', error);

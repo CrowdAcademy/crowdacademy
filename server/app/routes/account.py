@@ -3,6 +3,8 @@ from app.models.user import User
 from app.modules.Access import login_required
 from app.modules.Access.roles import Roles
 from app.utils.consts import REQUIRED_FIELDS, USER_ROLES
+from mongoengine.errors import NotUniqueError, ValidationError
+
 
 bp = Blueprint('account', __name__)
 
@@ -32,7 +34,8 @@ def create_user_account():
         if any(role not in valid_roles for role in data[REQUIRED_FIELDS.ROLES]):
             return jsonify({"error": "Invalid roles specified"}), 400
 
-        if User.objects(username=data[REQUIRED_FIELDS.USERNAME]).first():
+        # Check if username or email already exists
+        if User.objects(username=data[REQUIRED_FIELDS.USERNAME].lower()).first():
             return jsonify({"error": "Username already exists"}), 409
         
         if User.objects(email=data[REQUIRED_FIELDS.EMAIL]).first():
@@ -47,18 +50,36 @@ def create_user_account():
                 permissions.extend(Roles.INSTRUCTOR)
 
         user = User(
-            username=data[REQUIRED_FIELDS.USERNAME],
+            username=data[REQUIRED_FIELDS.USERNAME].lower(),
             email=data[REQUIRED_FIELDS.EMAIL],
             password=data[REQUIRED_FIELDS.PASSWORD],
             roles=data[REQUIRED_FIELDS.ROLES],
             permissions=permissions
         )
 
-        user.save()
+        try:
+            user.save()
+
+        except ValueError as e:    
+            return jsonify({"error": str(e)}), 400
+
+        except NotUniqueError as e:
+            # Handle duplicate key error for username or email
+            return jsonify({"error": "Username or email already exists"}), 409
+
+        except ValidationError as e:
+            # Handle validation errors
+            return jsonify({"error": str(e)}), 400
+
+        except Exception as e:
+            # Handle unexpected errors
+            return jsonify({"error": f"Unexpected error: {str(e)}"}), 500
+
         return jsonify({"message": "User registered successfully", "user_id": str(user.id)}), 201
     
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 @bp.route("/account/update", methods=["PUT"])
 @login_required
