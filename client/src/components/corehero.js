@@ -69,24 +69,29 @@ export default function CoreHero() {
             },
             body: JSON.stringify(challengeData)
         })
-            .then(response => {
-                if (!response.ok) {
-                    console.log(response);
-                    throw new Error('Failed to create challenge.');
-                }
-                setMessage({ type: 'success', content: 'Challenge created successfully!' });
-                clearFields();
+        .then(response => {
+            if (!response.ok) {
+                console.log(response);
+                throw new Error('Failed to create challenge.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            setMessage({ type: 'success', content: 'Challenge created successfully!' });
+            clearFields();
 
-                setTimeout(() => {
-                    setMessage({});
-                }, 3000);
-            })
-            .catch(error => {
-                setMessage({ type: 'error', content: error.message });
-                setTimeout(() => {
-                    setMessage({});
-                }, 3000);
-            });
+            setTimeout(() => {
+                setMessage({});
+                window.location.href = `/questions/${data.challenge._id.$oid}`;
+            }, 3000);
+        })
+        .catch(error => {
+            setMessage({ type: 'error', content: error.message });
+            setTimeout(() => {
+                setMessage({});
+            }, 3000);
+        });
+
     };
 
 

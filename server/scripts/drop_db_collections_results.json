@@ -1,0 +1,85 @@
+{
+    "results": {
+        "delete_user_6669ecbecb5904e2cb6afc68": {
+            "success": false,
+            "error": "<!doctype html>\n<html lang=en>\n<title>405 Method Not Allowed</title>\n<h1>Method Not Allowed</h1>\n<p>The method is not allowed for the requested URL.</p>\n",
+            "status_code": 405,
+            "status_message": "Method Not Allowed"
+        },
+        "delete_user_6669ee9c6e072eb06bf14349": {
+            "success": false,
+            "error": "<!doctype html>\n<html lang=en>\n<title>405 Method Not Allowed</title>\n<h1>Method Not Allowed</h1>\n<p>The method is not allowed for the requested URL.</p>\n",
+            "status_code": 405,
+            "status_message": "Method Not Allowed"
+        },
+        "delete_user_6669ee9c6e072eb06bf1434a": {
+            "success": false,
+            "error": "<!doctype html>\n<html lang=en>\n<title>405 Method Not Allowed</title>\n<h1>Method Not Allowed</h1>\n<p>The method is not allowed for the requested URL.</p>\n",
+            "status_code": 405,
+            "status_message": "Method Not Allowed"
+        },
+        "delete_user_6669ee9c6e072eb06bf1434b": {
+            "success": false,
+            "error": "<!doctype html>\n<html lang=en>\n<title>405 Method Not Allowed</title>\n<h1>Method Not Allowed</h1>\n<p>The method is not allowed for the requested URL.</p>\n",
+            "status_code": 405,
+            "status_message": "Method Not Allowed"
+        },
+        "delete_user_6669ee9c6e072eb06bf1434c": {
+            "success": false,
+            "error": "<!doctype html>\n<html lang=en>\n<title>405 Method Not Allowed</title>\n<h1>Method Not Allowed</h1>\n<p>The method is not allowed for the requested URL.</p>\n",
+            "status_code": 405,
+            "status_message": "Method Not Allowed"
+        },
+        "delete_user_6669ee9c6e072eb06bf1434d": {
+            "success": false,
+            "error": "<!doctype html>\n<html lang=en>\n<title>405 Method Not Allowed</title>\n<h1>Method Not Allowed</h1>\n<p>The method is not allowed for the requested URL.</p>\n",
+            "status_code": 405,
+            "status_message": "Method Not Allowed"
+        },
+        "delete_challenge_6669f0da95745203ddc60a22": {
+            "success": true,
+            "response": {
+                "message": "Challenge deleted successfully"
+            },
+            "status_code": 200,
+            "status_message": "OK"
+        },
+        "delete_challenge_6669f0da95745203ddc60a21": {
+            "success": true,
+            "response": {
+                "message": "Challenge deleted successfully"
+            },
+            "status_code": 200,
+            "status_message": "OK"
+        },
+        "delete_challenge_6669f0da95745203ddc60a20": {
+            "success": true,
+            "response": {
+                "message": "Challenge deleted successfully"
+            },
+            "status_code": 200,
+            "status_message": "OK"
+        },
+        "delete_challenge_6669f0da95745203ddc60a1f": {
+            "success": true,
+            "response": {
+                "message": "Challenge deleted successfully"
+            },
+            "status_code": 200,
+            "status_message": "OK"
+        },
+        "delete_challenge_6669f0da95745203ddc60a1e": {
+            "success": true,
+            "response": {
+                "message": "Challenge deleted successfully"
+            },
+            "status_code": 200,
+            "status_message": "OK"
+        }
+    },
+    "summary": {
+        "deleted_users": 0,
+        "deleted_challenges": 5,
+        "deleted_resources": 0
+    }
+}

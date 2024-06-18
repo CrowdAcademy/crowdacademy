@@ -8,7 +8,7 @@ const Topbar = () => {
     return (
         <div className="topbar">
             <Link to="/" className="topbar-link">
-        <img src={CrowdAcademyLogo} alt="CrowdAcademy Logo" className="logo-image" />
+                <img src={CrowdAcademyLogo} alt="CrowdAcademy Logo" className="logo-image" />
                 <h4 className="Logo-text">CrowdAcademy</h4>
             </Link>
         </div>

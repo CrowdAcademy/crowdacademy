@@ -1,6 +1,6 @@
 import "./QuestionDetailsPage.css"
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import LeftMainContainer from '../../components/shared/leftmaincontainer';
 import avatarDefault from "../../assets/avatar-default.svg";
 import { useUser } from '../../context/UserContext';
@@ -87,7 +87,9 @@ const QuestionDetailsPage = () => {
                                     </div>
                                     {
                                         user && user.permissions.includes("create_lesson") && (
-                                            <button className="respond-btn">Respond</button>
+                                            <Link to={`/respond/${question._id.$oid}`}>
+                                                <button className="respond-btn">Respond</button>
+                                            </Link>
                                         )
                                     }
                                 </div>

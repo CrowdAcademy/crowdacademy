@@ -2,7 +2,7 @@ import "../../assets/messages.css";
 import "./question.css";
 import React, { useEffect, useState } from 'react';
 import LeftMainContainer from '../../components/shared/leftmaincontainer';
-import Question from "../../components/question";
+import Question from "../../components/question/question";
 import CountHeader from '../../components/shared/CountHeader';
 
 const InstructorHomePage = () => {

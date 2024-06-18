@@ -1,0 +1,66 @@
+/* Message.css */
+@import url("../../assets/palette.css");
+
+
+.message-container {
+    position: fixed;
+    top: 20px; /* Adjust top margin as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: 90%; /* Adjust width as needed */
+    max-width: 500px; /* Adjust max-width as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--secondary);
+}
+
+.message {
+    position: relative;
+    padding: 12px 0;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.message-container.success {
+    background-color: var(--success);
+    color: var(--white);
+}
+
+.message-container.error {
+    background-color: var(--error);
+    color: var(--white);
+}
+
+.message-container.warning {
+    background-color: var(--warning);
+    color: var(--white);
+}
+
+.message-container.info {
+    background-color: var(--accent);
+    color: var(--text-primary);
+}
+
+.close-btn {
+    position: relative;
+    top: 5px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    font-size: 18px;
+}
+
+.close-btn:hover {
+    color: var(--secondary);
+}
+
+.error-message {
+    margin-bottom: 20px;
+    color: var(--error);
+}

@@ -9,7 +9,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import InstructorHomePage from './pages/instructor/instructor_home/homePage';
 import InstructorInboxPage from './pages/instructor/inbox/inBoxPage';
 import QuestionResponsePage from './pages/instructor/QuestionResponsePage/QuestionResponsePage';
-import LessonPage from './pages/lesson/lesson';
+import LessonPage from './pages/lessonPage/lesson';
 import AnswersPage from './pages/answers/AnswersPage';
 import QuestionsPage from './pages/questions/QuestionsPage';
 import LogoutPage from './pages/logout/LogoutPage';
@@ -17,7 +17,8 @@ import QuestionDetailsPage from './pages/questions/QuestionDetailsPage';
 
 
 
-function App() {return (
+function App() {
+  return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/auth" element={<AuthPage />} />

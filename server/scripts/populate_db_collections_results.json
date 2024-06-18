@@ -1,0 +1,243 @@
+{
+    "summary": {
+        "total_requests": 14,
+        "successful_requests": 6,
+        "failed_requests": 8
+    },
+    "results": {
+        "http://127.0.0.1:5000/users/add [1]": {
+            "success": false,
+            "error": {
+                "error": "Username already exists"
+            },
+            "status_code": 409,
+            "status_message": "Conflict"
+        },
+        "http://127.0.0.1:5000/users/add [2]": {
+            "success": false,
+            "error": {
+                "error": "Username already exists"
+            },
+            "status_code": 409,
+            "status_message": "Conflict"
+        },
+        "http://127.0.0.1:5000/users/add [3]": {
+            "success": false,
+            "error": {
+                "error": "Username already exists"
+            },
+            "status_code": 409,
+            "status_message": "Conflict"
+        },
+        "http://127.0.0.1:5000/users/add [4]": {
+            "success": false,
+            "error": {
+                "error": "Username already exists"
+            },
+            "status_code": 409,
+            "status_message": "Conflict"
+        },
+        "http://127.0.0.1:5000/users/add [5]": {
+            "success": false,
+            "error": {
+                "error": "Username already exists"
+            },
+            "status_code": 409,
+            "status_message": "Conflict"
+        },
+        "http://127.0.0.1:5000/challenges/create [1]": {
+            "success": true,
+            "response": {
+                "challenge": {
+                    "_id": {
+                        "$oid": "6669f13f3edc896eebd931ff"
+                    },
+                    "author_id": "6669ecbecb5904e2cb6afc68",
+                    "author_username": "zulan",
+                    "blocks": [],
+                    "created_at": {
+                        "$date": "2024-06-12T19:04:31.477Z"
+                    },
+                    "description": "I am currently working on solving linear equations and finding it quite challenging. The equations involve variables and constants, and I am unsure about the steps to isolate the variables and find the solutions. Can anyone provide a detailed explanation or step-by-step guide on how to approach these problems? Any examples would be greatly appreciated!",
+                    "feedback": [],
+                    "resource_ids": [],
+                    "status": "active",
+                    "tags": [
+                        "math",
+                        "algebra",
+                        "linear-equations"
+                    ],
+                    "title": "Struggling with Linear Equations: Need Help!",
+                    "updated_at": {
+                        "$date": "2024-06-12T19:04:31.477Z"
+                    }
+                },
+                "message": "Challenge created successfully"
+            },
+            "status_code": 201,
+            "status_message": "Created"
+        },
+        "http://127.0.0.1:5000/challenges/create [2]": {
+            "success": true,
+            "response": {
+                "challenge": {
+                    "_id": {
+                        "$oid": "6669f13f3edc896eebd93200"
+                    },
+                    "author_id": "6669ecbecb5904e2cb6afc68",
+                    "author_username": "zulan",
+                    "blocks": [],
+                    "created_at": {
+                        "$date": "2024-06-12T19:04:31.492Z"
+                    },
+                    "description": "I have a physics assignment on Newton's laws of motion, and I'm having trouble understanding how to apply them to different scenarios. Specifically, I'm confused about how to identify and calculate the forces acting on an object in various situations. Can someone explain each of Newton's laws in detail and provide some practical examples to help clarify these concepts?",
+                    "feedback": [],
+                    "resource_ids": [],
+                    "status": "active",
+                    "tags": [
+                        "physics",
+                        "homework",
+                        "newtons-laws"
+                    ],
+                    "title": "Physics Homework: Understanding Newton's Laws of Motion",
+                    "updated_at": {
+                        "$date": "2024-06-12T19:04:31.492Z"
+                    }
+                },
+                "message": "Challenge created successfully"
+            },
+            "status_code": 201,
+            "status_message": "Created"
+        },
+        "http://127.0.0.1:5000/challenges/create [3]": {
+            "success": true,
+            "response": {
+                "challenge": {
+                    "_id": {
+                        "$oid": "6669f13f3edc896eebd93201"
+                    },
+                    "author_id": "6669ecbecb5904e2cb6afc68",
+                    "author_username": "zulan",
+                    "blocks": [],
+                    "created_at": {
+                        "$date": "2024-06-12T19:04:31.508Z"
+                    },
+                    "description": "I'm studying biology and need a thorough explanation of the photosynthesis process. I understand that it involves converting light energy into chemical energy, but I am unclear about the specific steps and the roles of chlorophyll, sunlight, carbon dioxide, and water. Can someone break down the stages of photosynthesis, including the light-dependent and light-independent reactions, and explain how plants use this process to produce glucose and oxygen?",
+                    "feedback": [],
+                    "resource_ids": [],
+                    "status": "active",
+                    "tags": [
+                        "biology",
+                        "photosynthesis",
+                        "science"
+                    ],
+                    "title": "In-Depth Explanation of Photosynthesis Process",
+                    "updated_at": {
+                        "$date": "2024-06-12T19:04:31.508Z"
+                    }
+                },
+                "message": "Challenge created successfully"
+            },
+            "status_code": 201,
+            "status_message": "Created"
+        },
+        "http://127.0.0.1:5000/challenges/create [4]": {
+            "success": true,
+            "response": {
+                "challenge": {
+                    "_id": {
+                        "$oid": "6669f13f3edc896eebd93202"
+                    },
+                    "author_id": "6669ecbecb5904e2cb6afc68",
+                    "author_username": "zulan",
+                    "blocks": [],
+                    "created_at": {
+                        "$date": "2024-06-12T19:04:31.521Z"
+                    },
+                    "description": "I need to write an essay on World War II for my history class, but I'm struggling to choose a compelling topic. I'm looking for suggestions that go beyond the basic events and battles, focusing instead on unique aspects such as the social and economic impacts, the role of propaganda, personal stories from soldiers and civilians, or the contributions of lesser-known figures. Any topic ideas and sources for research would be very helpful!",
+                    "feedback": [],
+                    "resource_ids": [],
+                    "status": "active",
+                    "tags": [
+                        "history",
+                        "essay",
+                        "world-war-ii"
+                    ],
+                    "title": "World War II Essay Topics: Seeking Interesting Ideas",
+                    "updated_at": {
+                        "$date": "2024-06-12T19:04:31.521Z"
+                    }
+                },
+                "message": "Challenge created successfully"
+            },
+            "status_code": 201,
+            "status_message": "Created"
+        },
+        "http://127.0.0.1:5000/challenges/create [5]": {
+            "success": true,
+            "response": {
+                "challenge": {
+                    "_id": {
+                        "$oid": "6669f13f3edc896eebd93203"
+                    },
+                    "author_id": "6669ecbecb5904e2cb6afc68",
+                    "author_username": "zulan",
+                    "blocks": [],
+                    "created_at": {
+                        "$date": "2024-06-12T19:04:31.534Z"
+                    },
+                    "description": "I have to write a lab report for my chemistry class, and I'm not sure how to structure it properly. The experiment involved analyzing the reaction rates of different chemical reactions. I need advice on how to present my hypothesis, methods, results, and conclusions clearly and effectively. Any tips on writing a comprehensive and well-organized lab report would be greatly appreciated!",
+                    "feedback": [],
+                    "resource_ids": [],
+                    "status": "active",
+                    "tags": [
+                        "chemistry",
+                        "lab-report",
+                        "science"
+                    ],
+                    "title": "Guidance Needed for Chemistry Lab Report Writing",
+                    "updated_at": {
+                        "$date": "2024-06-12T19:04:31.535Z"
+                    }
+                },
+                "message": "Challenge created successfully"
+            },
+            "status_code": 201,
+            "status_message": "Created"
+        },
+        "http://127.0.0.1:5000/resources/create [1]": {
+            "success": false,
+            "error": {
+                "error": "[WinError 32] The process cannot access the file because it is being used by another process: 'D:\\\\matrix\\\\crowdacademy\\\\server\\\\uploads\\\\example-audio-mp3.mp3'"
+            },
+            "status_code": 500,
+            "status_message": "Internal Server Error"
+        },
+        "http://127.0.0.1:5000/resources/create [2]": {
+            "success": false,
+            "error": {
+                "error": "[WinError 32] The process cannot access the file because it is being used by another process: 'D:\\\\matrix\\\\crowdacademy\\\\server\\\\uploads\\\\test-image-img.jpg'"
+            },
+            "status_code": 500,
+            "status_message": "Internal Server Error"
+        },
+        "http://127.0.0.1:5000/resources/create [3]": {
+            "success": false,
+            "error": {
+                "error": "[WinError 32] The process cannot access the file because it is being used by another process: 'D:\\\\matrix\\\\crowdacademy\\\\server\\\\uploads\\\\test-video-mp4.mp4'"
+            },
+            "status_code": 500,
+            "status_message": "Internal Server Error"
+        },
+        "http://127.0.0.1:5000/login": {
+            "success": true,
+            "response": {
+                "message": "Login successful",
+                "success": true,
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjY2OWVjYmVjYjU5MDRlMmNiNmFmYzY4IiwiZXhwIjoxNzE4MzA1NDY0fQ.8BQMJFx69gnpMXE9-MrWYdABTm8MsIyDeOrZYYeQYlc"
+            },
+            "status_code": 200,
+            "status_message": "OK"
+        }
+    }
+}

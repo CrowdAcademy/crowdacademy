@@ -1,7 +1,5 @@
 @import url("../../assets/palette.css");
 
-
-
 .answer-container {
     background-color: var(--background-secondary);
     border: 1px solid var(--border-color);
@@ -42,4 +40,15 @@
 
 .lesson-content {
     flex: .7;
+}
+
+.delete-button {
+    background: none;
+    border: none;
+    color: var(--error);
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    align-self:center;
+    margin: 0 2rem;
 }

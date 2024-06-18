@@ -145,6 +145,33 @@ body,
     background-color: var(--primary);
 }
 
+.btn {
+    margin: 10px 0;
+    padding: 10px 30px;
+    border: 2px solid var(--accent-dark);
+    border-radius: .5rem;
+    cursor: pointer;
+    background-color: var(--accent-dark);
+    color: var(--secondary-light);
+}
+
+.btn:hover {
+    background-color: var(--accent-light);
+    border-color: var(--accent-light);
+}
+
+.btn.primary {
+    background-color: var(--secondary-dark);
+    border-color: var(--secondary-dark);
+    color: var(--secondary-light);
+}
+
+.btn.primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--text-light);
+}
+
+
 /*--------HOME-ASIDE-CONTAINER------- */
 
 .Logo-design {

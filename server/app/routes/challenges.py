@@ -8,7 +8,6 @@ from bson import ObjectId
 bp = Blueprint('challenges', __name__)
 
 
-
 # Route to create a new challenge
 @bp.route("/challenges/create", methods=["POST"])
 @login_required
@@ -20,10 +19,9 @@ def create_challenge(current_user):
     author_id = str(current_user.id)
     author_username = str(current_user.username)
     
-    # Check if the current user has a profile with an avatar
-    if hasattr(current_user, 'profile') and current_user.profile.avatar:
+    try:
         author_avatar = current_user.profile.avatar
-    else:
+    except AttributeError:
         author_avatar = None
     
     # Extract other data from JSON object
@@ -36,7 +34,6 @@ def create_challenge(current_user):
         return jsonify({"error": f"To update feedback, use: {url}"}), 400
 
     try:
-
         # Create new Challenge object
         new_challenge = Challenge(
             title=title,
@@ -57,14 +54,13 @@ def create_challenge(current_user):
     
     except Exception as e:
         return jsonify({"error": f"ValidationError: {str(e)}"}), 400
-
-
+    
 
 # Route to get all challenges
 @bp.route("/challenges/", methods=["GET"])
-# @login_required
-# @authorize([Permissions.VIEW_CHALLENGE, Permissions.VIEW_FEEDBACK, Permissions.VIEW_RESOURCE])
-def get_challenges():
+@login_required
+@authorize([Permissions.VIEW_CHALLENGE, Permissions.VIEW_FEEDBACK, Permissions.VIEW_RESOURCE])
+def get_challenges(current_user):
     challenges = Challenge.objects().all()
     return jsonify(challenges), 200
 
@@ -72,9 +68,9 @@ def get_challenges():
 
 # Route to get a specific challenge by ID
 @bp.route("/challenges/<challenge_id>", methods=["GET"])
-# @login_required
-# @authorize([Permissions.VIEW_CHALLENGE, Permissions.VIEW_FEEDBACK, Permissions.VIEW_RESOURCE])
-def get_challenge(challenge_id):
+@login_required
+@authorize([Permissions.VIEW_CHALLENGE, Permissions.VIEW_FEEDBACK, Permissions.VIEW_RESOURCE])
+def get_challenge(current_user, challenge_id):
     try:
         if not ObjectId.is_valid(challenge_id):
             return jsonify({"error": "Invalid challenge ID format"}), 400
@@ -90,7 +86,6 @@ def get_challenge(challenge_id):
         return jsonify({"error": str(e)}), 400
 
     
-
 # Route to update a challenge by ID
 @bp.route("/challenges/update/<challenge_id>", methods=["PUT"])
 @login_required

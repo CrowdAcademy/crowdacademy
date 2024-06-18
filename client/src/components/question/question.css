@@ -1,0 +1,14 @@
+/* Question.css */
+
+.delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #f44336; /* Red color for delete */
+    font-size: 18px;
+    margin-left: 10px; /* Adjust margin as needed */
+}
+
+.delete-btn:hover {
+    color: #d32f2f; /* Darker red on hover */
+}
