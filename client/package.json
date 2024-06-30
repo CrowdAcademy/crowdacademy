@@ -20,8 +20,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "webpack --config webpack.prod.js",
+    "start": "cross-env PORT=3000 react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -44,6 +44,6 @@
     ]
   },
   "devDependencies": {
-    "webpack-dev-server": "^5.0.4"
+    "cross-env": "^7.0.3"
   }
 }
