@@ -1,0 +1,249 @@
+@import url("../../../assets/palette.css");
+
+.lesson-title {
+    color: var(--background-primary);
+}
+
+.lesson-description {
+    color: var(--background-primary);
+    font-size: 16px;
+    font-style: italic;
+    margin: 20px;
+}
+
+.lesson-tags {
+    margin: 20px;
+    padding: 20px 20px 20px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.tags-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.lesson-tags span {
+    background-color: var(--accent-dark);
+    padding: 10px;
+    margin: 10px 10px 10px 0;
+    color: var(--background-primary);
+    text-transform: lowercase;
+}
+
+.tag-title {
+    display: inline;
+    color: var(--background-primary);
+    margin-right: 10px;
+}
+
+.response-container {
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary);
+    display: flex;
+}
+
+/* ---------topbar-------------- */
+
+.topbar {
+    height: 10%;
+    background-color: var(--primary);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+}
+
+.topbar .Logo-design {
+    padding: 0;
+}
+
+.add-res-resources-container {
+    margin-top: 20px;
+}
+
+.add-res-resources-container form textarea {
+    width: 100%;
+    height: 150px;
+    resize: none;
+}
+
+.challenge-details-form-container .challenge-details-form textarea {
+    width: 100%;
+    height: 100px;
+    resize: none;
+}
+
+/* ---------response-main-container-------- */
+
+.response-main-container {
+    width: 60%;
+    height: 100%;
+    background-color: var(--background-secondary);
+    display: flex;
+    flex-direction: column;
+}
+
+.response-main-inner-left-container {
+    width: 100%;
+    height: 85%;
+    padding-top: 20px;
+    padding-left: 20px;
+    overflow-y: auto;
+}
+
+.response-main-preview-container {
+    width: 100%;
+    height: 100%;
+    background-color: var(--secondary);
+    overflow-y: auto;
+}
+
+.response-main-container .challenge-card {
+    width: 100%;
+}
+
+.response-main-container .challenge-card-details {
+    flex: .6;
+    margin: 1rem 0;
+}
+
+.response-main-container .challenge-card-actions {
+    flex: .4
+}
+
+.add-response-content-icon-item-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 40px;
+}
+
+.response-container .icons {
+    width: 40px;
+    height: 40px;
+    background-color: var(--secondary);
+    color: var(--background-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.response-main-inner-left-container .challenge-card {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-right: 20px;
+    margin: 1rem 0 3rem 0;
+    width: 95%;
+}
+
+.note-to-responder {
+    width: 90%;
+    margin: 1rem;
+}
+
+.add-response-content-icon-item-container {
+    margin: 1rem 0;
+}
+
+.add-res-resources-container,
+.challenge-details-form-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 0 0 2rem 0
+}
+
+.add-res-resources-container form,
+.challenge-details-form-container form {
+    width: 67%;
+}
+
+.add-format-btn {
+    margin-top: 10px;
+    padding: 10px 30px;
+    border-radius: .5rem;
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    border-style: solid;
+    color: var(--background-primary);
+    cursor: pointer;
+}
+
+.add-format-btn:hover {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.save-challenge-btn {
+    margin: 10px 10px 10px 20px;
+}
+
+.cancel-challenge-btn {
+    border: 2px solid var(--primary);
+    background-color: var(--primary);
+    color: var(--secondary-light);
+}
+
+.save-btn-container button:hover {
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+
+.left-side {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.save-btn-container {
+    flex: .1;
+    background-color: var(--secondary);
+    padding: 1rem 0;
+}
+
+
+
+.challenge-details-form input {
+    width: 100%;
+    margin: 1rem 0;
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid var(--primary);
+    font-size: 16px;
+}
+
+.challenge-details-form textarea {
+    margin: 1rem 0;
+}
+
+.attach-file-input {
+    margin-left: 10px;
+}
+
+.link-input {
+    padding: 10px;
+    width: 300px;
+}
+
+.bottom-bar {
+    height: 5%;
+    width: 100%;
+    background-color: var(--primary);
+}
+
+.added-content-value {
+    border: 1px solid var(--border-color-dark);
+    margin: 20px;
+    padding: 20px;
+    color: var(--background-primary);
+    cursor: pointer;
+}
